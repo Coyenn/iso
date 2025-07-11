@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "./shadcn.css";
+
+@theme {
+	--font-sans: var(--font-inter);
+	--font-serif: var(--font-newsreader);
+
+	--animate-aurora: aurora 120s linear infinite;
+
+	@keyframes aurora {
+		from {
+			background-position: 50% 50%, 50% 50%;
+		}
+		to {
+			background-position: 350% 50%, 350% 50%;
+		}
+	}
+}
+
+@layer utilities {
+	.font-instrument-serif {
+		font-family: var(--font-instrument-serif);
+	}
+
+	.container-wrapper {
+		@apply max-w-[1400px] min-[1800px]:max-w-screen-xl min-[1400px]:border-x mx-auto w-full;
+	}
+
+	.container {
+		@apply px-4 xl:px-6 mx-auto max-w-screen-xl;
+	}
+}
