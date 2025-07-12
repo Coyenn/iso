@@ -2,6 +2,16 @@
   <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
 </div>
 
+<br />
+<div align="center">
+  <a href="https://iso-rho.vercel.app/">Demo</a>
+  |
+  <a href="https://hub.docker.com/r/coyann/iso">Docker</a>
+  |
+  <a href="https://github.com/Coyenn/iso/">GitHub</a>
+</div>
+<br />
+
 **Iso** is a lightweight, plug-and-play dashboard for all your self-hosted services.
 Built for my personal homelab — now open-sourced for yours.
 
