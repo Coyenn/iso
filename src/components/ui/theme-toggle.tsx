@@ -4,6 +4,7 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/src/components/ui/button";
+import { motion, AnimatePresence } from "motion/react";
 import {
 	Tooltip,
 	TooltipContent,
@@ -34,9 +35,41 @@ export function ThemeToggle() {
 						}}
 						aria-label={`Toggle theme to ${theme === "light" ? "dark" : theme === "dark" ? "system" : "light"}. Current theme is ${theme}.`}
 					>
-						{theme === "light" && <Sun />}
-						{theme === "dark" && <Moon />}
-						{theme === "system" && <Monitor />}
+						<AnimatePresence mode="wait">
+							{theme === "light" && (
+								<motion.div
+									initial={{ scale: 0.75, opacity: 0 }}
+									animate={{ scale: 1, opacity: 1 }}
+									exit={{ scale: 0.75, opacity: 0 }}
+									transition={{ duration: 0.15, ease: "easeInOut" }}
+									key="light"
+								>
+									<Sun />
+								</motion.div>
+							)}
+							{theme === "dark" && (
+								<motion.div
+									initial={{ scale: 0.75, opacity: 0 }}
+									animate={{ scale: 1, opacity: 1 }}
+									exit={{ scale: 0.75, opacity: 0 }}
+									transition={{ duration: 0.15, ease: "easeInOut" }}
+									key="dark"
+								>
+									<Moon />
+								</motion.div>
+							)}
+							{theme === "system" && (
+								<motion.div
+									initial={{ scale: 0.75, opacity: 0 }}
+									animate={{ scale: 1, opacity: 1 }}
+									exit={{ scale: 0.75, opacity: 0 }}
+									transition={{ duration: 0.15, ease: "easeInOut" }}
+									key="system"
+								>
+									<Monitor />
+								</motion.div>
+							)}
+						</AnimatePresence>
 					</Button>
 				</TooltipTrigger>
 				<TooltipContent>Toggle theme</TooltipContent>
