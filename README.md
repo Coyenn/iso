@@ -71,6 +71,22 @@ Refer to them in your `config.json` just like this:
 }
 ```
 
+### Adding custom CSS overrides
+
+```bash
+# Assuming your overrides live in ./iso-dashboard/css directory
+# Any .css files inside this folder will automatically be injected into the <head> of Iso at runtime
+# They can be used to tweak colors, spacing, etc.
+docker run -d \
+  --name iso \
+  -p 3000:3000 \
+  -v $(pwd)/config.json:/app/config.json:ro \
+  -v $(pwd)/iso-dashboard/css:/app/public/css:ro \
+  coyann/iso
+```
+
+All stylesheets mounted in `/app/public/css` will be served at `http://<ISO_URL>/css/<filename>` and automatically loaded by Iso in the order returned by the file system (typically alphabetical). This lets you fully override Tailwind variables or add your own custom rules without rebuilding the image.
+
 ## Configuration
 
 Iso is driven entirely by a single JSON file.

@@ -28,6 +28,7 @@ ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
 RUN apt-get update -y && apt-get install -y openssl
+RUN mkdir -p /app/public/css
 
 COPY --from=builder /app/next.config.js ./
 COPY --from=builder /app/public ./public

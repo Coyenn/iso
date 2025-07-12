@@ -8,6 +8,9 @@ import { Toaster } from "@/src/components/ui/sonner";
 import { ThemeToggle } from "@/src/components/ui/theme-toggle";
 import { getConfig } from "@/src/server/get-config";
 
+import fs from "node:fs";
+import path from "node:path";
+
 export const metadata: Metadata = {
 	description: "A simple services dashboard",
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
@@ -31,6 +34,18 @@ const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
 });
 
+function getCustomStylesheets(): string[] {
+	try {
+		const cssDir = path.join(process.cwd(), "public", "css");
+		return fs
+			.readdirSync(cssDir)
+			.filter((file) => file.endsWith(".css"))
+			.map((file) => `/css/${file}`);
+	} catch {
+		return [];
+	}
+}
+
 export interface RootLayoutProps {
 	children: React.ReactNode;
 }
@@ -38,6 +53,7 @@ export interface RootLayoutProps {
 export default async function RootLayout(props: RootLayoutProps) {
 	const { children } = props;
 	const config = await getConfig();
+	const customStylesheets = getCustomStylesheets();
 
 	return (
 		<html
@@ -47,6 +63,9 @@ export default async function RootLayout(props: RootLayoutProps) {
 		>
 			<head>
 				<title>{config.title}</title>
+				{customStylesheets.map((href) => (
+					<link key={href} rel="stylesheet" href={href} />
+				))}
 			</head>
 			<body className="flex min-h-screen flex-col antialiased">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
