@@ -1,42 +1,101 @@
-# Hexe Audiobook App
+<div align="center">
+  <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
+</div>
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+# Iso Dashboard
 
-## Testing Infinite Scrolling
+**Iso** is a lightweight, plug-and-play dashboard for all your self-hosted services.
+Built for my personal homelab — now open-sourced for yours.
 
-The application includes an infinite scrolling feature for the audiobooks library. To test this feature:
+---
 
-1. Run the database seed command to populate the database with test data:
-   ```bash
-   npm run db:seed
-   ```
+- 🧩 **Fully configurable** through a single `config.json` file
+- 🌐 **Multi-language**: English, Español, Français, Deutsch
+- 🎨 **Icon ready**: choose from a set of built-in icons or supply your own
+- 🐳 **Docker-first**: run anywhere with one simple command
 
-2. This will seed the database with 32 audiobooks, enough to test the infinite scrolling functionality.
+---
 
-3. The audiobooks are displayed with 10 items per page by default, and more will load as you scroll down.
+## ‍️Quick Start
 
-## What's next? How do I make an app with this?
+```bash
+docker run -d \
+  --name iso \
+  -p 3000:3000 \
+  coyenn/iso
+```
 
-We try to keep this project as simple as possible, so you can start with just the scaffolding we set up for you, and add additional things later when they become necessary.
+Open http://localhost:3000 and you’re up and running!
 
-If you are not familiar with the different technologies used in this project, please refer to the respective docs. If you still are in the wind, please join our [Discord](https://t3.gg/discord) and ask for help.
+### With a custom config
 
-- [Next.js](https://nextjs.org)
-- [NextAuth.js](https://next-auth.js.org)
-- [Prisma](https://prisma.io)
-- [Drizzle](https://orm.drizzle.team)
-- [Tailwind CSS](https://tailwindcss.com)
-- [tRPC](https://trpc.io)
+1. Create a `config.json` (see [Configuration](#-configuration)).
+2. Mount it into the container at `/app/config.json`:
 
-## Learn More
+```bash
+docker run -d \
+  --name iso \
+  -p 3000:3000 \
+  -v $(pwd)/config.json:/app/config.json:ro \
+  coyenn/iso
+```
 
-To learn more about the [T3 Stack](https://create.t3.gg/), take a look at the following resources:
+### Adding custom icons
 
-- [Documentation](https://create.t3.gg/)
-- [Learn the T3 Stack](https://create.t3.gg/en/faq#what-learning-resources-are-currently-available) — Check out these awesome tutorials
+```bash
+# Assuming your icons live in ./my-icons
+# They will be available at http://<ISO_URL>/custom-icons/<filename>
+docker run -d \
+  --name iso \
+  -p 3000:3000 \
+  -v $(pwd)/config.json:/app/config.json:ro \
+  -v $(pwd)/my-icons:/app/public/custom-icons:ro \
+  coyenn/iso
+```
 
-You can check out the [create-t3-app GitHub repository](https://github.com/t3-oss/create-t3-app) — your feedback and contributions are welcome!
+Refer to them in your `config.json` just like this:
 
-## How do I deploy this?
+```json
+{
+  "services": [
+    {
+      "icon": "/custom-icons/unifi.png",
+      "label": "UniFi Controller",
+      "href": "https://unifi.my-home.local"
+    }
+  ]
+}
+```
 
-Follow our deployment guides for [Vercel](https://create.t3.gg/en/deployment/vercel), [Netlify](https://create.t3.gg/en/deployment/netlify) and [Docker](https://create.t3.gg/en/deployment/docker) for more information.
+---
+
+## Configuration
+
+Iso is driven entirely by a single JSON file.
+
+### Example `config.json`
+
+```json
+{
+  "title": "My Homelab",
+  "services": [
+    {
+      "icon": "recordPlayer", // built-in icon from Iso
+      "label": "Audiobooks",
+      "href": "https://audiobooks.my-home.local"
+    },
+    {
+      "icon": "/custom-icons/unifi.png", // custom icon
+      "label": "UniFi Controller",
+      "href": "https://unifi.my-home.local"
+    }
+  ],
+  "locale": "en"
+}
+```
+
+---
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
