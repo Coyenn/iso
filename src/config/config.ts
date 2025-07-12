@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { icons } from "@/src/config/icons";
 
 export const serviceSchema = z.object({
 	icon: z.string().min(1, { message: "Service icon cannot be empty" }),
@@ -7,36 +8,38 @@ export const serviceSchema = z.object({
 });
 
 export const configSchema = z.object({
+	title: z.string().default("Iso Dashboard"),
 	services: z.array(serviceSchema).default([]),
-	locale: z.enum(["en", "es", "fr", "de"]),
+	locale: z.enum(["en", "es", "fr", "de"]).default("en"),
 });
 
 export type Config = z.infer<typeof configSchema>;
 
 export const defaultConfig: Config = {
+	title: "Iso Dashboard",
 	services: [
 		{
-			icon: "/images/record-player.png",
+			icon: icons.recordPlayer,
 			label: "Audiobooks",
 			href: "/audiobooks",
 		},
 		{
-			icon: "/images/beamer.png",
+			icon: icons.beamer,
 			label: "Images & Videos",
 			href: "/images-videos",
 		},
 		{
-			icon: "/images/popcorn-bucket.png",
+			icon: icons.popcornBucket,
 			label: "Movies & TV Shows",
 			href: "/movies-tv-shows",
 		},
 		{
-			icon: "/images/lock.png",
+			icon: icons.lock,
 			label: "Backup & Restore",
 			href: "/backup-restore",
 		},
 		{
-			icon: "/images/keychain.png",
+			icon: icons.keychain,
 			label: "Account",
 			href: "/account",
 		},

@@ -9,7 +9,6 @@ import { ThemeToggle } from "@/src/components/ui/theme-toggle";
 import { getConfig } from "@/src/server/get-config";
 
 export const metadata: Metadata = {
-	title: "ISO Dashboard",
 	description: "A simple services dashboard",
 	icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
@@ -46,6 +45,9 @@ export default async function RootLayout(props: RootLayoutProps) {
 			className={`${inter.variable} ${newsreader.variable} ${instrumentSerif.variable}`}
 			suppressHydrationWarning
 		>
+			<head>
+				<title>{config.title}</title>
+			</head>
 			<body className="flex min-h-screen flex-col antialiased">
 				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 					<ThemeToggle />
