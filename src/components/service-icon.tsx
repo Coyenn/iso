@@ -28,7 +28,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 				height={225}
 				className="transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
 			/>
-			<h3 className="font-medium text-lg sm:text-xl">{label}</h3>
+			<h3 className="font-medium text-lg text-center sm:text-xl">{label}</h3>
 		</motion.a>
 	);
 }

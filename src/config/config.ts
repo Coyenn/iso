@@ -16,29 +16,29 @@ export type Config = z.infer<typeof configSchema>;
 export const defaultConfig: Config = {
 	services: [
 		{
-			icon: "/images/camera.png",
-			label: "Camera",
-			href: "/camera",
+			icon: "/images/record-player.png",
+			label: "Audiobooks",
+			href: "/audiobooks",
 		},
 		{
-			icon: "/images/headphones.png",
-			label: "Headphones",
-			href: "/headphones",
+			icon: "/images/beamer.png",
+			label: "Images & Videos",
+			href: "/images-videos",
 		},
 		{
-			icon: "/images/server.png",
-			label: "Server",
-			href: "/server",
+			icon: "/images/popcorn-bucket.png",
+			label: "Movies & TV Shows",
+			href: "/movies-tv-shows",
 		},
 		{
-			icon: "/images/tv.png",
-			label: "TV",
-			href: "/tv",
+			icon: "/images/lock.png",
+			label: "Backup & Restore",
+			href: "/backup-restore",
 		},
 		{
 			icon: "/images/keychain.png",
-			label: "Keychain",
-			href: "/keychain",
+			label: "Account",
+			href: "/account",
 		},
 	],
 	locale: "en",
