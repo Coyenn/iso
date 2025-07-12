@@ -77,7 +77,7 @@ Iso is driven entirely by a single JSON file.
 
 ### Example `config.json`
 
-```json
+```json5
 {
   "title": "My Homelab",
   "services": [
