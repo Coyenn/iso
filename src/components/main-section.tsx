@@ -1,3 +1,6 @@
+"use client";
+
+import { motion } from "framer-motion";
 import type z from "zod";
 import { ServiceIconList } from "@/src/components/service-icon-list";
 import type { configSchema } from "@/src/config/config";
@@ -19,10 +22,15 @@ export function MainSection(props: MainSectionProps) {
 				: localeStrings?.dayTime.evening;
 
 	return (
-		<section className="container flex flex-1 flex-col items-center justify-center gap-10 py-16 sm:gap-12 md:gap-16">
-			<h1 className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl">
+		<section className="sm:-mt-16 md:-mt-20 container flex flex-1 flex-col items-center justify-center gap-10 py-16 sm:gap-12 md:gap-16">
+			<motion.h1
+				initial={{ opacity: 0, y: 10, scale: 0.9 }}
+				animate={{ opacity: 1, y: 0, scale: 1 }}
+				transition={{ duration: 0.2, ease: "easeInOut" }}
+				className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl"
+			>
 				{dayTimeString}
-			</h1>
+			</motion.h1>
 			<ServiceIconList services={config.services} />
 		</section>
 	);

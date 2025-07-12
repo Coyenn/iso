@@ -19,16 +19,20 @@ export function ServiceIcon(props: ServiceIconProps) {
 			href={href}
 			target="_blank"
 			variants={itemVariants}
-			className="group flex aspect-square w-[125px] flex-col items-center rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]"
+			className="group relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]"
 		>
 			<Image
 				src={icon}
 				alt={label}
-				width={225}
-				height={225}
-				className="transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
+				width={250}
+				height={250}
+				quality={90}
+				loading="eager"
+				className="aspect-square transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
 			/>
-			<h3 className="font-medium text-lg text-center sm:text-xl">{label}</h3>
+			<h3 className="text-center font-medium text-md sm:text-lg md:text-xl">
+				{label}
+			</h3>
 		</motion.a>
 	);
 }

@@ -30,7 +30,7 @@ export function ServiceIconList(props: ServiceIconListProps) {
 				initial="hidden"
 				animate="show"
 				exit="hidden"
-				className="flex flex-wrap justify-center gap-8 sm:mb-16 md:mb-20"
+				className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
 			>
 				{services.map((service) => (
 					<ServiceIcon key={service.label} {...service} />
