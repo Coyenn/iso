@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import Image from "next/image";
 import type z from "zod";
 import type { serviceSchema } from "@/src/config/config";
+import { icons } from "@/src/config/icons";
 
 // Variants for each service item – used by the parent container for staggering
 const itemVariants = {
@@ -22,7 +23,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 			className="group relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]"
 		>
 			<Image
-				src={icon}
+				src={icon.startsWith("/") ? icon : icons[icon as keyof typeof icons]}
 				alt={label}
 				width={250}
 				height={250}
