@@ -108,7 +108,13 @@ Iso is driven entirely by a single JSON file.
       "href": "https://unifi.my-home.local"
     }
   ],
-  "locale": "en"
+  "locale": "en",
+  "customGreetings": {
+    "morning": "Rise and shine!",
+    "afternoon": "Hey there!",
+    "evening": "Good evening 😊",
+    "night": "Sleep tight"
+  }
 }
 ```
 

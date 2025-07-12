@@ -7,10 +7,20 @@ export const serviceSchema = z.object({
 	href: z.string().url({ message: "Service href must be a valid URL" }),
 });
 
+export const customGreetingsSchema = z
+	.object({
+		morning: z.string().optional(),
+		afternoon: z.string().optional(),
+		evening: z.string().optional(),
+		night: z.string().optional(),
+	})
+	.partial();
+
 export const configSchema = z.object({
 	title: z.string().default("Iso Dashboard"),
 	services: z.array(serviceSchema).default([]),
 	locale: z.enum(["en", "es", "fr", "de"]).default("en"),
+	customGreetings: customGreetingsSchema.optional(),
 });
 
 export type Config = z.infer<typeof configSchema>;

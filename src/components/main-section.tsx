@@ -13,13 +13,20 @@ export interface MainSectionProps {
 export function MainSection(props: MainSectionProps) {
 	const { config } = props;
 	const localeStrings = locales.find((locale) => locale.name === config.locale);
-	const dayTime = new Date().getHours();
+	const messages = {
+		...localeStrings?.dayTime,
+		...(config.customGreetings ?? {}),
+	} as Record<string, string | undefined>;
+
+	const hour = new Date().getHours();
 	const dayTimeString =
-		dayTime > 5 && dayTime < 12
-			? localeStrings?.dayTime.morning
-			: dayTime < 18
-				? localeStrings?.dayTime.afternoon
-				: localeStrings?.dayTime.evening;
+		hour > 5 && hour < 12
+			? messages.morning
+			: hour < 18
+				? messages.afternoon
+				: hour < 22
+					? messages.evening
+					: messages.night;
 
 	return (
 		<section className="sm:-mt-16 md:-mt-20 container flex flex-1 flex-col items-center justify-center gap-10 py-16 sm:gap-12 md:gap-16">
