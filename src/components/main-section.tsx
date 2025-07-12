@@ -1,9 +1,14 @@
-import { ServiceIcon } from "@/src/components/service-icon";
+import type z from "zod";
+import { ServiceIconList } from "@/src/components/service-icon-list";
+import type { configSchema } from "@/src/config/config";
 import { locales } from "@/src/config/locale";
-import { getConfig } from "@/src/server/get-config";
 
-export async function MainSection() {
-	const config = await getConfig();
+export interface MainSectionProps {
+	config: z.infer<typeof configSchema>;
+}
+
+export function MainSection(props: MainSectionProps) {
+	const { config } = props;
 	const localeStrings = locales.find((locale) => locale.name === config.locale);
 	const dayTime = new Date().getHours();
 	const dayTimeString =
@@ -18,11 +23,7 @@ export async function MainSection() {
 			<h1 className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl">
 				{dayTimeString}
 			</h1>
-			<div className="flex flex-wrap justify-center gap-8 sm:mb-16 md:mb-20">
-				{config.services.map((service) => (
-					<ServiceIcon key={service.label} {...service} />
-				))}
-			</div>
+			<ServiceIconList services={config.services} />
 		</section>
 	);
 }

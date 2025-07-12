@@ -1,10 +1,10 @@
 "use client";
 
 import { Monitor, Moon, Sun } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/src/components/ui/button";
-import { motion, AnimatePresence } from "motion/react";
 import {
 	Tooltip,
 	TooltipContent,
