@@ -7,7 +7,7 @@ export async function MainSection() {
 	const localeStrings = locales.find((locale) => locale.name === config.locale);
 	const dayTime = new Date().getHours();
 	const dayTimeString =
-		dayTime < 12
+		dayTime > 5 && dayTime < 12
 			? localeStrings?.dayTime.morning
 			: dayTime < 18
 				? localeStrings?.dayTime.afternoon

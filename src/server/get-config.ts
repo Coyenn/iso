@@ -15,8 +15,8 @@ export const getConfig = async (): Promise<Config> => {
 		}
 
 		return parsed.data;
-	} catch (error) {
-		console.error("Error reading config:", error);
+	} catch (_) {
+		console.log("Error reading config, falling back to default config");
 
 		return defaultConfig;
 	}

@@ -3,7 +3,6 @@
 FROM oven/bun:latest AS deps
 WORKDIR /app
 
-COPY prisma ./
 COPY package.json bun.lockb ./
 
 RUN bun install --frozen-lockfile

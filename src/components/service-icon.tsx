@@ -9,11 +9,13 @@ export function ServiceIcon(props: ServiceIconProps) {
 	const { icon, label, href } = props;
 
 	return (
-		<div className="flex aspect-square w-[125px] flex-col items-center gap-2 sm:w-[175px] md:w-[225px]">
-			<Link href={href} target="_blank">
-				<Image src={icon} alt={label} width={225} height={225} />
-			</Link>
-			<p>{label}</p>
-		</div>
+		<Link
+			href={href}
+			target="_blank"
+			className="flex aspect-square w-[125px] flex-col items-center gap-2 sm:w-[175px] md:w-[225px]"
+		>
+			<Image src={icon} alt={label} width={225} height={225} />
+			<h3 className="font-medium text-lg sm:text-xl">{label}</h3>
+		</Link>
 	);
 }

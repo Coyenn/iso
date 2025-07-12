@@ -1,10 +1,5 @@
 import { z } from "zod";
 
-import camera from "@/public/images/camera.png";
-import headphones from "@/public/images/headphones.png";
-import server from "@/public/images/server.png";
-import tv from "@/public/images/tv.png";
-
 export const serviceSchema = z.object({
 	icon: z.string().min(1, { message: "Service icon cannot be empty" }),
 	label: z.string().min(1, { message: "Service label cannot be empty" }),
@@ -18,32 +13,25 @@ export const configSchema = z.object({
 
 export type Config = z.infer<typeof configSchema>;
 
-export const defaultIcons = {
-	camera,
-	headphones,
-	server,
-	tv,
-};
-
 export const defaultConfig: Config = {
 	services: [
 		{
-			icon: defaultIcons.camera.src,
+			icon: "/images/camera.png",
 			label: "Camera",
 			href: "/camera",
 		},
 		{
-			icon: defaultIcons.headphones.src,
+			icon: "/images/headphones.png",
 			label: "Headphones",
 			href: "/headphones",
 		},
 		{
-			icon: defaultIcons.server.src,
+			icon: "/images/server.png",
 			label: "Server",
 			href: "/server",
 		},
 		{
-			icon: defaultIcons.tv.src,
+			icon: "/images/tv.png",
 			label: "TV",
 			href: "/tv",
 		},
