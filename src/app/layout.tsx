@@ -5,6 +5,8 @@ import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
 
 import { ThemeProvider } from "@/src/components/providers/theme-provider";
 import { Toaster } from "@/src/components/ui/sonner";
+import { ThemeToggle } from "@/src/components/ui/theme-toggle";
+import { getConfig } from "@/src/server/get-config";
 
 export const metadata: Metadata = {
 	title: "ISO Dashboard",
@@ -30,25 +32,23 @@ const instrumentSerif = Instrument_Serif({
 	variable: "--font-instrument-serif",
 });
 
-export default function RootLayout({
-	children,
-}: Readonly<{ children: React.ReactNode }>) {
+export interface RootLayoutProps {
+	children: React.ReactNode;
+}
+
+export default async function RootLayout(props: RootLayoutProps) {
+	const { children } = props;
+	const config = await getConfig();
+
 	return (
 		<html
-			lang="en"
+			lang={config.locale ?? "en"}
 			className={`${inter.variable} ${newsreader.variable} ${instrumentSerif.variable}`}
 			suppressHydrationWarning
-			data-primary="brand"
-			data-secondary="brand"
-			data-surface="sand"
 		>
 			<body className="flex min-h-screen flex-col antialiased">
-				<ThemeProvider
-					attribute="class"
-					defaultTheme="system"
-					disableTransitionOnChange
-					enableSystem
-				>
+				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+					<ThemeToggle />
 					<main className="container-wrapper relative flex-1">{children}</main>
 					<Toaster />
 				</ThemeProvider>

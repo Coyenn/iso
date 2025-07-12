@@ -18,7 +18,7 @@ export async function MainSection() {
 			<h1 className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl">
 				{dayTimeString}
 			</h1>
-			<div className="flex flex-wrap justify-center gap-12 sm:mb-16 md:mb-20">
+			<div className="flex flex-wrap justify-center gap-8 sm:mb-16 md:mb-20">
 				{config.services.map((service) => (
 					<ServiceIcon key={service.label} {...service} />
 				))}

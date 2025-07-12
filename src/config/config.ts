@@ -35,6 +35,11 @@ export const defaultConfig: Config = {
 			label: "TV",
 			href: "/tv",
 		},
+		{
+			icon: "/images/keychain.png",
+			label: "Keychain",
+			href: "/keychain",
+		},
 	],
 	locale: "en",
 };

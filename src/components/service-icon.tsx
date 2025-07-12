@@ -12,7 +12,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 		<Link
 			href={href}
 			target="_blank"
-			className="flex aspect-square w-[125px] flex-col items-center gap-2 sm:w-[175px] md:w-[225px]"
+			className="flex aspect-square w-[125px] flex-col items-center rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]"
 		>
 			<Image src={icon} alt={label} width={225} height={225} />
 			<h3 className="font-medium text-lg sm:text-xl">{label}</h3>

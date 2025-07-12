@@ -13,10 +13,14 @@
 	}
 
 	.container-wrapper {
-		@apply max-w-[1400px] min-[1800px]:max-w-screen-xl mx-auto w-full flex flex-col;
+		@apply max-w-[1400px] mx-auto w-full flex flex-col;
 	}
 
 	.container {
-		@apply px-4 xl:px-6 mx-auto max-w-screen-xl;
+		@apply px-4 xl:px-6 mx-auto;
 	}
+}
+
+button {
+	cursor: pointer;
 }
