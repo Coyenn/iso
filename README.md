@@ -26,7 +26,7 @@ Built for my personal homelab — now open-sourced for yours.
 docker run -d \
   --name iso \
   -p 3000:3000 \
-  coyenn/iso
+  coyann/iso
 ```
 
 Open http://localhost:3000 and you’re up and running!
@@ -41,7 +41,7 @@ docker run -d \
   --name iso \
   -p 3000:3000 \
   -v $(pwd)/config.json:/app/config.json:ro \
-  coyenn/iso
+  coyann/iso
 ```
 
 ### Adding custom icons
@@ -54,7 +54,7 @@ docker run -d \
   -p 3000:3000 \
   -v $(pwd)/config.json:/app/config.json:ro \
   -v $(pwd)/my-icons:/app/public/custom-icons:ro \
-  coyenn/iso
+  coyann/iso
 ```
 
 Refer to them in your `config.json` just like this:
