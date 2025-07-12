@@ -2,19 +2,13 @@
   <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
 </div>
 
-# Iso Dashboard
-
 **Iso** is a lightweight, plug-and-play dashboard for all your self-hosted services.
 Built for my personal homelab — now open-sourced for yours.
 
----
-
-- 🧩 **Fully configurable** through a single `config.json` file
-- 🌐 **Multi-language**: English, Español, Français, Deutsch
-- 🎨 **Icon ready**: choose from a set of built-in icons or supply your own
-- 🐳 **Docker-first**: run anywhere with one simple command
-
----
+- **Fully configurable** through a single `config.json` file
+- **Multi-language**: English, Español, Français, Deutsch
+- **Icon ready**: choose from a set of built-in icons or supply your own
+- **Docker-first**: run anywhere with one simple command
 
 ## ‍️Quick Start
 
@@ -67,8 +61,6 @@ Refer to them in your `config.json` just like this:
 }
 ```
 
----
-
 ## Configuration
 
 Iso is driven entirely by a single JSON file.
@@ -93,8 +85,6 @@ Iso is driven entirely by a single JSON file.
   "locale": "en"
 }
 ```
-
----
 
 ## License
 
