@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utils";
-import { type SVGProps, forwardRef } from "react";
+import { forwardRef, type SVGProps } from "react";
+import { cn } from "@/src/lib/utils";
 
 export interface IconBaseProps extends SVGProps<SVGSVGElement> {
 	className?: string;

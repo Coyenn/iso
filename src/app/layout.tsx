@@ -1,10 +1,10 @@
-import "@/styles/globals.css";
+import "@/src/styles/globals.css";
 
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
 
-import { ThemeProvider } from "@/components/providers/theme-provider";
-import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/src/components/providers/theme-provider";
+import { Toaster } from "@/src/components/ui/sonner";
 
 export const metadata: Metadata = {
 	title: "ISO Dashboard",
@@ -49,7 +49,7 @@ export default function RootLayout({
 					disableTransitionOnChange
 					enableSystem
 				>
-					<main className="relative flex-1">{children}</main>
+					<main className="container-wrapper relative flex-1">{children}</main>
 					<Toaster />
 				</ThemeProvider>
 			</body>
