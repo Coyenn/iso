@@ -9,4 +9,6 @@ export const icons = {
 	lock: "/icons/lock.png",
 	recordPlayer: "/icons/record-player.png",
 	tv: "/icons/tv.png",
+	book: "/icons/book.png",
+	bookshelf: "/icons/bookshelf.png",
 };
