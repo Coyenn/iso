@@ -1,14 +1,16 @@
 <div align="center">
-  <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
+  <a href="https://iso.tim.cv/" target="_blank">
+    <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
+  </a>
 </div>
 
 <br />
 <div align="center">
-  <a href="https://iso-rho.vercel.app/">Demo</a>
+  <a href="https://iso.tim.cv" target="_blank">Demo</a>
   |
-  <a href="https://hub.docker.com/r/coyann/iso">Docker</a>
+  <a href="https://hub.docker.com/r/coyann/iso" target="_blank">Docker</a>
   |
-  <a href="https://github.com/Coyenn/iso/">GitHub</a>
+  <a href="https://github.com/Coyenn/iso/" target="_blank">GitHub</a>
 </div>
 <br />
 
