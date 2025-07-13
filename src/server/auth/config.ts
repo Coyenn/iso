@@ -1,7 +1,6 @@
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-
-import { z } from "zod";
+import { loginFormSchema } from "@/src/config/schemas";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -35,13 +34,12 @@ export const authConfig = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials) {
-				const parsedCredentials = z
-					.object({
-						password: z.string().min(1).max(255),
-					})
-					.parse(credentials);
+				const parsedCredentials = loginFormSchema.parse(credentials);
 
-				if (parsedCredentials.password !== process.env.AUTH_PASSWORD) {
+				if (
+					!process.env.AUTH_PASSWORD ||
+					parsedCredentials.password !== process.env.AUTH_PASSWORD
+				) {
 					return null;
 				}
 

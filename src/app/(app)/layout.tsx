@@ -1,4 +1,4 @@
-import { PageHeader } from "@/src/components/layout/page-header";
+import { AppPageHeader } from "@/src/components/layout/app-page-header";
 
 export interface AppLayoutProps {
 	children: React.ReactNode;
@@ -9,7 +9,7 @@ export default async function AppLayout(props: AppLayoutProps) {
 
 	return (
 		<>
-			<PageHeader />
+			<AppPageHeader />
 			<main className="container-wrapper relative flex-1">{children}</main>
 		</>
 	);
