@@ -12,7 +12,7 @@
 </div>
 <br />
 
-**Iso** is a lightweight, plug-and-play dashboard for all your self-hosted services.
+**Iso** is a plug-and-play dashboard for all your self-hosted services.
 Built for my personal homelab — now open-sourced for yours.
 
 - **Fully configurable** through a single `config.json` file

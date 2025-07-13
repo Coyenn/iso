@@ -4,7 +4,7 @@ import { icons } from "@/src/config/icons";
 export const serviceSchema = z.object({
 	icon: z.string().min(1, { message: "Service icon cannot be empty" }),
 	label: z.string().min(1, { message: "Service label cannot be empty" }),
-	href: z.string().url({ message: "Service href must be a valid URL" }),
+	href: z.url({ message: "Service href must be a valid URL" }),
 });
 
 export const customGreetingsSchema = z
