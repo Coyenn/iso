@@ -31,11 +31,14 @@ export function LoginLogoutButton(props: LoginLogoutButtonProps) {
 				<Button
 					variant="ghost"
 					size="icon"
-					onClick={() => {
+					onClick={async () => {
 						if (isLoggedIn) {
-							signOut();
+							await signOut({
+								redirect: false,
+							});
+							window.location.href = "/";
 						} else {
-							signIn();
+							await signIn();
 						}
 					}}
 				>
