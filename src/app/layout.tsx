@@ -1,15 +1,13 @@
 import "@/src/styles/globals.css";
 
-import type { Metadata } from "next";
-import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
-
-import { ThemeProvider } from "@/src/components/providers/theme-provider";
-import { Toaster } from "@/src/components/ui/sonner";
-import { ThemeToggle } from "@/src/components/ui/theme-toggle";
-import { getConfig } from "@/src/server/get-config";
-
 import fs from "node:fs";
 import path from "node:path";
+import type { Metadata } from "next";
+import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
+import { SessionProvider } from "next-auth/react";
+import { ThemeProvider } from "@/src/components/providers/theme-provider";
+import { Toaster } from "@/src/components/ui/sonner";
+import { getConfig } from "@/src/server/get-config";
 
 export const metadata: Metadata = {
 	description: "A simple services dashboard",
@@ -68,11 +66,12 @@ export default async function RootLayout(props: RootLayoutProps) {
 				))}
 			</head>
 			<body className="flex min-h-screen flex-col antialiased">
-				<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-					<ThemeToggle />
-					<main className="container-wrapper relative flex-1">{children}</main>
-					<Toaster />
-				</ThemeProvider>
+				<SessionProvider>
+					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+						{children}
+						<Toaster />
+					</ThemeProvider>
+				</SessionProvider>
 			</body>
 		</html>
 	);
