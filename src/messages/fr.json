@@ -1,12 +1,20 @@
 {
 	"defaultGreeting": "Bienvenue !",
 	"goBack": "Retour",
+	"theme": {
+		"title": "Schéma de couleurs"
+	},
 	"tooltips": {
 		"toggleTheme": "Changer le schéma de couleurs",
 		"settings": "Paramètres",
 		"logout": "Se déconnecter",
 		"login": "Se connecter",
-		"password": "Mot de passe"
+		"password": "Mot de passe",
+		"editMode": {
+			"title": "Mode d'édition",
+			"activate": "Activer le mode d'édition",
+			"deactivate": "Désactiver le mode d'édition"
+		}
 	},
 	"auth": {
 		"login": {
@@ -37,5 +45,9 @@
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",
 		"error": "Une erreur est survenue. Veuillez réessayer."
+	},
+	"service": {
+		"add": "Ajouter",
+		"remove": "Supprimer"
 	}
 }

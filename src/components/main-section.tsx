@@ -20,7 +20,7 @@ export function MainSection(props: MainSectionProps) {
 			: t("defaultGreeting");
 
 	return (
-		<section className="sm:-mt-16 md:-mt-20 container flex flex-1 flex-col items-center justify-center gap-10 py-16 sm:gap-12 md:gap-16">
+		<section className="2xl:-mt-20 container mt-10 flex flex-1 flex-col items-center justify-center gap-6 py-16 sm:gap-10 md:gap-16">
 			<motion.h1
 				initial={{ opacity: 0, y: 10, scale: 0.9 }}
 				animate={{ opacity: 1, y: 0, scale: 1 }}

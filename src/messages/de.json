@@ -1,12 +1,20 @@
 {
 	"defaultGreeting": "Willkommen!",
 	"goBack": "Zurück",
+	"theme": {
+		"title": "Farbschema"
+	},
 	"tooltips": {
 		"toggleTheme": "Farbschema wechseln",
 		"settings": "Einstellungen",
 		"logout": "Abmelden",
 		"login": "Anmelden",
-		"password": "Passwort"
+		"password": "Passwort",
+		"editMode": {
+			"title": "Bearbeitungsmodus",
+			"activate": "Bearbeitungsmodus aktivieren",
+			"deactivate": "Bearbeitungsmodus deaktivieren"
+		}
 	},
 	"auth": {
 		"login": {
@@ -37,5 +45,9 @@
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",
 		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut."
+	},
+	"service": {
+		"add": "Hinzufügen",
+		"remove": "Entfernen"
 	}
 }

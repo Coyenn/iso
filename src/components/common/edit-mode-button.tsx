@@ -1,8 +1,7 @@
 "use client";
 
-import { KeyRound, LogOut } from "lucide-react";
+import { Pencil, PencilOff } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { signIn, signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "@/src/components/ui/button";
@@ -11,15 +10,12 @@ import {
 	TooltipContent,
 	TooltipTrigger,
 } from "@/src/components/ui/tooltip";
+import { useEditModeStore } from "@/src/store/edit-mode-store";
 
-export interface LoginLogoutButtonProps {
-	isLoggedIn: boolean;
-}
-
-export function LoginLogoutButton(props: LoginLogoutButtonProps) {
-	const { isLoggedIn } = props;
-	const t = useTranslations("tooltips");
+export function EditModeButton() {
 	const [isClient, setIsClient] = useState(false);
+	const t = useTranslations("tooltips.editMode");
+	const { editMode, setEditMode } = useEditModeStore();
 
 	useEffect(() => {
 		setIsClient(true);
@@ -33,27 +29,21 @@ export function LoginLogoutButton(props: LoginLogoutButtonProps) {
 				<Button
 					variant="ghost"
 					size="icon"
-					onClick={async () => {
-						if (isLoggedIn) {
-							await signOut({
-								redirect: false,
-							});
-							window.location.href = "/";
-						} else {
-							await signIn();
-						}
+					onClick={() => {
+						setEditMode(!editMode);
 					}}
+					aria-label={t("title")}
 				>
 					<AnimatePresence mode="wait">
-						{isLoggedIn ? (
+						{editMode ? (
 							<motion.div
 								initial={{ scale: 0.75, opacity: 0 }}
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.75, opacity: 0 }}
 								transition={{ duration: 0.15, ease: "easeInOut" }}
-								key="logout"
+								key="editOff"
 							>
-								<LogOut />
+								<PencilOff />
 							</motion.div>
 						) : (
 							<motion.div
@@ -61,15 +51,17 @@ export function LoginLogoutButton(props: LoginLogoutButtonProps) {
 								animate={{ scale: 1, opacity: 1 }}
 								exit={{ scale: 0.75, opacity: 0 }}
 								transition={{ duration: 0.15, ease: "easeInOut" }}
-								key="login"
+								key="editOn"
 							>
-								<KeyRound />
+								<Pencil />
 							</motion.div>
 						)}
 					</AnimatePresence>
 				</Button>
 			</TooltipTrigger>
-			<TooltipContent>{isLoggedIn ? t("logout") : t("login")}</TooltipContent>
+			<TooltipContent>
+				{editMode ? t("deactivate") : t("activate")}
+			</TooltipContent>
 		</Tooltip>
 	);
 }

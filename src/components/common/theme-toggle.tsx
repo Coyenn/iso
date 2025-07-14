@@ -14,8 +14,8 @@ import {
 
 export function ThemeToggle() {
 	const { theme, setTheme } = useTheme();
+	const t = useTranslations();
 	const [isClient, setIsClient] = useState(false);
-	const t = useTranslations("tooltips");
 
 	useEffect(() => {
 		setIsClient(true);
@@ -34,7 +34,7 @@ export function ThemeToggle() {
 						else if (theme === "dark") setTheme("system");
 						else setTheme("light");
 					}}
-					aria-label={`Toggle theme to ${theme === "light" ? "dark" : theme === "dark" ? "system" : "light"}. Current theme is ${theme}.`}
+					aria-label={t("theme.title")}
 				>
 					<AnimatePresence mode="wait">
 						{theme === "light" && (
@@ -73,7 +73,7 @@ export function ThemeToggle() {
 					</AnimatePresence>
 				</Button>
 			</TooltipTrigger>
-			<TooltipContent>{t("toggleTheme")}</TooltipContent>
+			<TooltipContent>{t("tooltips.toggleTheme")}</TooltipContent>
 		</Tooltip>
 	);
 }

@@ -1,12 +1,20 @@
 {
 	"defaultGreeting": "Welcome!",
 	"goBack": "Go back",
+	"theme": {
+		"title": "Theme"
+	},
 	"tooltips": {
 		"toggleTheme": "Toggle theme",
 		"settings": "Settings",
 		"logout": "Logout",
 		"login": "Login",
-		"password": "Password"
+		"password": "Password",
+		"editMode": {
+			"title": "Edit mode",
+			"activate": "Activate edit mode",
+			"deactivate": "Deactivate edit mode"
+		}
 	},
 	"auth": {
 		"login": {
@@ -30,12 +38,16 @@
 		},
 		"greetings": {
 			"title": "Custom Greetings",
-			"description": "If set, a random greeting will be displayed on the dashboard on each page load.",
+			"description": "If set, a random greeting will be displayed on the dashboard on each page load instead of the default greeting.",
 			"addGreeting": "Add Greeting",
 			"removeGreeting": "Remove Greeting"
 		},
 		"save": "Save",
 		"success": "Settings saved",
 		"error": "Something went wrong. Please try again."
+	},
+	"service": {
+		"add": "Add",
+		"remove": "Remove"
 	}
 }
