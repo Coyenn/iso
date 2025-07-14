@@ -1,5 +1,6 @@
 "use server";
 
+import z from "zod";
 import {
 	type Config,
 	configLocation,
@@ -10,11 +11,16 @@ import {
 export const getConfig = async (): Promise<Config> => {
 	try {
 		const file = Bun.file(configLocation);
+
+		if (!file.exists()) {
+			await Bun.write(configLocation, JSON.stringify(defaultConfig, null, 2));
+		}
+
 		const rawConfig = await file.json();
 		const parsed = configSchema.safeParse(rawConfig);
 
 		if (!parsed.success) {
-			console.error("Config validation failed:", parsed.error.format());
+			console.error("Config validation failed:", z.treeifyError(parsed.error));
 
 			return defaultConfig;
 		}

@@ -31,9 +31,11 @@ export function ServiceIconList(props: ServiceIconListProps) {
 				exit="hidden"
 				className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
 			>
-				{services.map((service, index) => (
-					<ServiceIcon key={service.label} {...service} index={index} />
-				))}
+				{services
+					.sort((a, b) => (a?.order ?? 0) - (b?.order ?? 0))
+					.map((service, index) => (
+						<ServiceIcon key={service.label} {...service} index={index} />
+					))}
 			</motion.div>
 		</AnimatePresence>
 	);

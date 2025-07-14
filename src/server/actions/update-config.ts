@@ -1,6 +1,5 @@
 "use server";
 
-import fs from "node:fs";
 import { type Config, configLocation, configSchema } from "@/src/config/config";
 import { auth } from "@/src/server/auth";
 
@@ -20,13 +19,6 @@ export async function updateConfig(values: Config) {
 		return {
 			success: false,
 			error: "Invalid configuration supplied",
-		};
-	}
-
-	if (!fs.existsSync(configLocation)) {
-		return {
-			success: false,
-			error: "Config file not found",
 		};
 	}
 

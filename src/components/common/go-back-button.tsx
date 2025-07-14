@@ -21,7 +21,7 @@ export function GoBackButton(props: GoBackButtonProps) {
 	}
 
 	return (
-		<Button className="absolute top-4 left-4" variant="ghost" asChild>
+		<Button className="absolute top-4 left-4 z-50" variant="ghost" asChild>
 			<Link href={href}>
 				<ArrowLeft />
 				{title ?? t("goBack")}
