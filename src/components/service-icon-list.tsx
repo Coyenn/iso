@@ -9,7 +9,6 @@ export interface ServiceIconListProps {
 	services: z.infer<typeof serviceSchema>[];
 }
 
-// Motion container variants that stagger children
 const containerVariants = {
 	hidden: { opacity: 0 },
 	show: {
@@ -32,8 +31,8 @@ export function ServiceIconList(props: ServiceIconListProps) {
 				exit="hidden"
 				className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
 			>
-				{services.map((service) => (
-					<ServiceIcon key={service.label} {...service} />
+				{services.map((service, index) => (
+					<ServiceIcon key={service.label} {...service} index={index} />
 				))}
 			</motion.div>
 		</AnimatePresence>

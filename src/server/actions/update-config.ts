@@ -1,12 +1,11 @@
 "use server";
 
 import fs from "node:fs";
-import { type Config, configSchema } from "@/src/config/config";
+import { type Config, configLocation, configSchema } from "@/src/config/config";
 import { auth } from "@/src/server/auth";
 
 export async function updateConfig(values: Config) {
 	const session = await auth();
-	const configLocation = "/app/config.json";
 
 	if (!session) {
 		return {

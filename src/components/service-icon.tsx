@@ -3,12 +3,15 @@
 import { X } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 import type z from "zod";
 import { Button } from "@/src/components/ui/button";
 import type { serviceSchema } from "@/src/config/config";
 import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
+import { removeService } from "@/src/server/actions/remove-service";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 const itemVariants = {
@@ -16,12 +19,15 @@ const itemVariants = {
 	show: { opacity: 1, scale: 1, y: 0 },
 };
 
-export type ServiceIconProps = z.infer<typeof serviceSchema>;
+export type ServiceIconProps = z.infer<typeof serviceSchema> & {
+	index: number;
+};
 
 export function ServiceIcon(props: ServiceIconProps) {
-	const { icon, label, href } = props;
+	const { icon, label, href, index } = props;
 	const { editMode } = useEditModeStore();
 	const t = useTranslations("service");
+	const { refresh } = useRouter();
 
 	const wrapperClasses =
 		"group relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]";
@@ -61,6 +67,15 @@ export function ServiceIcon(props: ServiceIconProps) {
 					size="icon"
 					className="absolute top-2 right-2 z-10"
 					aria-label={t("remove")}
+					onClick={async () => {
+						const result = await removeService(index);
+
+						if (result.success) {
+							refresh();
+						} else {
+							toast.error(result.error);
+						}
+					}}
 				>
 					<X />
 				</Button>

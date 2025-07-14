@@ -1,10 +1,14 @@
 "use server";
 
-import { type Config, configSchema, defaultConfig } from "@/src/config/config";
+import {
+	type Config,
+	configLocation,
+	configSchema,
+	defaultConfig,
+} from "@/src/config/config";
 
 export const getConfig = async (): Promise<Config> => {
 	try {
-		const configLocation = "/app/config.json";
 		const file = Bun.file(configLocation);
 		const rawConfig = await file.json();
 		const parsed = configSchema.safeParse(rawConfig);

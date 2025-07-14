@@ -13,6 +13,8 @@ export const greetingSchema = z.object({
 
 export type Greeting = z.infer<typeof greetingSchema>;
 
+export type Service = z.infer<typeof serviceSchema>;
+
 export const defaultConfig = {
 	title: "Iso Dashboard",
 	services: [
@@ -54,3 +56,6 @@ export const configSchema = z.object({
 });
 
 export type Config = z.infer<typeof configSchema>;
+
+export const configLocation =
+	process.env.NODE_ENV === "production" ? "/app/config.json" : "./config.json";

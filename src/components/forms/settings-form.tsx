@@ -36,7 +36,7 @@ import {
 } from "@/src/components/ui/select";
 import { type Config, configSchema } from "@/src/config/config";
 import { locales } from "@/src/config/locale";
-import { updateConfig } from "@/src/server/update-config";
+import { updateConfig } from "@/src/server/actions/update-config";
 
 export interface SettingsFormProps {
 	currentConfig: Config;
