@@ -11,10 +11,14 @@ export const getConfig = async (): Promise<Config> => {
 
 		if (!parsed.success) {
 			console.error("Config validation failed:", parsed.error.format());
+
 			return defaultConfig;
 		}
 
-		return parsed.data;
+		return {
+			...defaultConfig,
+			...parsed.data,
+		};
 	} catch (_) {
 		console.log("Error reading config, falling back to default config");
 

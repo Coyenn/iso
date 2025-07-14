@@ -1,50 +1,32 @@
-export type LocaleName = "en" | "es" | "fr" | "de";
+import type { Greeting } from "@/src/config/config";
+
+export type LocaleCode = "en" | "es" | "fr" | "de";
 
 export interface Locale {
-	name: LocaleName;
-	dayTime: {
-		morning: string;
-		afternoon: string;
-		evening: string;
-		night: string;
-	};
+	code: LocaleCode;
+	name: string;
+	greetings: Array<Greeting>;
 }
 
 export const locales: Locale[] = [
 	{
-		name: "en",
-		dayTime: {
-			morning: "Good morning",
-			afternoon: "Good afternoon",
-			evening: "Good evening",
-			night: "Good night",
-		},
+		code: "en",
+		name: "English",
+		greetings: [{ message: "Welcome!" }],
 	},
 	{
-		name: "es",
-		dayTime: {
-			morning: "Buenos días",
-			afternoon: "Buenas tardes",
-			evening: "Buenas noches",
-			night: "Buenas noches",
-		},
+		code: "es",
+		name: "Español",
+		greetings: [{ message: "Bienvenido!" }],
 	},
 	{
-		name: "fr",
-		dayTime: {
-			morning: "Bonjour",
-			afternoon: "Bonsoir",
-			evening: "Bonsoir",
-			night: "Bonsoir",
-		},
+		code: "fr",
+		name: "Français",
+		greetings: [{ message: "Bienvenue!" }],
 	},
 	{
-		name: "de",
-		dayTime: {
-			morning: "Guten Morgen",
-			afternoon: "Guten Tag",
-			evening: "Guten Abend",
-			night: "Guten Abend",
-		},
+		code: "de",
+		name: "Deutsch",
+		greetings: [{ message: "Willkommen!" }],
 	},
 ];

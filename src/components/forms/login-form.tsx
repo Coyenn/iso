@@ -50,13 +50,15 @@ export function LoginForm() {
 			if (result?.ok && !result?.error) {
 				toast.success("Login successful");
 			} else {
-				setError("Invalid username or password");
+				setError("Invalid password");
 			}
 		} catch (_) {
 			toast.error("Something went wrong. Please try again.");
 		} finally {
-			refresh();
-			setIsLoading(false);
+			setTimeout(() => {
+				refresh();
+				setIsLoading(false);
+			}, 500);
 		}
 	}
 
@@ -67,7 +69,7 @@ export function LoginForm() {
 			exit={{ opacity: 0, y: -10 }}
 			transition={{ duration: 0.1 }}
 		>
-			<Card className="w-full border-none">
+			<Card className="w-full">
 				<CardHeader>
 					<Image
 						src={CompassImage}

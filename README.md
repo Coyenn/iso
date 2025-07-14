@@ -111,12 +111,12 @@ Iso is driven entirely by a single JSON file.
     }
   ],
   "locale": "en",
-  "customGreetings": {
-    "morning": "Rise and shine!",
-    "afternoon": "Hey there!",
-    "evening": "Good evening 😊",
-    "night": "Sleep tight"
-  }
+  "greetings": [
+    "Rise and shine!",
+    "Hey there!",
+    "Good evening 😊",
+    "Sleep tight"
+  ]
 }
 ```
 

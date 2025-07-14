@@ -24,3 +24,8 @@
 button {
 	cursor: pointer;
 }
+
+*::selection {
+	background-color: var(--selection);
+	color: var(--selection-foreground);
+}

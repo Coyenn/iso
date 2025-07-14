@@ -65,7 +65,7 @@ export default async function RootLayout(props: RootLayoutProps) {
 					<link key={href} rel="stylesheet" href={href} />
 				))}
 			</head>
-			<body className="flex min-h-screen flex-col antialiased">
+			<body className="flex min-h-screen flex-col bg-background antialiased">
 				<SessionProvider>
 					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
 						{children}

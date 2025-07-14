@@ -1,3 +1,4 @@
+import { GoBackButton } from "@/src/components/common/go-back-button";
 import { AppPageHeader } from "@/src/components/layout/app-page-header";
 
 export interface AppLayoutProps {
@@ -10,6 +11,7 @@ export default async function AppLayout(props: AppLayoutProps) {
 	return (
 		<>
 			<AppPageHeader />
+			<GoBackButton href="/" title="Go back" />
 			<main className="container-wrapper relative flex-1">{children}</main>
 		</>
 	);
