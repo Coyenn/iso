@@ -2,6 +2,7 @@
 
 import { Monitor, Moon, Sun } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { useTranslations } from "next-intl";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import { Button } from "@/src/components/ui/button";
@@ -14,6 +15,7 @@ import {
 export function ThemeToggle() {
 	const { theme, setTheme } = useTheme();
 	const [isClient, setIsClient] = useState(false);
+	const t = useTranslations("tooltips");
 
 	useEffect(() => {
 		setIsClient(true);
@@ -71,7 +73,7 @@ export function ThemeToggle() {
 					</AnimatePresence>
 				</Button>
 			</TooltipTrigger>
-			<TooltipContent>Toggle theme</TooltipContent>
+			<TooltipContent>{t("toggleTheme")}</TooltipContent>
 		</Tooltip>
 	);
 }

@@ -1,5 +1,6 @@
 import { Cog } from "lucide-react";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 import { Button } from "@/src/components/ui/button";
 import {
 	Tooltip,
@@ -8,6 +9,8 @@ import {
 } from "@/src/components/ui/tooltip";
 
 export function SettingsButton() {
+	const t = useTranslations("tooltips");
+
 	return (
 		<Tooltip>
 			<TooltipTrigger asChild>
@@ -17,7 +20,7 @@ export function SettingsButton() {
 					</Link>
 				</Button>
 			</TooltipTrigger>
-			<TooltipContent>Settings</TooltipContent>
+			<TooltipContent>{t("settings")}</TooltipContent>
 		</Tooltip>
 	);
 }

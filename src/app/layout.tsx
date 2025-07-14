@@ -5,6 +5,7 @@ import path from "node:path";
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
+import { NextIntlClientProvider } from "next-intl";
 import { ThemeProvider } from "@/src/components/providers/theme-provider";
 import { Toaster } from "@/src/components/ui/sonner";
 import { getConfig } from "@/src/server/get-config";
@@ -66,12 +67,14 @@ export default async function RootLayout(props: RootLayoutProps) {
 				))}
 			</head>
 			<body className="flex min-h-screen flex-col bg-background antialiased">
-				<SessionProvider>
-					<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-						{children}
-						<Toaster />
-					</ThemeProvider>
-				</SessionProvider>
+				<NextIntlClientProvider>
+					<SessionProvider>
+						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+							{children}
+							<Toaster />
+						</ThemeProvider>
+					</SessionProvider>
+				</NextIntlClientProvider>
 			</body>
 		</html>
 	);

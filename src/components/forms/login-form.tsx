@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -28,6 +29,7 @@ export function LoginForm() {
 	const { refresh } = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
+	const t = useTranslations("auth.login");
 	const form = useForm<z.infer<typeof loginFormSchema>>({
 		resolver: zodResolver(loginFormSchema),
 		defaultValues: {
@@ -48,12 +50,12 @@ export function LoginForm() {
 			});
 
 			if (result?.ok && !result?.error) {
-				toast.success("Login successful");
+				toast.success(t("success"));
 			} else {
-				setError("Invalid password");
+				setError(t("error"));
 			}
 		} catch (_) {
-			toast.error("Something went wrong. Please try again.");
+			toast.error(t("errorMessage"));
 		} finally {
 			setTimeout(() => {
 				refresh();
@@ -89,7 +91,7 @@ export function LoginForm() {
 									name="password"
 									render={({ field }) => (
 										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="password">Password</FormLabel>
+											<FormLabel htmlFor="password">{t("password")}</FormLabel>
 											<FormControl>
 												<PasswordInput
 													id="password"
@@ -127,7 +129,7 @@ export function LoginForm() {
 												exit={{ opacity: 0 }}
 												transition={{ duration: 0.15 }}
 											>
-												Login
+												{t("submit")}
 											</motion.span>
 										)}
 									</AnimatePresence>

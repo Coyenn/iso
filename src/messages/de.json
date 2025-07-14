@@ -1,0 +1,41 @@
+{
+	"defaultGreeting": "Willkommen!",
+	"goBack": "Zurück",
+	"tooltips": {
+		"toggleTheme": "Farbschema wechseln",
+		"settings": "Einstellungen",
+		"logout": "Abmelden",
+		"login": "Anmelden",
+		"password": "Passwort"
+	},
+	"auth": {
+		"login": {
+			"title": "Anmelden",
+			"password": "Passwort",
+			"submit": "Anmelden",
+			"success": "Anmeldung erfolgreich",
+			"error": "Ungültiges Passwort",
+			"errorMessage": "Etwas ist schief gelaufen. Bitte versuche es erneut."
+		}
+	},
+	"settings": {
+		"title": "Einstellungen",
+		"pageTitle": {
+			"title": "Seitentitel",
+			"description": "Ändert den sichtbaren Titel des Dashboards im Browser-Tab."
+		},
+		"locale": {
+			"title": "Sprache",
+			"description": "Wählen Sie die Sprache des Dashboards."
+		},
+		"greetings": {
+			"title": "Benutzerdefinierte Willkommensnachrichten",
+			"description": "Wenn gesetzt, wird bei jedem Laden der Seite eine zufällige Willkommensnachricht auf dem Dashboard angezeigt.",
+			"addGreeting": "Willkommensnachricht hinzufügen",
+			"removeGreeting": "Willkommensnachricht entfernen"
+		},
+		"save": "Speichern",
+		"success": "Einstellungen gespeichert",
+		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut."
+	}
+}

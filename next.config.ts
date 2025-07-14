@@ -3,9 +3,12 @@
  * for Docker builds.
  */
 import "./src/env.js";
+import type { NextConfig } from "next";
+import createNextIntlPlugin from "next-intl/plugin";
 
-/** @type {import("next").NextConfig} */
-const config = {
+const withNextIntl = createNextIntlPlugin();
+
+const config: NextConfig = {
 	reactStrictMode: true,
 	output: "standalone",
 	images: {
@@ -22,4 +25,4 @@ const config = {
 	},
 };
 
-export default config;
+export default withNextIntl(config);

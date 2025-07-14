@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import type z from "zod";
 import { ServiceIconList } from "@/src/components/service-icon-list";
 import type { configSchema, Greeting } from "@/src/config/config";
@@ -11,9 +12,12 @@ export interface MainSectionProps {
 
 export function MainSection(props: MainSectionProps) {
 	const { config } = props;
+	const t = useTranslations();
 	const greetings: Array<Greeting> = config.greetings ?? [];
 	const randomGreeting =
-		greetings[Math.floor(Math.random() * greetings.length)]?.message ?? "";
+		greetings.length > 0
+			? greetings[Math.floor(Math.random() * greetings.length)]?.message
+			: t("defaultGreeting");
 
 	return (
 		<section className="sm:-mt-16 md:-mt-20 container flex flex-1 flex-col items-center justify-center gap-10 py-16 sm:gap-12 md:gap-16">
@@ -23,7 +27,7 @@ export function MainSection(props: MainSectionProps) {
 				transition={{ duration: 0.2, ease: "easeInOut" }}
 				className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl"
 			>
-				{randomGreeting}
+				{randomGreeting ?? t("defaultGreeting")}
 			</motion.h1>
 			<ServiceIconList services={config.services} />
 		</section>

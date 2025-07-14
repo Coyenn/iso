@@ -11,7 +11,7 @@ export default async function AuthLayout(props: AuthLayoutProps) {
 	return (
 		<>
 			<AuthPageHeader />
-			<GoBackButton href="/" title="Go back" />
+			<GoBackButton href="/" />
 			<main className="container-wrapper relative flex-1 items-center justify-center p-4">
 				{children}
 			</main>

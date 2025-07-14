@@ -1,0 +1,41 @@
+{
+	"defaultGreeting": "Welcome!",
+	"goBack": "Go back",
+	"tooltips": {
+		"toggleTheme": "Toggle theme",
+		"settings": "Settings",
+		"logout": "Logout",
+		"login": "Login",
+		"password": "Password"
+	},
+	"auth": {
+		"login": {
+			"title": "Login",
+			"password": "Password",
+			"submit": "Login",
+			"success": "Login successful",
+			"error": "Invalid password",
+			"errorMessage": "Something went wrong. Please try again."
+		}
+	},
+	"settings": {
+		"title": "Settings",
+		"pageTitle": {
+			"title": "Page Title",
+			"description": "This changes the visible title of the dashboard in the browser tab."
+		},
+		"locale": {
+			"title": "Language",
+			"description": "Select the language of the dashboard."
+		},
+		"greetings": {
+			"title": "Custom Greetings",
+			"description": "If set, a random greeting will be displayed on the dashboard on each page load.",
+			"addGreeting": "Add Greeting",
+			"removeGreeting": "Remove Greeting"
+		},
+		"save": "Save",
+		"success": "Settings saved",
+		"error": "Something went wrong. Please try again."
+	}
+}

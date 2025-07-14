@@ -1,0 +1,41 @@
+{
+	"defaultGreeting": "¡Bienvenido!",
+	"goBack": "Regresar",
+	"tooltips": {
+		"toggleTheme": "Cambiar esquema de color",
+		"settings": "Configuración",
+		"logout": "Cerrar sesión",
+		"login": "Iniciar sesión",
+		"password": "Contraseña"
+	},
+	"auth": {
+		"login": {
+			"title": "Iniciar sesión",
+			"password": "Contraseña",
+			"submit": "Iniciar sesión",
+			"success": "Inicio de sesión exitoso",
+			"error": "Contraseña inválida",
+			"errorMessage": "Algo salió mal. Por favor, inténtalo de nuevo."
+		}
+	},
+	"settings": {
+		"title": "Configuración",
+		"pageTitle": {
+			"title": "Título de la página",
+			"description": "Esto cambia el título visible del panel en la pestaña del navegador."
+		},
+		"locale": {
+			"title": "Idioma",
+			"description": "Selecciona el idioma del panel."
+		},
+		"greetings": {
+			"title": "Mensajes de bienvenida personalizados",
+			"description": "Si está configurado, se mostrará un mensaje de bienvenida aleatorio en el panel en cada carga de página.",
+			"addGreeting": "Agregar mensaje de bienvenida",
+			"removeGreeting": "Eliminar mensaje de bienvenida"
+		},
+		"save": "Guardar",
+		"success": "Configuración guardada",
+		"error": "Algo salió mal. Por favor, inténtalo de nuevo."
+	}
+}

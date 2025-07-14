@@ -6,6 +6,7 @@ import { Loader2, Trash2, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -51,6 +52,7 @@ export function SettingsForm(props: SettingsFormProps) {
 		resolver: zodResolver(configSchema),
 		defaultValues: currentConfig,
 	});
+	const t = useTranslations("settings");
 
 	const {
 		fields: greetingFields,
@@ -70,13 +72,13 @@ export function SettingsForm(props: SettingsFormProps) {
 
 			const result = await updateConfig(values);
 			if (result.success) {
-				toast.success("Settings saved");
+				toast.success(t("success"));
 			} else {
 				toast.error(result.error);
 			}
 		} catch (e) {
 			console.error(e);
-			toast.error("Something went wrong. Please try again.");
+			toast.error(t("error"));
 		} finally {
 			refresh();
 			setTimeout(() => {
@@ -94,7 +96,7 @@ export function SettingsForm(props: SettingsFormProps) {
 		>
 			<Card className="w-full border-none">
 				<CardHeader>
-					<CardTitle className="text-center">Settings</CardTitle>
+					<CardTitle className="text-center">{t("title")}</CardTitle>
 				</CardHeader>
 				<CardContent className="px-6">
 					<Form {...form}>
@@ -106,10 +108,11 @@ export function SettingsForm(props: SettingsFormProps) {
 									name="title"
 									render={({ field }) => (
 										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="title">Page Title</FormLabel>
+											<FormLabel htmlFor="title">
+												{t("pageTitle.title")}
+											</FormLabel>
 											<p className="text-muted-foreground text-sm">
-												This changes the visible title of the dashboard in the
-												browser tab.
+												{t("pageTitle.description")}
 											</p>
 											<div className="rounded-md border border-input bg-background p-4 shadow-xs">
 												<div className="mb-4 flex w-max items-center gap-2 rounded-t-xl bg-input/30 p-2">
@@ -143,9 +146,11 @@ export function SettingsForm(props: SettingsFormProps) {
 									name="locale"
 									render={({ field }) => (
 										<FormItem className="grid gap-2">
-											<FormLabel htmlFor="locale">Language</FormLabel>
+											<FormLabel htmlFor="locale">
+												{t("locale.title")}
+											</FormLabel>
 											<p className="text-muted-foreground text-sm">
-												Select the language of the dashboard.
+												{t("locale.description")}
 											</p>
 											<div className="rounded-md border border-input bg-background p-4 shadow-xs">
 												<p className="mb-4 font-instrument-serif text-xl sm:text-2xl md:text-3xl">
@@ -179,10 +184,9 @@ export function SettingsForm(props: SettingsFormProps) {
 
 								{/* Greetings */}
 								<div className="grid gap-2">
-									<p className="font-medium text-sm">Custom Greetings</p>
+									<p className="font-medium text-sm">{t("greetings.title")}</p>
 									<p className="text-muted-foreground text-sm">
-										If set, a random greeting will be displayed on the dashboard
-										on each page load.
+										{t("greetings.description")}
 									</p>
 									<div
 										className="space-y-4 rounded-md border border-input bg-background p-4 shadow-xs"
@@ -220,7 +224,7 @@ export function SettingsForm(props: SettingsFormProps) {
 													type="button"
 													variant="destructive"
 													onClick={() => removeGreeting(index)}
-													aria-label="Remove greeting"
+													aria-label={t("greetings.removeGreeting")}
 												>
 													<Trash2 />
 												</Button>
@@ -232,7 +236,7 @@ export function SettingsForm(props: SettingsFormProps) {
 											className="w-full"
 											onClick={() => appendGreeting({ message: "" })}
 										>
-											Add Greeting
+											{t("greetings.addGreeting")}
 										</Button>
 									</div>
 								</div>
@@ -262,7 +266,7 @@ export function SettingsForm(props: SettingsFormProps) {
 												exit={{ opacity: 0 }}
 												transition={{ duration: 0.15 }}
 											>
-												Save
+												{t("save")}
 											</motion.span>
 										)}
 									</AnimatePresence>

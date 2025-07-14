@@ -1,0 +1,41 @@
+{
+	"defaultGreeting": "Bienvenue !",
+	"goBack": "Retour",
+	"tooltips": {
+		"toggleTheme": "Changer le schéma de couleurs",
+		"settings": "Paramètres",
+		"logout": "Se déconnecter",
+		"login": "Se connecter",
+		"password": "Mot de passe"
+	},
+	"auth": {
+		"login": {
+			"title": "Connexion",
+			"password": "Mot de passe",
+			"submit": "Se connecter",
+			"success": "Connexion réussie",
+			"error": "Mot de passe invalide",
+			"errorMessage": "Une erreur est survenue. Veuillez réessayer."
+		}
+	},
+	"settings": {
+		"title": "Paramètres",
+		"pageTitle": {
+			"title": "Titre de la page",
+			"description": "Cela modifie le titre visible du tableau de bord dans l'onglet du navigateur."
+		},
+		"locale": {
+			"title": "Langue",
+			"description": "Sélectionnez la langue du tableau de bord."
+		},
+		"greetings": {
+			"title": "Messages d'accueil personnalisés",
+			"description": "Si défini, un message d'accueil aléatoire sera affiché sur le tableau de bord à chaque chargement de page.",
+			"addGreeting": "Ajouter un message d'accueil",
+			"removeGreeting": "Supprimer le message d'accueil"
+		},
+		"save": "Enregistrer",
+		"success": "Paramètres enregistrés",
+		"error": "Une erreur est survenue. Veuillez réessayer."
+	}
+}

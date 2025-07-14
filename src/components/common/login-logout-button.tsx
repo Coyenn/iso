@@ -2,6 +2,7 @@
 
 import { KeyRound, LogOut } from "lucide-react";
 import { signIn, signOut } from "next-auth/react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/src/components/ui/button";
 import {
 	Tooltip,
@@ -15,6 +16,7 @@ export interface LoginLogoutButtonProps {
 
 export function LoginLogoutButton(props: LoginLogoutButtonProps) {
 	const { isLoggedIn } = props;
+	const t = useTranslations("tooltips");
 
 	return (
 		<Tooltip>
@@ -44,7 +46,7 @@ export function LoginLogoutButton(props: LoginLogoutButtonProps) {
 					)}
 				</Button>
 			</TooltipTrigger>
-			<TooltipContent>{isLoggedIn ? "Logout" : "Login"}</TooltipContent>
+			<TooltipContent>{isLoggedIn ? t("logout") : t("login")}</TooltipContent>
 		</Tooltip>
 	);
 }
