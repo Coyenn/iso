@@ -8,8 +8,9 @@ import type z from "zod";
 import { Button } from "@/src/components/ui/button";
 import type { serviceSchema } from "@/src/config/config";
 import { icons } from "@/src/config/icons";
-import { cn } from "@/src/lib/utils";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 const itemVariants = {
 	hidden: { opacity: 0, scale: 0.9, y: 10 },
@@ -22,18 +23,15 @@ export type ServiceIconProps = z.infer<typeof serviceSchema> & {
 };
 
 export function ServiceIcon(props: ServiceIconProps) {
-	const { icon, label, href, index, onRemove } = props;
+	const { icon, label, index, onRemove } = props;
 	const { editMode } = useEditModeStore();
 	const t = useTranslations("service");
-
-	const wrapperClasses =
-		"group relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]";
 
 	const content = (
 		<motion.div
 			animate={editMode ? { rotate: [-2, 2, -2] } : { rotate: 0 }}
 			transition={{
-				duration: 0.4,
+				duration: editMode ? 0.4 : 0,
 				ease: "easeInOut",
 				repeat: Infinity,
 				repeatType: "mirror",
@@ -56,14 +54,8 @@ export function ServiceIcon(props: ServiceIconProps) {
 		</motion.div>
 	);
 
-	return editMode ? (
-		<motion.div
-			variants={itemVariants}
-			initial="hidden"
-			animate="show"
-			exit="hidden"
-			className="relative"
-		>
+	return (
+		<motion.div variants={itemVariants} className="relative">
 			{editMode && (
 				<Button
 					variant="ghost"
@@ -75,21 +67,57 @@ export function ServiceIcon(props: ServiceIconProps) {
 					<X />
 				</Button>
 			)}
-			<motion.button
-				variants={itemVariants}
-				className={cn(wrapperClasses, "!cursor-grab active:!cursor-grabbing")}
+			<div
+				className={
+					"relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-muted focus-visible:bg-muted group-focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px]"
+				}
 			>
 				{content}
-			</motion.button>
+			</div>
 		</motion.div>
-	) : (
-		<motion.a
-			href={href}
-			target="_blank"
-			variants={itemVariants}
-			className={wrapperClasses}
+	);
+}
+
+export interface SortableServiceIconProps {
+	service: z.infer<typeof serviceSchema>;
+	index: number;
+	onRemove: (index: number) => void;
+}
+
+export function SortableServiceIcon(props: SortableServiceIconProps) {
+	const { service, index, onRemove } = props;
+	const { label, href } = service;
+	const {
+		attributes,
+		listeners,
+		setNodeRef,
+		transform,
+		transition,
+		isDragging,
+	} = useSortable({ id: label });
+
+	const { editMode } = useEditModeStore();
+
+	const style = {
+		transform: CSS.Transform.toString(transform),
+		transition,
+		zIndex: isDragging ? 50 : undefined,
+	} as React.CSSProperties;
+
+	const WrapperTag = editMode ? "div" : "a";
+
+	return (
+		<WrapperTag
+			{...(!editMode
+				? { href, target: "_blank", rel: "noopener noreferrer" }
+				: {})}
+			ref={setNodeRef}
+			style={style}
+			{...attributes}
+			{...listeners}
+			className="group cursor-grab touch-none rounded-lg active:cursor-grabbing"
 		>
-			{content}
-		</motion.a>
+			<ServiceIcon {...service} index={index} onRemove={onRemove} />
+		</WrapperTag>
 	);
 }
