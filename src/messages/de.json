@@ -42,6 +42,10 @@
 			"addGreeting": "Willkommensnachricht hinzufügen",
 			"removeGreeting": "Willkommensnachricht entfernen"
 		},
+		"customStylesheet": {
+			"title": "Benutzerdefinierte Stylesheet",
+			"description": "Ändert das Aussehen des Dashboards."
+		},
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",
 		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut."

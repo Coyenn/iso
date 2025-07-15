@@ -42,6 +42,10 @@
 			"addGreeting": "Agregar mensaje de bienvenida",
 			"removeGreeting": "Eliminar mensaje de bienvenida"
 		},
+		"customStylesheet": {
+			"title": "Hoja de estilo personalizada",
+			"description": "Cambia el aspecto del panel."
+		},
 		"save": "Guardar",
 		"success": "Configuración guardada",
 		"error": "Algo salió mal. Por favor, inténtalo de nuevo."

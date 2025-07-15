@@ -42,6 +42,10 @@
 			"addGreeting": "Ajouter un message d'accueil",
 			"removeGreeting": "Supprimer le message d'accueil"
 		},
+		"customStylesheet": {
+			"title": "Feuille de style personnalisée",
+			"description": "Modifie l'apparence du tableau de bord."
+		},
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",
 		"error": "Une erreur est survenue. Veuillez réessayer."

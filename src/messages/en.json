@@ -42,6 +42,10 @@
 			"addGreeting": "Add Greeting",
 			"removeGreeting": "Remove Greeting"
 		},
+		"customStylesheet": {
+			"title": "Custom Stylesheet",
+			"description": "Changes the appearance of the dashboard."
+		},
 		"save": "Save",
 		"success": "Settings saved",
 		"error": "Something went wrong. Please try again."

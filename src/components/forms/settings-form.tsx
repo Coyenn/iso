@@ -34,23 +34,29 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/components/ui/select";
+import { Textarea } from "@/src/components/ui/textarea";
 import { type Config, configSchema } from "@/src/config/config";
 import { locales } from "@/src/config/locale";
+import { stylesheetSchema } from "@/src/config/stylesheet";
 import { updateConfig } from "@/src/server/actions/config/update-config";
+import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
 
 export interface SettingsFormProps {
 	currentConfig: Config;
+	customStylesheet: string;
 }
 
+const configSchemaWithStylesheet = configSchema.extend(stylesheetSchema.shape);
+
 export function SettingsForm(props: SettingsFormProps) {
-	const { currentConfig } = props;
+	const { currentConfig, customStylesheet } = props;
 	const { refresh } = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [greetingsParent] = useAutoAnimate<HTMLDivElement>();
 	const form = useForm({
-		resolver: zodResolver(configSchema),
-		defaultValues: currentConfig,
+		resolver: zodResolver(configSchemaWithStylesheet),
+		defaultValues: { ...currentConfig, customStylesheet },
 	});
 	const t = useTranslations("settings");
 
@@ -70,11 +76,20 @@ export function SettingsForm(props: SettingsFormProps) {
 			setIsLoading(true);
 			setError(null);
 
-			const result = await updateConfig(values);
-			if (result.success) {
+			const configResult = await updateConfig(values);
+
+			if (configResult.success) {
 				toast.success(t("success"));
 			} else {
-				toast.error(result.error);
+				toast.error(configResult.error);
+			}
+
+			const stylesheetResult = await updateCustomStylesheet(values);
+
+			if (stylesheetResult.success) {
+				toast.success(t("success"));
+			} else {
+				toast.error(stylesheetResult.error);
 			}
 		} catch (e) {
 			console.error(e);
@@ -239,6 +254,28 @@ export function SettingsForm(props: SettingsFormProps) {
 											{t("greetings.addGreeting")}
 										</Button>
 									</div>
+								</div>
+
+								{/* Custom Stylesheet */}
+								<div className="grid gap-2">
+									<p className="font-medium text-sm">
+										{t("customStylesheet.title")}
+									</p>
+									<p className="text-muted-foreground text-sm">
+										{t("customStylesheet.description")}
+									</p>
+									<FormControl>
+										<Textarea
+											className="bg-background dark:bg-background"
+											id="customStylesheet"
+											placeholder="Custom Stylesheet"
+											defaultValue={customStylesheet}
+											onChange={(e) => {
+												form.setValue("customStylesheet", e.target.value);
+											}}
+										/>
+									</FormControl>
+									<FormMessage className="text-center" />
 								</div>
 
 								<Button

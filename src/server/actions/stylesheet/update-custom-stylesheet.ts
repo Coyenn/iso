@@ -1,12 +1,10 @@
 "use server";
 
-import z from "zod";
-import { customStylesheetLocation } from "@/src/config/stylesheet";
+import {
+	customStylesheetLocation,
+	stylesheetSchema,
+} from "@/src/config/stylesheet";
 import { auth } from "@/src/server/auth";
-
-const payloadSchema = z.object({
-	stylesheet: z.string().min(1).max(10000),
-});
 
 export async function updateCustomStylesheet(values: unknown) {
 	const session = await auth();
@@ -18,7 +16,7 @@ export async function updateCustomStylesheet(values: unknown) {
 		};
 	}
 
-	const parsedPayload = payloadSchema.safeParse(values);
+	const parsedPayload = stylesheetSchema.safeParse(values);
 	if (!parsedPayload.success) {
 		return { success: false, error: "Invalid data supplied" };
 	}
@@ -26,9 +24,12 @@ export async function updateCustomStylesheet(values: unknown) {
 	const file = Bun.file(customStylesheetLocation);
 
 	if (!file.exists()) {
-		await Bun.write(customStylesheetLocation, parsedPayload.data.stylesheet);
+		await Bun.write(
+			customStylesheetLocation,
+			parsedPayload.data.customStylesheet,
+		);
 	} else {
-		await file.write(parsedPayload.data.stylesheet);
+		await file.write(parsedPayload.data.customStylesheet);
 	}
 
 	return {
