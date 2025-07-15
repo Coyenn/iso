@@ -26,9 +26,9 @@ FROM oven/bun:latest AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV APP_DATA_PATH=/config
 
 RUN apt-get update -y && apt-get install -y openssl
-RUN mkdir -p /app/public/css
 
 COPY --from=builder /app/next.config.ts ./
 COPY --from=builder /app/public ./public

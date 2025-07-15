@@ -44,4 +44,7 @@ yarn-error.log*
 .direnv
 
 # Iso
-config.json
+/config.json
+/config/
+/public/images/
+/public/css/

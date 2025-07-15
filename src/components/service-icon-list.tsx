@@ -15,31 +15,34 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { AnimatePresence, motion } from "motion/react";
-import { useMemo, useState } from "react";
+import { motion, stagger, useAnimate } from "motion/react";
+import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import type z from "zod";
 import { SortableServiceIcon } from "@/src/components/service-icon";
 import type { Service, serviceSchema } from "@/src/config/config";
-import { removeService } from "@/src/server/actions/remove-service";
-import { updateServices } from "@/src/server/actions/update-services";
+import { removeService } from "@/src/server/actions/service/remove-service";
+import { updateServices } from "@/src/server/actions/service/update-services";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 export interface ServiceIconListProps {
 	services: z.infer<typeof serviceSchema>[];
 }
 
-const containerVariants = {
-	hidden: {},
-	show: {
-		transition: {
-			staggerChildren: 0.1,
-		},
-	},
-};
-
 export function ServiceIconList(props: ServiceIconListProps) {
 	const { services } = props;
+	const [iconScope, iconAnimate] = useAnimate();
+
+	useEffect(() => {
+		iconAnimate([
+			[
+				".service-icon",
+				{ opacity: [0, 1], scale: [0.9, 1], y: [10, 0] },
+				{ duration: 0.2, delay: stagger(0.1) },
+			],
+		]);
+	}, [iconAnimate]);
+
 	const [currentServices, setCurrentServices] = useState<Service[]>(services);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const { editMode } = useEditModeStore();
@@ -111,36 +114,29 @@ export function ServiceIconList(props: ServiceIconListProps) {
 	};
 
 	return (
-		<AnimatePresence>
-			<motion.div
-				variants={containerVariants}
-				initial="hidden"
-				animate="show"
-				exit="hidden"
+		<motion.div ref={iconScope}>
+			<DndContext
+				sensors={sensors}
+				collisionDetection={closestCorners}
+				onDragEnd={handleDragEnd}
 			>
-				<DndContext
-					sensors={sensors}
-					collisionDetection={closestCorners}
-					onDragEnd={handleDragEnd}
+				<SortableContext
+					items={sortedServices.map((service) => service.label)}
+					disabled={!editMode}
+					strategy={rectSortingStrategy}
 				>
-					<SortableContext
-						items={sortedServices.map((service) => service.label)}
-						disabled={!editMode}
-						strategy={rectSortingStrategy}
-					>
-						<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
-							{sortedServices.map((service, index) => (
-								<SortableServiceIcon
-									key={service.label}
-									service={service}
-									index={index}
-									onRemove={onServiceRemove}
-								/>
-							))}
-						</div>
-					</SortableContext>
-				</DndContext>
-			</motion.div>
-		</AnimatePresence>
+					<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+						{sortedServices.map((service, index) => (
+							<SortableServiceIcon
+								key={service.label}
+								service={service}
+								index={index}
+								onRemove={onServiceRemove}
+							/>
+						))}
+					</div>
+				</SortableContext>
+			</DndContext>
+		</motion.div>
 	);
 }

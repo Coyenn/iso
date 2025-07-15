@@ -12,7 +12,9 @@ export default async function AppLayout(props: AppLayoutProps) {
 		<>
 			<AppPageHeader />
 			<GoBackButton href="/" />
-			<main className="container-wrapper relative flex-1">{children}</main>
+			<main className="container-wrapper relative mt-18 flex-1">
+				{children}
+			</main>
 		</>
 	);
 }

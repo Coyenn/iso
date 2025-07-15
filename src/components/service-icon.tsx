@@ -1,5 +1,7 @@
 "use client";
 
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 import { X } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
@@ -8,11 +10,10 @@ import type z from "zod";
 import { Button } from "@/src/components/ui/button";
 import type { serviceSchema } from "@/src/config/config";
 import { icons } from "@/src/config/icons";
+import { cn } from "@/src/lib/utils";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 
-const itemVariants = {
+export const itemVariants = {
 	hidden: { opacity: 0, scale: 0.9, y: 10 },
 	show: { opacity: 1, scale: 1, y: 0 },
 };
@@ -55,7 +56,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 	);
 
 	return (
-		<motion.div variants={itemVariants} className="relative">
+		<motion.div className="service-icon relative">
 			{editMode && (
 				<Button
 					variant="ghost"
@@ -115,7 +116,10 @@ export function SortableServiceIcon(props: SortableServiceIconProps) {
 			style={style}
 			{...attributes}
 			{...listeners}
-			className="group cursor-grab touch-none rounded-lg active:cursor-grabbing"
+			className={cn(
+				"group touch-none rounded-lg",
+				editMode && "cursor-grab active:cursor-grabbing",
+			)}
 		>
 			<ServiceIcon {...service} index={index} onRemove={onRemove} />
 		</WrapperTag>

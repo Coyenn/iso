@@ -1,11 +1,11 @@
 "use server";
 
 import type { Service } from "@/src/config/config";
-import { updateConfig } from "@/src/server/actions/update-config";
+import { updateConfig } from "@/src/server/actions/config/update-config";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
 
-export async function addService(values: Service[]) {
+export async function updateServices(newServices: Service[]) {
 	const session = await auth();
 	if (!session) {
 		return { success: false, error: "Unauthorized" };
@@ -13,9 +13,7 @@ export async function addService(values: Service[]) {
 
 	const config = await getConfig();
 
-	for (const service of values) {
-		config.services.push(service);
-	}
+	config.services = newServices;
 
 	const result = await updateConfig(config);
 

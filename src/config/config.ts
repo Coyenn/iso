@@ -66,5 +66,4 @@ export const configSchema = z.object({
 
 export type Config = z.infer<typeof configSchema>;
 
-export const configLocation =
-	process.env.NODE_ENV === "production" ? "/app/config.json" : "./config.json";
+export const configLocation = `${process.env.APP_DATA_PATH}/config.json`;
