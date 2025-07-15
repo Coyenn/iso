@@ -34,12 +34,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/components/ui/select";
-import { Textarea } from "@/src/components/ui/textarea";
 import { type Config, configSchema } from "@/src/config/config";
 import { locales } from "@/src/config/locale";
 import { stylesheetSchema } from "@/src/config/stylesheet";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
+import HighlightedTextarea from "@/src/components/common/highlighted-textarea";
 
 export interface SettingsFormProps {
 	currentConfig: Config;
@@ -265,14 +265,9 @@ export function SettingsForm(props: SettingsFormProps) {
 										{t("customStylesheet.description")}
 									</p>
 									<FormControl>
-										<Textarea
-											className="bg-background dark:bg-background"
-											id="customStylesheet"
-											placeholder="Custom Stylesheet"
-											defaultValue={customStylesheet}
-											onChange={(e) => {
-												form.setValue("customStylesheet", e.target.value);
-											}}
+										<HighlightedTextarea
+											value={form.watch("customStylesheet")}
+											onChange={(val) => form.setValue("customStylesheet", val)}
 										/>
 									</FormControl>
 									<FormMessage className="text-center" />
