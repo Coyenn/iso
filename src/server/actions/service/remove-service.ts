@@ -2,6 +2,7 @@
 
 import { z } from "zod";
 import { updateConfig } from "@/src/server/actions/config/update-config";
+import { removeIcon } from "@/src/server/actions/icon/remove-icon";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
 
@@ -22,6 +23,12 @@ export async function removeService(index: unknown) {
 
 	if (parsedIndex.data >= config.services.length) {
 		return { success: false, error: "Service index out of range" };
+	}
+
+	const service = config.services[parsedIndex.data];
+
+	if (service?.icon?.startsWith("/images/")) {
+		await removeIcon(service.icon);
 	}
 
 	config.services.splice(parsedIndex.data, 1);

@@ -1,6 +1,6 @@
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { loginFormSchema } from "@/src/config/schemas";
+import { loginFormSchema } from "@/src/schemas/login-form-schema";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`

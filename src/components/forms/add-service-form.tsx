@@ -20,29 +20,21 @@ import {
 	Form as ShadForm,
 } from "@/src/components/ui/form";
 import { Input } from "@/src/components/ui/input";
-import { type Service, serviceSchema } from "@/src/config/config";
 import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
+import { addServiceSchema } from "@/src/schemas/add-service-schema";
 import { addService } from "@/src/server/actions/service/add-service";
 
 export interface AddServiceFormProps {
-	/**
-	 * Current amount of services in the configuration – used to automatically
-	 * assign an `order` number for the newly created service.
-	 */
 	currentServiceCount?: number;
+	onSuccess?: () => void;
+	allUploadedIcons: [string, string][];
 }
-
-const addServiceSchema = serviceSchema.pick({
-	icon: true,
-	href: true,
-	label: true,
-});
 
 type AddServiceSchema = z.infer<typeof addServiceSchema>;
 
 export function AddServiceForm(props: AddServiceFormProps) {
-	const { currentServiceCount } = props;
+	const { currentServiceCount, onSuccess, allUploadedIcons } = props;
 	const { refresh } = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -64,7 +56,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 			setIsLoading(true);
 			setError(null);
 
-			const newService: Service = {
+			const newService = {
 				...values,
 				order: (currentServiceCount ?? 0) + 1,
 			};
@@ -74,6 +66,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 			if (result.success) {
 				toast.success("Service added successfully");
 				form.reset();
+				onSuccess?.();
 			} else {
 				toast.error(result.error || "Failed to add service");
 			}
@@ -111,20 +104,22 @@ export function AddServiceForm(props: AddServiceFormProps) {
 										className="grid max-h-[200px] grid-cols-3 gap-2 overflow-y-auto md:grid-cols-4"
 										ref={iconsParent}
 									>
-										{Object.entries(icons).map(([key, src]) => (
-											<Button
-												variant="ghost"
-												key={key}
-												onClick={() => field.onChange(key)}
-												aria-label={`Select ${key} icon`}
-												className={cn(
-													"aspect-square h-full w-full p-1 hover:bg-accent focus-visible:bg-accent",
-													field.value === key && "!bg-accent",
-												)}
-											>
-												<Image src={src} alt={key} width={160} height={160} />
-											</Button>
-										))}
+										{[...allUploadedIcons, ...Object.entries(icons)].map(
+											([key, src]) => (
+												<Button
+													variant="ghost"
+													key={key}
+													onClick={() => field.onChange(key)}
+													aria-label={`Select ${key} icon`}
+													className={cn(
+														"aspect-square h-full w-full p-1 hover:bg-accent focus-visible:bg-accent",
+														field.value === key && "!bg-accent",
+													)}
+												>
+													<Image src={src} alt={key} width={120} height={120} />
+												</Button>
+											),
+										)}
 									</div>
 									{/* Upload new icon */}
 									<div className="mt-4">
@@ -136,8 +131,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 													const file = e.target.files?.[0];
 													if (!file) return;
 
-													const objectUrl = URL.createObjectURL(file);
-													field.onChange(objectUrl);
+													field.onChange(file);
 												}}
 												className="cursor-pointer"
 												id="icon-picker"

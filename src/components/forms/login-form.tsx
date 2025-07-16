@@ -23,7 +23,7 @@ import {
 	FormMessage,
 } from "@/src/components/ui/form";
 import { PasswordInput } from "@/src/components/ui/password-input";
-import { loginFormSchema } from "@/src/config/schemas";
+import { loginFormSchema } from "@/src/schemas/login-form-schema";
 
 export function LoginForm() {
 	const { refresh } = useRouter();

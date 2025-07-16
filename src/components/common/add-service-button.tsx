@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { AddServiceForm } from "@/src/components/forms/add-service-form";
@@ -21,10 +21,18 @@ import {
 	TooltipTrigger,
 } from "@/src/components/ui/tooltip";
 
-export function AddServiceButton() {
+export interface AddServiceButtonProps {
+	serviceCount: number;
+	allUploadedIcons: [string, string][];
+}
+
+export function AddServiceButton(props: AddServiceButtonProps) {
+	const { serviceCount, allUploadedIcons } = props;
 	const t = useTranslations("tooltips");
 	const [isClient, setIsClient] = useState(false);
 	const pathname = usePathname();
+	const [modalIsOpen, setModalIsOpen] = useState(false);
+	const { refresh } = useRouter();
 
 	useEffect(() => {
 		setIsClient(true);
@@ -33,7 +41,7 @@ export function AddServiceButton() {
 	if (!isClient || pathname !== "/") return null;
 
 	return (
-		<Dialog>
+		<Dialog open={modalIsOpen} onOpenChange={setModalIsOpen}>
 			<Tooltip>
 				<AnimatePresence mode="wait">
 					<TooltipTrigger asChild>
@@ -61,7 +69,14 @@ export function AddServiceButton() {
 						Add a new service to your website.
 					</DialogDescription>
 				</DialogHeader>
-				<AddServiceForm />
+				<AddServiceForm
+					currentServiceCount={serviceCount}
+					onSuccess={() => {
+						refresh();
+						setModalIsOpen(false);
+					}}
+					allUploadedIcons={allUploadedIcons}
+				/>
 			</DialogContent>
 		</Dialog>
 	);
