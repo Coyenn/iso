@@ -1,6 +1,6 @@
-import { Textarea } from "@/src/components/ui/textarea";
-import { highlight } from "sugar-high";
 import { useRef } from "react";
+import { highlight } from "sugar-high";
+import { Textarea } from "@/src/components/ui/textarea";
 
 // Lightweight syntax-highlighted textarea powered by sugar-high
 interface HighlightedTextareaProps {
@@ -32,12 +32,12 @@ function HighlightedTextarea(props: HighlightedTextareaProps) {
 			<Textarea
 				ref={textareaRef}
 				id="customStylesheet"
-				placeholder="Custom Stylesheet"
+				placeholder="Custom Stylesheets"
 				spellCheck={false}
 				value={value}
 				onChange={(e) => onChange(e.target.value)}
 				onScroll={handleScroll}
-				className="font-mono text-sm relative z-10 h-40 w-full resize-none overflow-auto !bg-transparent p-3 text-transparent caret-foreground focus:outline-none"
+				className="!bg-transparent relative z-10 h-40 w-full resize-none overflow-auto p-3 font-mono text-sm text-transparent caret-foreground focus:outline-none"
 				style={{ lineHeight: "1.5" }}
 			/>
 		</div>

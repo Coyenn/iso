@@ -11,6 +11,7 @@ import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
+import HighlightedTextarea from "@/src/components/common/highlighted-textarea";
 import { Button } from "@/src/components/ui/button";
 import {
 	Card,
@@ -39,7 +40,6 @@ import { locales } from "@/src/config/locale";
 import { stylesheetSchema } from "@/src/config/stylesheet";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
-import HighlightedTextarea from "@/src/components/common/highlighted-textarea";
 
 export interface SettingsFormProps {
 	currentConfig: Config;
@@ -77,19 +77,12 @@ export function SettingsForm(props: SettingsFormProps) {
 			setError(null);
 
 			const configResult = await updateConfig(values);
-
-			if (configResult.success) {
-				toast.success(t("success"));
-			} else {
-				toast.error(configResult.error);
-			}
-
 			const stylesheetResult = await updateCustomStylesheet(values);
 
-			if (stylesheetResult.success) {
+			if (stylesheetResult.success && configResult.success) {
 				toast.success(t("success"));
 			} else {
-				toast.error(stylesheetResult.error);
+				toast.error(stylesheetResult.error || configResult.error || t("error"));
 			}
 		} catch (e) {
 			console.error(e);

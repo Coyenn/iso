@@ -1,3 +1,4 @@
+import { AddServiceButton } from "@/src/components/common/add-service-button";
 import { EditModeButton } from "@/src/components/common/edit-mode-button";
 import { LoginLogoutButton } from "@/src/components/common/login-logout-button";
 import { SettingsButton } from "@/src/components/common/settings-button";
@@ -10,13 +11,14 @@ export async function AppPageHeader() {
 
 	return (
 		<div className="absolute top-4 right-4 z-50 flex items-center gap-2">
-			<ThemeToggle />
 			{isLoggedIn && (
 				<>
-					<SettingsButton />
 					<EditModeButton />
+					<AddServiceButton />
 				</>
 			)}
+			<ThemeToggle />
+			{isLoggedIn && <SettingsButton />}
 			{process.env.AUTH_PASSWORD && (
 				<LoginLogoutButton isLoggedIn={isLoggedIn} />
 			)}

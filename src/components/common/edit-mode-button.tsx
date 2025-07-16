@@ -2,6 +2,7 @@
 
 import { Pencil, PencilOff } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Button } from "@/src/components/ui/button";
@@ -16,12 +17,13 @@ export function EditModeButton() {
 	const [isClient, setIsClient] = useState(false);
 	const t = useTranslations("tooltips.editMode");
 	const { editMode, setEditMode } = useEditModeStore();
+	const pathname = usePathname();
 
 	useEffect(() => {
 		setIsClient(true);
 	}, []);
 
-	if (!isClient) return null;
+	if (!isClient || pathname !== "/") return null;
 
 	return (
 		<Tooltip>

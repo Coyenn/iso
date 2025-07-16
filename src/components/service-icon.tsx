@@ -40,7 +40,11 @@ export function ServiceIcon(props: ServiceIconProps) {
 			className="flex flex-col items-center"
 		>
 			<Image
-				src={icon.startsWith("/") ? icon : icons[icon as keyof typeof icons]}
+				src={
+					icon.startsWith("/")
+						? icon
+						: (icons[icon as keyof typeof icons] ?? icon)
+				}
 				alt={label}
 				width={250}
 				height={250}

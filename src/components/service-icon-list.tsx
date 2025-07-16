@@ -115,17 +115,17 @@ export function ServiceIconList(props: ServiceIconListProps) {
 
 	return (
 		<motion.div ref={iconScope}>
-			<DndContext
-				sensors={sensors}
-				collisionDetection={closestCorners}
-				onDragEnd={handleDragEnd}
-			>
-				<SortableContext
-					items={sortedServices.map((service) => service.label)}
-					disabled={!editMode}
-					strategy={rectSortingStrategy}
+			<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+				<DndContext
+					sensors={sensors}
+					collisionDetection={closestCorners}
+					onDragEnd={handleDragEnd}
 				>
-					<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+					<SortableContext
+						items={sortedServices.map((service) => service.label)}
+						disabled={!editMode}
+						strategy={rectSortingStrategy}
+					>
 						{sortedServices.map((service, index) => (
 							<SortableServiceIcon
 								key={service.label}
@@ -134,9 +134,9 @@ export function ServiceIconList(props: ServiceIconListProps) {
 								onRemove={onServiceRemove}
 							/>
 						))}
-					</div>
-				</SortableContext>
-			</DndContext>
+					</SortableContext>
+				</DndContext>
+			</div>
 		</motion.div>
 	);
 }

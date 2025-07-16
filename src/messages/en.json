@@ -10,6 +10,7 @@
 		"logout": "Logout",
 		"login": "Login",
 		"password": "Password",
+		"addService": "Add service",
 		"editMode": {
 			"title": "Edit mode",
 			"activate": "Activate edit mode",
@@ -43,7 +44,7 @@
 			"removeGreeting": "Remove Greeting"
 		},
 		"customStylesheet": {
-			"title": "Custom Stylesheet",
+			"title": "Custom Stylesheets",
 			"description": "Changes the appearance of the dashboard."
 		},
 		"save": "Save",

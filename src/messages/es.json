@@ -10,6 +10,7 @@
 		"logout": "Cerrar sesión",
 		"login": "Iniciar sesión",
 		"password": "Contraseña",
+		"addService": "Añadir servicio",
 		"editMode": {
 			"title": "Modo de edición",
 			"activate": "Activar modo de edición",

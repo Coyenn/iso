@@ -10,6 +10,7 @@
 		"logout": "Abmelden",
 		"login": "Anmelden",
 		"password": "Passwort",
+		"addService": "Service hinzufügen",
 		"editMode": {
 			"title": "Bearbeitungsmodus",
 			"activate": "Bearbeitungsmodus aktivieren",
@@ -43,7 +44,7 @@
 			"removeGreeting": "Willkommensnachricht entfernen"
 		},
 		"customStylesheet": {
-			"title": "Benutzerdefinierte Stylesheet",
+			"title": "Benutzerdefinierte Styles",
 			"description": "Ändert das Aussehen des Dashboards."
 		},
 		"save": "Speichern",

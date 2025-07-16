@@ -10,6 +10,7 @@
 		"logout": "Se déconnecter",
 		"login": "Se connecter",
 		"password": "Mot de passe",
+		"addService": "Ajouter un service",
 		"editMode": {
 			"title": "Mode d'édition",
 			"activate": "Activer le mode d'édition",
