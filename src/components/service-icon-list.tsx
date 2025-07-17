@@ -20,16 +20,15 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
-import type z from "zod";
 import { SortableServiceIcon } from "@/src/components/service-icon";
-import type { serviceSchema } from "@/src/config/config";
+import type { Service } from "@/src/schemas/service-schema";
 import { removeService } from "@/src/server/actions/service/remove-service";
 import { updateServices } from "@/src/server/actions/service/update-services";
 import { useCurrentServicesStore } from "@/src/store/current-services-store";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 export interface ServiceIconListProps {
-	services: z.infer<typeof serviceSchema>[];
+	services: Service[];
 }
 
 export function ServiceIconList(props: ServiceIconListProps) {

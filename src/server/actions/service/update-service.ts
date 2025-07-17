@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { serviceSchema } from "@/src/config/config";
+import { serviceSchema } from "@/src/schemas/service-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";

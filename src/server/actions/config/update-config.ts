@@ -1,6 +1,8 @@
 "use server";
 
-import { type Config, configLocation, configSchema } from "@/src/config/config";
+import { configLocation } from "@/src/config/config";
+import type { Config } from "@/src/schemas/config-schema";
+import { configSchema } from "@/src/schemas/config-schema";
 import { auth } from "@/src/server/auth";
 
 export async function updateConfig(values: Config) {

@@ -1,12 +1,9 @@
 "use server";
 
 import z from "zod";
-import {
-	type Config,
-	configLocation,
-	configSchema,
-	defaultConfig,
-} from "@/src/config/config";
+import { configLocation, defaultConfig } from "@/src/config/config";
+import type { Config } from "@/src/schemas/config-schema";
+import { configSchema } from "@/src/schemas/config-schema";
 
 export const getConfig = async (): Promise<Config> => {
 	try {

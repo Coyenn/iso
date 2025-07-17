@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import type z from "zod";
 import { ServiceIconList } from "@/src/components/service-icon-list";
-import type { configSchema, Greeting } from "@/src/config/config";
+import type { Config } from "@/src/schemas/config-schema";
+import type { Greeting } from "@/src/schemas/greeting-schema";
 
 export interface MainSectionProps {
-	config: z.infer<typeof configSchema>;
+	config: Config;
 }
 
 export function MainSection(props: MainSectionProps) {

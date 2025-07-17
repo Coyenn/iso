@@ -1,7 +1,7 @@
 "use server";
 
-import { serviceSchema } from "@/src/config/config";
 import { addServiceSchema } from "@/src/schemas/add-service-schema";
+import { serviceSchema } from "@/src/schemas/service-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { uploadIcon } from "@/src/server/actions/icon/upload-icon";
 import { auth } from "@/src/server/auth";

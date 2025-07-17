@@ -1,13 +1,12 @@
-import type z from "zod";
 import { create } from "zustand";
-import type { serviceSchema } from "@/src/config/config";
+import type { Service } from "@/src/schemas/service-schema";
 
 export interface CurrentServicesStoreState {
-	currentServices: z.infer<typeof serviceSchema>[];
+	currentServices: Service[];
 }
 
 export interface CurrentServicesStoreActions {
-	setCurrentServices: (services: z.infer<typeof serviceSchema>[]) => void;
+	setCurrentServices: (services: Service[]) => void;
 }
 
 export type CurrentServicesStore = CurrentServicesStoreState &

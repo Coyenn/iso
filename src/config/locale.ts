@@ -1,4 +1,4 @@
-import type { Greeting } from "@/src/config/config";
+import type { Greeting } from "@/src/schemas/greeting-schema";
 
 export type LocaleCode = "en" | "es" | "fr" | "de";
 

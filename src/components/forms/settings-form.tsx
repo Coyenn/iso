@@ -35,9 +35,9 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/components/ui/select";
-import { type Config, configSchema } from "@/src/config/config";
 import { locales } from "@/src/config/locale";
 import { stylesheetSchema } from "@/src/config/stylesheet";
+import { type Config, configSchema } from "@/src/schemas/config-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
 

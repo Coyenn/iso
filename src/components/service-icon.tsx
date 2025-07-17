@@ -6,11 +6,10 @@ import { X } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import type z from "zod";
 import { Button } from "@/src/components/ui/button";
-import type { serviceSchema } from "@/src/config/config";
 import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
+import type { Service } from "@/src/schemas/service-schema";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 export const itemVariants = {
@@ -18,7 +17,7 @@ export const itemVariants = {
 	show: { opacity: 1, scale: 1, y: 0 },
 };
 
-export type ServiceIconProps = z.infer<typeof serviceSchema> & {
+export type ServiceIconProps = Service & {
 	index: number;
 	onRemove: (index: number) => void;
 };
@@ -84,7 +83,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 }
 
 export interface SortableServiceIconProps {
-	service: z.infer<typeof serviceSchema>;
+	service: Service;
 	index: number;
 	onRemove: (index: number) => void;
 }
