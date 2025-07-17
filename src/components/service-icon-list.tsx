@@ -16,13 +16,16 @@ import {
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
 import { motion, stagger, useAnimate } from "motion/react";
+import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import type z from "zod";
 import { SortableServiceIcon } from "@/src/components/service-icon";
-import type { Service, serviceSchema } from "@/src/config/config";
+import type { serviceSchema } from "@/src/config/config";
 import { removeService } from "@/src/server/actions/service/remove-service";
 import { updateServices } from "@/src/server/actions/service/update-services";
+import { useCurrentServicesStore } from "@/src/store/current-services-store";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 export interface ServiceIconListProps {
@@ -32,6 +35,13 @@ export interface ServiceIconListProps {
 export function ServiceIconList(props: ServiceIconListProps) {
 	const { services } = props;
 	const [iconScope, iconAnimate] = useAnimate();
+	const { currentServices, setCurrentServices } = useCurrentServicesStore();
+	const t = useTranslations("service");
+
+	// biome-ignore lint/correctness/useExhaustiveDependencies: Test
+	useEffect(() => {
+		setCurrentServices(services);
+	}, []);
 
 	useEffect(() => {
 		iconAnimate([
@@ -43,7 +53,6 @@ export function ServiceIconList(props: ServiceIconListProps) {
 		]);
 	}, [iconAnimate]);
 
-	const [currentServices, setCurrentServices] = useState<Service[]>(services);
 	const [isUpdating, setIsUpdating] = useState(false);
 	const { editMode } = useEditModeStore();
 	const sortedServices = useMemo(
@@ -126,16 +135,45 @@ export function ServiceIconList(props: ServiceIconListProps) {
 						disabled={!editMode}
 						strategy={rectSortingStrategy}
 					>
-						{sortedServices.map((service, index) => (
-							<SortableServiceIcon
-								key={service.label}
-								service={service}
-								index={index}
-								onRemove={onServiceRemove}
-							/>
-						))}
+						{sortedServices.map((service) => {
+							const index = sortedServices.findIndex((s) => s === service);
+
+							return (
+								<SortableServiceIcon
+									key={`${service.label}-${index}`}
+									service={service}
+									index={index}
+									onRemove={onServiceRemove}
+								/>
+							);
+						})}
 					</SortableContext>
 				</DndContext>
+				{sortedServices.length === 0 && (
+					<motion.div className="service-icon relative">
+						<div
+							className={
+								"relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors sm:w-[175px] md:w-[225px]"
+							}
+						>
+							<div className="flex flex-col items-center">
+								<Image
+									src={"/icons/blueprint.png"}
+									alt={t("emptyState")}
+									width={250}
+									height={250}
+									quality={90}
+									loading="eager"
+									draggable={false}
+									className="aspect-square grayscale-100 transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
+								/>
+								<h3 className="text-center font-medium text-md sm:text-lg md:text-xl">
+									{t("emptyState")}
+								</h3>
+							</div>
+						</div>
+					</motion.div>
+				)}
 			</div>
 		</motion.div>
 	);

@@ -53,6 +53,7 @@
 	},
 	"service": {
 		"add": "Agregar",
-		"remove": "Eliminar"
+		"remove": "Eliminar",
+		"emptyState": "No hay servicios aún"
 	}
 }

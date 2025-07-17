@@ -42,7 +42,11 @@ export async function addService(values: unknown) {
 
 		const result = await updateConfig(config);
 
-		return result;
+		if (result.success) {
+			return { success: true, data: serviceSchema.parse(createdService) };
+		} else {
+			return { success: false, error: result.error };
+		}
 	} catch (error) {
 		console.error(error);
 		return { success: false, error: "Failed to add service" };

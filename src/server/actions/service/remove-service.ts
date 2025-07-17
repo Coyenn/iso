@@ -21,17 +21,13 @@ export async function removeService(index: unknown) {
 		return { success: false, error: "Invalid index supplied" };
 	}
 
-	if (parsedIndex.data >= config.services.length) {
-		return { success: false, error: "Service index out of range" };
-	}
-
 	const service = config.services[parsedIndex.data];
 
 	if (service?.icon?.startsWith("/images/")) {
 		await removeIcon(service.icon);
 	}
 
-	config.services.splice(parsedIndex.data, 1);
+	config.services = config.services.filter((_, i) => i !== parsedIndex.data);
 
 	const result = await updateConfig(config);
 

@@ -24,21 +24,23 @@ import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
 import { addServiceSchema } from "@/src/schemas/add-service-schema";
 import { addService } from "@/src/server/actions/service/add-service";
+import { useCurrentServicesStore } from "@/src/store/current-services-store";
 
 export interface AddServiceFormProps {
 	currentServiceCount?: number;
-	onSuccess?: () => void;
 	allUploadedIcons: [string, string][];
+	onSuccess?: () => void;
 }
 
 type AddServiceSchema = z.infer<typeof addServiceSchema>;
 
 export function AddServiceForm(props: AddServiceFormProps) {
-	const { currentServiceCount, onSuccess, allUploadedIcons } = props;
+	const { currentServiceCount, allUploadedIcons, onSuccess } = props;
 	const { refresh } = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [iconsParent] = useAutoAnimate<HTMLDivElement>();
+	const { currentServices, setCurrentServices } = useCurrentServicesStore();
 
 	const form = useForm<AddServiceSchema>({
 		resolver: zodResolver(addServiceSchema),
@@ -66,6 +68,11 @@ export function AddServiceForm(props: AddServiceFormProps) {
 			if (result.success) {
 				toast.success("Service added successfully");
 				form.reset();
+
+				if (result.data) {
+					setCurrentServices([...currentServices, result.data]);
+				}
+
 				onSuccess?.();
 			} else {
 				toast.error(result.error || "Failed to add service");

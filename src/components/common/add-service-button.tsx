@@ -2,7 +2,7 @@
 
 import { Plus } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { AddServiceForm } from "@/src/components/forms/add-service-form";
@@ -32,7 +32,6 @@ export function AddServiceButton(props: AddServiceButtonProps) {
 	const [isClient, setIsClient] = useState(false);
 	const pathname = usePathname();
 	const [modalIsOpen, setModalIsOpen] = useState(false);
-	const { refresh } = useRouter();
 
 	useEffect(() => {
 		setIsClient(true);
@@ -66,16 +65,15 @@ export function AddServiceButton(props: AddServiceButtonProps) {
 				<DialogHeader className="mb-2">
 					<DialogTitle>Add Service</DialogTitle>
 					<DialogDescription>
-						Add a new service to your website.
+						Add a new service to the dashboard
 					</DialogDescription>
 				</DialogHeader>
 				<AddServiceForm
 					currentServiceCount={serviceCount}
+					allUploadedIcons={allUploadedIcons}
 					onSuccess={() => {
-						refresh();
 						setModalIsOpen(false);
 					}}
-					allUploadedIcons={allUploadedIcons}
 				/>
 			</DialogContent>
 		</Dialog>
