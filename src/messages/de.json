@@ -54,6 +54,6 @@
 	"service": {
 		"add": "Hinzufügen",
 		"remove": "Entfernen",
-		"emptyState": "Noch keine Services vorhanden"
+		"emptyState": "Keine Services"
 	}
 }

@@ -2,20 +2,17 @@
 
 import type { Service } from "@/src/schemas/service-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
-import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
+import { withAuth } from "@/src/server/utils/with-auth";
 
 export async function updateServices(newServices: Service[]) {
-	const session = await auth();
-	if (!session) {
-		return { success: false, error: "Unauthorized" };
-	}
+	return withAuth(async () => {
+		const config = await getConfig();
 
-	const config = await getConfig();
+		config.services = newServices;
 
-	config.services = newServices;
+		const result = await updateConfig(config);
 
-	const result = await updateConfig(config);
-
-	return result;
+		return result;
+	});
 }

@@ -4,35 +4,28 @@ import {
 	customStylesheetLocation,
 	stylesheetSchema,
 } from "@/src/config/stylesheet";
-import { auth } from "@/src/server/auth";
+import { withAuth } from "@/src/server/utils/with-auth";
 
 export async function updateCustomStylesheet(values: unknown) {
-	const session = await auth();
+	return withAuth(async () => {
+		const parsedPayload = stylesheetSchema.safeParse(values);
+		if (!parsedPayload.success) {
+			return { success: false, error: "Invalid data supplied" };
+		}
 
-	if (!session) {
+		const file = Bun.file(customStylesheetLocation);
+
+		if (!file.exists()) {
+			await Bun.write(
+				customStylesheetLocation,
+				parsedPayload.data.customStylesheet,
+			);
+		} else {
+			await file.write(parsedPayload.data.customStylesheet);
+		}
+
 		return {
-			success: false,
-			error: "Unauthorized",
+			success: true,
 		};
-	}
-
-	const parsedPayload = stylesheetSchema.safeParse(values);
-	if (!parsedPayload.success) {
-		return { success: false, error: "Invalid data supplied" };
-	}
-
-	const file = Bun.file(customStylesheetLocation);
-
-	if (!file.exists()) {
-		await Bun.write(
-			customStylesheetLocation,
-			parsedPayload.data.customStylesheet,
-		);
-	} else {
-		await file.write(parsedPayload.data.customStylesheet);
-	}
-
-	return {
-		success: true,
-	};
+	});
 }
