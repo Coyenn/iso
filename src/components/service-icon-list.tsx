@@ -15,25 +15,23 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { motion, stagger, useAnimate } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { ServiceIcon } from "@/src/components/service-icon";
-import type { Service } from "@/src/schemas/service-schema";
 import { updateServices } from "@/src/server/actions/service/update-services";
-import { useCurrentServicesStore } from "@/src/store/current-services-store";
+import { useCurrentServices } from "@/src/store/current-services-context";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
-export interface ServiceIconListProps {
-	services: Service[];
-}
+export const itemVariants = {
+	hidden: { opacity: 0, scale: 0.9, y: 10 },
+	show: { opacity: 1, scale: 1, y: 0 },
+};
 
-export function ServiceIconList(props: ServiceIconListProps) {
-	const { services } = props;
-	const [iconScope, iconAnimate] = useAnimate();
-	const { currentServices, setCurrentServices } = useCurrentServicesStore();
+export function ServiceIconList() {
+	const { currentServices, setCurrentServices } = useCurrentServices();
 	const t = useTranslations("service");
 	const [isUpdating, setIsUpdating] = useState(false);
 	const { editMode } = useEditModeStore();
@@ -42,17 +40,7 @@ export function ServiceIconList(props: ServiceIconListProps) {
 		[currentServices],
 	);
 
-	// biome-ignore lint/correctness/useExhaustiveDependencies: Set initial services
-	useEffect(() => {
-		setCurrentServices(services);
-		iconAnimate([
-			[
-				".service-icon",
-				{ opacity: [0, 1], scale: [0.9, 1], y: [10, 0] },
-				{ duration: 0.2, delay: stagger(0.1) },
-			],
-		]);
-	}, []);
+	const hasAnimatedRef = useRef(false);
 
 	const sensors = useSensors(
 		useSensor(PointerSensor, {
@@ -95,22 +83,17 @@ export function ServiceIconList(props: ServiceIconListProps) {
 
 			if (!result.success) {
 				toast.error(result.error || "Failed to update service order");
-				setCurrentServices(services);
 			}
 		} catch (error) {
 			console.error(error);
 			toast.error("Failed to update service order");
-			setCurrentServices(services);
 		} finally {
 			setIsUpdating(false);
 		}
 	};
 
 	return (
-		<motion.div
-			ref={iconScope}
-			className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8"
-		>
+		<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCorners}
@@ -121,15 +104,28 @@ export function ServiceIconList(props: ServiceIconListProps) {
 					disabled={!editMode}
 					strategy={rectSortingStrategy}
 				>
-					{sortedServices.map((service) => {
-						const index = sortedServices.findIndex((s) => s === service);
-
+					{sortedServices.map((service, index) => {
 						return (
-							<ServiceIcon
-								key={`${service.label}-${index}`}
-								service={service}
-								index={index}
-							/>
+							<motion.div
+								variants={itemVariants}
+								key={service.label}
+								initial={hasAnimatedRef.current ? false : "hidden"}
+								animate="show"
+								exit="hidden"
+								transition={{
+									duration: 0.2,
+									delay: hasAnimatedRef.current ? 0 : index * 0.1,
+								}}
+								onAnimationComplete={() => {
+									hasAnimatedRef.current = true;
+								}}
+							>
+								<ServiceIcon
+									key={`${service.label}-${index}`}
+									service={service}
+									index={index}
+								/>
+							</motion.div>
 						);
 					})}
 				</SortableContext>
@@ -159,6 +155,6 @@ export function ServiceIconList(props: ServiceIconListProps) {
 					</div>
 				</motion.div>
 			)}
-		</motion.div>
+		</div>
 	);
 }

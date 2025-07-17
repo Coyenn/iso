@@ -24,7 +24,7 @@ import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
 import { addServiceSchema } from "@/src/schemas/add-service-schema";
 import { addService } from "@/src/server/actions/service/add-service";
-import { useCurrentServicesStore } from "@/src/store/current-services-store";
+import { useCurrentServices } from "@/src/store/current-services-context";
 
 export interface AddServiceFormProps {
 	currentServiceCount?: number;
@@ -40,12 +40,12 @@ export function AddServiceForm(props: AddServiceFormProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
 	const [iconsParent] = useAutoAnimate<HTMLDivElement>();
-	const { currentServices, setCurrentServices } = useCurrentServicesStore();
+	const { currentServices, setCurrentServices } = useCurrentServices();
 
 	const form = useForm<AddServiceSchema>({
 		resolver: zodResolver(addServiceSchema),
 		defaultValues: {
-			icon: "backpack",
+			icon: "",
 			href: "",
 			label: "",
 		},

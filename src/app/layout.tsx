@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/src/components/providers/theme-provider";
 import { Toaster } from "@/src/components/ui/sonner";
 import { getCustomStylesheet } from "@/src/server/actions/stylesheet/get-custom-stylesheet";
 import { getConfig } from "@/src/server/get-config";
+import { CurrentServicesProvider } from "@/src/store/current-services-context";
 
 export const metadata: Metadata = {
 	description: "A simple services dashboard",
@@ -60,7 +61,9 @@ export default async function RootLayout(props: RootLayoutProps) {
 				<NextIntlClientProvider>
 					<SessionProvider>
 						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-							{children}
+							<CurrentServicesProvider initialServices={config.services}>
+								{children}
+							</CurrentServicesProvider>
 							<Toaster />
 						</ThemeProvider>
 					</SessionProvider>

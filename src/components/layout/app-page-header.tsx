@@ -11,7 +11,7 @@ export async function AppPageHeader() {
 	const session = await auth();
 	const isLoggedIn = !!session?.user;
 	const config = await getConfig();
-	const { icons } = await getUploadedIcons();
+	const result = await getUploadedIcons();
 
 	return (
 		<div className="absolute top-4 right-4 z-50 flex items-center gap-2">
@@ -20,7 +20,9 @@ export async function AppPageHeader() {
 					<EditModeButton />
 					<AddServiceButton
 						serviceCount={config.services.length}
-						allUploadedIcons={icons ?? []}
+						allUploadedIcons={
+							result.success && result.icons ? result.icons : []
+						}
 					/>
 				</>
 			)}

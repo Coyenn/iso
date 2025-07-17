@@ -12,13 +12,8 @@ import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
 import type { Service } from "@/src/schemas/service-schema";
 import { removeService } from "@/src/server/actions/service/remove-service";
-import { useCurrentServicesStore } from "@/src/store/current-services-store";
+import { useCurrentServices } from "@/src/store/current-services-context";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
-
-export const itemVariants = {
-	hidden: { opacity: 0, scale: 0.9, y: 10 },
-	show: { opacity: 1, scale: 1, y: 0 },
-};
 
 export interface ServiceIconProps {
 	service: Service;
@@ -37,9 +32,9 @@ export function ServiceIcon(props: ServiceIconProps) {
 		isDragging,
 	} = useSortable({ id: label });
 	const t = useTranslations("service");
-	const { currentServices, setCurrentServices } = useCurrentServicesStore();
+	const { currentServices, setCurrentServices } = useCurrentServices();
 	const { editMode } = useEditModeStore();
-	const WrapperTag = editMode ? motion.div : motion.a;
+	const WrapperTag = editMode ? "div" : "a";
 
 	const onRemove = async (index: number) => {
 		const result = await removeService(index);
@@ -65,10 +60,9 @@ export function ServiceIcon(props: ServiceIconProps) {
 			{...attributes}
 			{...listeners}
 			ref={setNodeRef}
-			variants={itemVariants}
 			style={style}
 			className={cn(
-				"group service-icon touch-none rounded-lg",
+				"group touch-none rounded-lg",
 				editMode && "cursor-grab active:cursor-grabbing",
 				!isDragging && "duration-200",
 			)}

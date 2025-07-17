@@ -39,7 +39,7 @@ export function MainSection(props: MainSectionProps) {
 			>
 				{randomGreeting ?? t("defaultGreeting")}
 			</motion.h1>
-			<ServiceIconList services={config.services} />
+			<ServiceIconList />
 		</section>
 	);
 }
