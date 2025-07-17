@@ -55,5 +55,21 @@
 		"add": "Add",
 		"remove": "Remove",
 		"emptyState": "No services yet"
+	},
+	"forms": {
+		"chooseFile": "Choose file",
+		"addService": {
+			"iconLabel": "Icon",
+			"iconDescription": "Choose an existing icon or upload a new one.",
+			"nameLabel": "Name",
+			"urlLabel": "URL",
+			"serviceNamePlaceholder": "Service name",
+			"urlPlaceholder": "https://example.com",
+			"submit": "Add Service",
+			"success": "Service added successfully",
+			"error": "Failed to add service",
+			"dialogTitle": "Add Service",
+			"dialogDescription": "Add a new service to the dashboard"
+		}
 	}
 }

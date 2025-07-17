@@ -28,7 +28,8 @@ export interface AddServiceButtonProps {
 
 export function AddServiceButton(props: AddServiceButtonProps) {
 	const { serviceCount, allUploadedIcons } = props;
-	const t = useTranslations("tooltips");
+	const tTooltip = useTranslations("tooltips");
+	const tForm = useTranslations("forms.addService");
 	const [isClient, setIsClient] = useState(false);
 	const pathname = usePathname();
 	const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -59,14 +60,12 @@ export function AddServiceButton(props: AddServiceButtonProps) {
 						</DialogTrigger>
 					</TooltipTrigger>
 				</AnimatePresence>
-				<TooltipContent>{t("addService")}</TooltipContent>
+				<TooltipContent>{tTooltip("addService")}</TooltipContent>
 			</Tooltip>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader className="mb-2">
-					<DialogTitle>Add Service</DialogTitle>
-					<DialogDescription>
-						Add a new service to the dashboard
-					</DialogDescription>
+					<DialogTitle>{tForm("dialogTitle")}</DialogTitle>
+					<DialogDescription>{tForm("dialogDescription")}</DialogDescription>
 				</DialogHeader>
 				<AddServiceForm
 					currentServiceCount={serviceCount}

@@ -98,6 +98,7 @@ export function ServiceIconList() {
 				sensors={sensors}
 				collisionDetection={closestCorners}
 				onDragEnd={handleDragEnd}
+				autoScroll={false}
 			>
 				<SortableContext
 					items={sortedServices.map((service) => service.label)}

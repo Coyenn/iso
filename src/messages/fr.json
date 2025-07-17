@@ -55,5 +55,21 @@
 		"add": "Ajouter",
 		"remove": "Supprimer",
 		"emptyState": "Aucun service ajouté"
+	},
+	"forms": {
+		"chooseFile": "Choisir un fichier",
+		"addService": {
+			"iconLabel": "Icône",
+			"iconDescription": "Choisissez une icône existante ou téléchargez-en une nouvelle.",
+			"nameLabel": "Nom",
+			"urlLabel": "URL",
+			"serviceNamePlaceholder": "Nom du service",
+			"urlPlaceholder": "https://exemple.com",
+			"submit": "Ajouter un service",
+			"success": "Service ajouté avec succès",
+			"error": "Échec de l'ajout du service",
+			"dialogTitle": "Ajouter un service",
+			"dialogDescription": "Ajoutez un nouveau service au tableau de bord"
+		}
 	}
 }

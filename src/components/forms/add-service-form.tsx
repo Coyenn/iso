@@ -6,11 +6,13 @@ import { Loader2 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 import { Button } from "@/src/components/ui/button";
+import { FileInput } from "@/src/components/ui/file-input";
 import {
 	FormControl,
 	FormField,
@@ -36,6 +38,7 @@ type AddServiceSchema = z.infer<typeof addServiceSchema>;
 
 export function AddServiceForm(props: AddServiceFormProps) {
 	const { currentServiceCount, allUploadedIcons, onSuccess } = props;
+	const t = useTranslations("forms.addService");
 	const { refresh } = useRouter();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState<string | null>(null);
@@ -66,7 +69,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 			const result = await addService(newService);
 
 			if (result.success) {
-				toast.success("Service added successfully");
+				toast.success(t("success"));
 				form.reset();
 
 				if (result.data) {
@@ -75,11 +78,11 @@ export function AddServiceForm(props: AddServiceFormProps) {
 
 				onSuccess?.();
 			} else {
-				toast.error(result.error || "Failed to add service");
+				toast.error(result.error || t("error"));
 			}
 		} catch (e) {
 			console.error(e);
-			toast.error("Failed to add service");
+			toast.error(t("error"));
 		} finally {
 			refresh();
 			setTimeout(() => setIsLoading(false), 500);
@@ -102,9 +105,9 @@ export function AddServiceForm(props: AddServiceFormProps) {
 							name="icon"
 							render={({ field }) => (
 								<FormItem className="grid gap-2">
-									<FormLabel>Icon</FormLabel>
+									<FormLabel>{t("iconLabel")}</FormLabel>
 									<p className="text-muted-foreground text-sm">
-										Choose an existing icon or upload a new one.
+										{t("iconDescription")}
 									</p>
 									{/* Existing icons */}
 									<div
@@ -116,7 +119,10 @@ export function AddServiceForm(props: AddServiceFormProps) {
 												<Button
 													variant="ghost"
 													key={key}
-													onClick={() => field.onChange(key)}
+													onClick={(e) => {
+														e.preventDefault();
+														field.onChange(key);
+													}}
 													aria-label={`Select ${key} icon`}
 													className={cn(
 														"aspect-square h-full w-full p-1 hover:bg-accent focus-visible:bg-accent",
@@ -131,17 +137,14 @@ export function AddServiceForm(props: AddServiceFormProps) {
 									{/* Upload new icon */}
 									<div className="mt-4">
 										<FormControl>
-											<Input
-												type="file"
+											<FileInput
 												accept="image/*"
 												onChange={(e) => {
 													const file = e.target.files?.[0];
 													if (!file) return;
-
 													field.onChange(file);
 												}}
-												className="cursor-pointer"
-												id="icon-picker"
+												ref={field.ref}
 											/>
 										</FormControl>
 									</div>
@@ -155,9 +158,13 @@ export function AddServiceForm(props: AddServiceFormProps) {
 							name="label"
 							render={({ field }) => (
 								<FormItem className="grid gap-2">
-									<FormLabel htmlFor="label">Name</FormLabel>
+									<FormLabel htmlFor="label">{t("nameLabel")}</FormLabel>
 									<FormControl>
-										<Input id="label" placeholder="Service name" {...field} />
+										<Input
+											id="label"
+											placeholder={t("serviceNamePlaceholder")}
+											{...field}
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -170,11 +177,11 @@ export function AddServiceForm(props: AddServiceFormProps) {
 							name="href"
 							render={({ field }) => (
 								<FormItem className="grid gap-2">
-									<FormLabel htmlFor="href">URL</FormLabel>
+									<FormLabel htmlFor="href">{t("urlLabel")}</FormLabel>
 									<FormControl>
 										<Input
 											id="href"
-											placeholder="https://example.com"
+											placeholder={t("urlPlaceholder")}
 											{...field}
 										/>
 									</FormControl>
@@ -209,7 +216,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 										exit={{ opacity: 0 }}
 										transition={{ duration: 0.15 }}
 									>
-										Add Service
+										{t("submit")}
 									</motion.span>
 								)}
 							</AnimatePresence>

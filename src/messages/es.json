@@ -55,5 +55,21 @@
 		"add": "Agregar",
 		"remove": "Eliminar",
 		"emptyState": "No hay servicios aún"
+	},
+	"forms": {
+		"chooseFile": "Elegir archivo",
+		"addService": {
+			"iconLabel": "Icono",
+			"iconDescription": "Elige un icono existente o sube uno nuevo.",
+			"nameLabel": "Nombre",
+			"urlLabel": "URL",
+			"serviceNamePlaceholder": "Nombre del servicio",
+			"urlPlaceholder": "https://ejemplo.com",
+			"submit": "Añadir servicio",
+			"success": "Servicio añadido correctamente",
+			"error": "No se pudo añadir el servicio",
+			"dialogTitle": "Añadir servicio",
+			"dialogDescription": "Añade un nuevo servicio al panel"
+		}
 	}
 }

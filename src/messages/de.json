@@ -55,5 +55,21 @@
 		"add": "Hinzufügen",
 		"remove": "Entfernen",
 		"emptyState": "Keine Services"
+	},
+	"forms": {
+		"chooseFile": "Datei auswählen",
+		"addService": {
+			"iconLabel": "Icon",
+			"iconDescription": "Wähle ein vorhandenes Icon oder lade ein neues hoch.",
+			"nameLabel": "Name",
+			"urlLabel": "URL",
+			"serviceNamePlaceholder": "Service-Name",
+			"urlPlaceholder": "https://beispiel.com",
+			"submit": "Service hinzufügen",
+			"success": "Service erfolgreich hinzugefügt",
+			"error": "Service konnte nicht hinzugefügt werden",
+			"dialogTitle": "Service hinzufügen",
+			"dialogDescription": "Füge dem Dashboard einen neuen Service hinzu"
+		}
 	}
 }
