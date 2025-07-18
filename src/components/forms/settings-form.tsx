@@ -103,7 +103,7 @@ export function SettingsForm(props: SettingsFormProps) {
 			exit={{ opacity: 0, y: -10 }}
 			transition={{ duration: 0.1 }}
 		>
-			<Card className="w-full border-none bg-transparent">
+			<Card className="w-full border-none bg-transparent p-0">
 				<CardHeader>
 					<CardTitle>{t("title")}</CardTitle>
 				</CardHeader>
@@ -123,7 +123,7 @@ export function SettingsForm(props: SettingsFormProps) {
 											</p>
 											<div className="py-4">
 												<FormControl>
-													<div className="grid grid-cols-3 gap-4 md:grid-cols-5">
+													<div className="grid grid-cols-3 gap-4 md:grid-cols-6 md:gap-2">
 														{themeSchema.options.map((theme) => (
 															<div
 																key={theme}

@@ -6,6 +6,7 @@ export const themeSchema = z.enum([
 	"amethyst",
 	"amber",
 	"ocean",
+	"sunshine",
 ]);
 
 export type Theme = z.infer<typeof themeSchema>;
