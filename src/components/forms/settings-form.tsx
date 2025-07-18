@@ -82,9 +82,7 @@ export function SettingsForm(props: SettingsFormProps) {
 			const configResult = await updateConfig(values);
 			const stylesheetResult = await updateCustomStylesheet(values);
 
-			if (stylesheetResult.success && configResult.success) {
-				toast.success(t("success"));
-			} else {
+			if (!stylesheetResult.success || !configResult.success) {
 				toast.error(stylesheetResult.error || configResult.error || t("error"));
 			}
 		} catch (e) {
@@ -137,17 +135,8 @@ export function SettingsForm(props: SettingsFormProps) {
 																<button
 																	type="button"
 																	onClick={() => {
-																		// Change the theme "live" in the body
-																		themeSchema.options.forEach((t) => {
-																			document.body.classList.remove(
-																				`theme-${t}`,
-																			);
-																		});
-																		document.body.classList.add(
-																			`theme-${theme}`,
-																		);
-
 																		field.onChange(theme);
+																		form.handleSubmit(onSubmit)();
 																	}}
 																	className={cn(
 																		"flex flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",

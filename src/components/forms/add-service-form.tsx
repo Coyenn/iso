@@ -69,7 +69,6 @@ export function AddServiceForm(props: AddServiceFormProps) {
 			const result = await addService(newService);
 
 			if (result.success) {
-				toast.success(t("success"));
 				form.reset();
 
 				if (result.data) {

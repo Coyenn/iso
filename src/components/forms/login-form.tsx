@@ -49,9 +49,7 @@ export function LoginForm() {
 				redirect: false,
 			});
 
-			if (result?.ok && !result?.error) {
-				toast.success(t("success"));
-			} else {
+			if (!result?.ok || result?.error) {
 				setError(t("error"));
 			}
 		} catch (_) {
