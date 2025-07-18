@@ -29,6 +29,10 @@
 	},
 	"settings": {
 		"title": "Paramètres",
+		"theme": {
+			"title": "Schéma de couleurs",
+			"description": "Cela modifie le schéma de couleurs du tableau de bord."
+		},
 		"pageTitle": {
 			"title": "Titre de la page",
 			"description": "Cela modifie le titre visible du tableau de bord dans l'onglet du navigateur."
@@ -46,6 +50,10 @@
 		"customStylesheet": {
 			"title": "Feuille de style personnalisée",
 			"description": "Modifie l'apparence du tableau de bord."
+		},
+		"pageLoadAnimation": {
+			"title": "Animation de chargement de la page",
+			"description": "Si activé, une animation sera affichée lors du chargement de la page."
 		},
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",

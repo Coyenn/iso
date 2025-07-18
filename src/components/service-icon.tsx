@@ -18,10 +18,11 @@ import { useEditModeStore } from "@/src/store/edit-mode-store";
 export interface ServiceIconProps {
 	service: Service;
 	index: number;
+	pageLoadAnimation: boolean;
 }
 
 export function ServiceIcon(props: ServiceIconProps) {
-	const { service, index } = props;
+	const { service, index, pageLoadAnimation } = props;
 	const { label, href, icon } = service;
 	const {
 		attributes,
@@ -34,7 +35,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 	const t = useTranslations("service");
 	const { currentServices, setCurrentServices } = useCurrentServices();
 	const { editMode } = useEditModeStore();
-	const WrapperTag = editMode ? "div" : "a";
+	const WrapperTag = editMode ? motion.div : motion.a;
 
 	const onRemove = async (index: number) => {
 		const result = await removeService(index);
@@ -82,7 +83,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 				<motion.div
 					animate={editMode ? { rotate: [-2, 2, -2] } : { rotate: 0 }}
 					transition={{
-						duration: editMode ? 0.4 : 0,
+						duration: pageLoadAnimation ? 0.4 : 0,
 						ease: "easeInOut",
 						repeat: Infinity,
 						repeatType: "mirror",

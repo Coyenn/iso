@@ -35,9 +35,12 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/components/ui/select";
+import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
 import { stylesheetSchema } from "@/src/config/stylesheet";
+import { cn } from "@/src/lib/utils";
 import { type Config, configSchema } from "@/src/schemas/config-schema";
+import { themeSchema } from "@/src/schemas/theme-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
 
@@ -102,14 +105,66 @@ export function SettingsForm(props: SettingsFormProps) {
 			exit={{ opacity: 0, y: -10 }}
 			transition={{ duration: 0.1 }}
 		>
-			<Card className="w-full border-none">
+			<Card className="w-full border-none bg-transparent">
 				<CardHeader>
-					<CardTitle className="text-center">{t("title")}</CardTitle>
+					<CardTitle>{t("title")}</CardTitle>
 				</CardHeader>
 				<CardContent className="px-6">
 					<Form {...form}>
 						<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 							<div className="grid gap-6">
+								{/* Theme */}
+								<FormField
+									control={form.control}
+									name="theme"
+									render={({ field }) => (
+										<FormItem className="grid gap-2">
+											<FormLabel htmlFor="theme">{t("theme.title")}</FormLabel>
+											<p className="text-muted-foreground text-sm">
+												{t("theme.description")}
+											</p>
+											<div className="py-4">
+												<FormControl>
+													<div className="grid grid-cols-3 gap-4 md:grid-cols-5">
+														{themeSchema.options.map((theme) => (
+															<div
+																key={theme}
+																className={cn(
+																	"flex flex-col items-center gap-1",
+																	`theme-${theme}`,
+																)}
+															>
+																<button
+																	type="button"
+																	onClick={() => field.onChange(theme)}
+																	className={cn(
+																		"flex flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none dark:bg-input/30 dark:hover:bg-accent/50",
+																		field.value === theme && "border-primary",
+																	)}
+																	aria-label={theme}
+																	aria-pressed={field.value === theme}
+																>
+																	<Image
+																		src={`/theme-icons/${theme}.png`}
+																		alt={`${theme} theme icon`}
+																		className="aspect-square h-full w-full"
+																		width={256}
+																		height={256}
+																	/>
+																</button>
+																<span className="text-sm capitalize">
+																	{theme}
+																</span>
+															</div>
+														))}
+													</div>
+												</FormControl>
+											</div>
+											<FormMessage className="text-center" />
+										</FormItem>
+									)}
+								/>
+
 								{/* Title */}
 								<FormField
 									control={form.control}
@@ -240,7 +295,7 @@ export function SettingsForm(props: SettingsFormProps) {
 										))}
 										<Button
 											type="button"
-											variant="secondary"
+											variant="outline"
 											className="w-full"
 											onClick={() => appendGreeting({ message: "" })}
 										>
@@ -265,6 +320,30 @@ export function SettingsForm(props: SettingsFormProps) {
 									</FormControl>
 									<FormMessage className="text-center" />
 								</div>
+
+								{/* Page Load Animation */}
+								<FormField
+									control={form.control}
+									name="pageLoadAnimation"
+									render={({ field }) => (
+										<FormItem className="flex flex-row items-center justify-between gap-2">
+											<div className="grid gap-2">
+												<FormLabel htmlFor="pageLoadAnimation">
+													{t("pageLoadAnimation.title")}
+												</FormLabel>
+												<p className="text-muted-foreground text-sm">
+													{t("pageLoadAnimation.description")}
+												</p>
+											</div>
+											<FormControl>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
 
 								<Button
 									type="submit"

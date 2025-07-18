@@ -57,7 +57,9 @@ export default async function RootLayout(props: RootLayoutProps) {
 					/>
 				)}
 			</head>
-			<body className="flex min-h-[calc(100vh-10rem)] flex-col bg-background antialiased">
+			<body
+				className={`theme-${config.theme ?? "neutral"} flex min-h-[calc(100vh-10rem)] flex-col overflow-x-hidden bg-background antialiased`}
+			>
 				<NextIntlClientProvider>
 					<SessionProvider>
 						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>

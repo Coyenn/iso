@@ -15,7 +15,7 @@ export default async function SettingsPage() {
 	const customStylesheet = await getCustomStylesheet();
 
 	return (
-		<div className="mt-12 h-full w-full max-w-[700px] self-center p-4">
+		<div className="mt-12 mb-8 h-full w-full max-w-[700px] self-center p-4">
 			<SettingsForm
 				currentConfig={config}
 				customStylesheet={customStylesheet}

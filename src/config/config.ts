@@ -1,4 +1,5 @@
 import { icons } from "@/src/config/icons";
+import type { Config } from "@/src/schemas/config-schema";
 
 export const configLocation = `${process.env.APP_DATA_PATH}/config.json`;
 
@@ -36,6 +37,8 @@ export const defaultConfig = {
 			href: "https://account.iso.com",
 		},
 	],
-	locale: "en" as const,
+	locale: "en",
+	pageLoadAnimation: true,
+	theme: "neutral",
 	greetings: [],
-};
+} satisfies Config;

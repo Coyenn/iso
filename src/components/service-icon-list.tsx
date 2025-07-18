@@ -15,7 +15,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useMemo, useRef, useState } from "react";
@@ -26,11 +26,17 @@ import { useCurrentServices } from "@/src/store/current-services-context";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
 
 export const itemVariants = {
-	hidden: { opacity: 0, scale: 0.9, y: 10 },
+	hidden: { opacity: 0, scale: 0.8, y: 10 },
 	show: { opacity: 1, scale: 1, y: 0 },
+	exit: { opacity: 0, scale: 0, y: 10, width: 0 },
 };
 
-export function ServiceIconList() {
+export interface ServiceIconListProps {
+	pageLoadAnimation: boolean;
+}
+
+export function ServiceIconList(props: ServiceIconListProps) {
+	const { pageLoadAnimation } = props;
 	const { currentServices, setCurrentServices } = useCurrentServices();
 	const t = useTranslations("service");
 	const [isUpdating, setIsUpdating] = useState(false);
@@ -98,37 +104,43 @@ export function ServiceIconList() {
 				sensors={sensors}
 				collisionDetection={closestCorners}
 				onDragEnd={handleDragEnd}
-				autoScroll={false}
 			>
 				<SortableContext
 					items={sortedServices.map((service) => service.label)}
 					disabled={!editMode}
 					strategy={rectSortingStrategy}
 				>
-					{sortedServices.map((service, index) => {
-						return (
-							<motion.div
-								variants={itemVariants}
-								key={service.label}
-								initial={hasAnimatedRef.current ? false : "hidden"}
-								animate="show"
-								exit="hidden"
-								transition={{
-									duration: 0.2,
-									delay: hasAnimatedRef.current ? 0 : index * 0.1,
-								}}
-								onAnimationComplete={() => {
-									hasAnimatedRef.current = true;
-								}}
-							>
-								<ServiceIcon
-									key={`${service.label}-${index}`}
-									service={service}
-									index={index}
-								/>
-							</motion.div>
-						);
-					})}
+					<AnimatePresence>
+						{sortedServices.map((service, index) => {
+							return (
+								<motion.div
+									variants={itemVariants}
+									key={service.label}
+									initial={hasAnimatedRef.current ? false : "hidden"}
+									animate="show"
+									exit="exit"
+									transition={{
+										duration: pageLoadAnimation ? 0.2 : 0,
+										delay: pageLoadAnimation
+											? hasAnimatedRef.current
+												? 0
+												: index * 0.1
+											: 0,
+									}}
+									onAnimationComplete={() => {
+										hasAnimatedRef.current = true;
+									}}
+								>
+									<ServiceIcon
+										key={`${service.label}-${index}`}
+										service={service}
+										index={index}
+										pageLoadAnimation={pageLoadAnimation}
+									/>
+								</motion.div>
+							);
+						})}
+					</AnimatePresence>
 				</SortableContext>
 			</DndContext>
 			{sortedServices.length === 0 && (

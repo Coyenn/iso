@@ -29,6 +29,10 @@
 	},
 	"settings": {
 		"title": "Einstellungen",
+		"theme": {
+			"title": "Farbschema",
+			"description": "Ändert das Farbschema des Dashboards."
+		},
 		"pageTitle": {
 			"title": "Seitentitel",
 			"description": "Ändert den sichtbaren Titel des Dashboards im Browser-Tab."
@@ -46,6 +50,10 @@
 		"customStylesheet": {
 			"title": "Benutzerdefinierte Styles",
 			"description": "Ändert das Aussehen des Dashboards."
+		},
+		"pageLoadAnimation": {
+			"title": "Animation beim Laden der Seite",
+			"description": "Wenn aktiviert, wird eine Animation beim Laden der Seite angezeigt."
 		},
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",

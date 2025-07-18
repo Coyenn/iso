@@ -29,6 +29,10 @@
 	},
 	"settings": {
 		"title": "Settings",
+		"theme": {
+			"title": "Theme",
+			"description": "Select the color theme of the dashboard."
+		},
 		"pageTitle": {
 			"title": "Page Title",
 			"description": "This changes the visible title of the dashboard in the browser tab."
@@ -46,6 +50,10 @@
 		"customStylesheet": {
 			"title": "Custom Stylesheets",
 			"description": "Changes the appearance of the dashboard."
+		},
+		"pageLoadAnimation": {
+			"title": "Page load animation",
+			"description": "If enabled, an animation will be displayed when the page loads."
 		},
 		"save": "Save",
 		"success": "Settings saved",
