@@ -139,14 +139,14 @@ export function SettingsForm(props: SettingsFormProps) {
 																		form.handleSubmit(onSubmit)();
 																	}}
 																	className={cn(
-																		"flex flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",
+																		"flex w-full flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",
 																		field.value === theme && "border-primary",
 																	)}
 																	aria-label={theme}
 																	aria-pressed={field.value === theme}
 																>
 																	<Image
-																		src={`/theme-icons/${theme}.png`}
+																		src={`/icons/${theme}.png`}
 																		alt={`${theme} theme icon`}
 																		className="aspect-square h-full w-full"
 																		width={256}
