@@ -136,9 +136,21 @@ export function SettingsForm(props: SettingsFormProps) {
 															>
 																<button
 																	type="button"
-																	onClick={() => field.onChange(theme)}
+																	onClick={() => {
+																		// Change the theme "live" in the body
+																		themeSchema.options.forEach((t) => {
+																			document.body.classList.remove(
+																				`theme-${t}`,
+																			);
+																		});
+																		document.body.classList.add(
+																			`theme-${theme}`,
+																		);
+
+																		field.onChange(theme);
+																	}}
 																	className={cn(
-																		"flex flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none dark:bg-input/30 dark:hover:bg-accent/50",
+																		"flex flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",
 																		field.value === theme && "border-primary",
 																	)}
 																	aria-label={theme}
