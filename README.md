@@ -22,11 +22,6 @@ Built for my personal homelab — now open-sourced for yours.
 - **Icon ready**: choose from a set of built-in icons or supply your own
 - **Docker-first**: run anywhere with one simple command
 
-## More Screenshots
-
-<img src="./.github/assets/preview-settings.png" alt="Iso settings screenshot" width="400" />
-<img src="./.github/assets/preview-login.png" alt="Iso login screenshot" width="400" />
-
 ## ‍️Quick Start
 
 ### Docker
@@ -110,6 +105,13 @@ Iso is configured through a single `config.json` file located in the `/config` d
 | `AUTH_SECRET` | Secret key for authentication | - | No |
 | `AUTH_PASSWORD` | Password for dashboard access | - | No |
 | `APP_DATA_PATH` | Path to config directory | `/config` | No |
+
+## More Screenshots
+
+<div style="display: flex;">
+  <img src="./.github/assets/preview-settings.png" alt="Iso settings screenshot" width="400" style="width: 49%;" />
+  <img src="./.github/assets/preview-login.png" alt="Iso login screenshot" width="400"style="width: 49%;" />
+</div>
 
 ## Development
 
