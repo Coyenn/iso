@@ -1,9 +1,7 @@
 "use server";
 
-import {
-	customStylesheetLocation,
-	stylesheetSchema,
-} from "@/src/config/stylesheet";
+import { customStylesheetLocation } from "@/src/config/stylesheet";
+import { stylesheetSchema } from "@/src/schemas/stylesheet-schema";
 import { withAuth } from "@/src/server/utils/with-auth";
 
 export async function updateCustomStylesheet(values: unknown) {

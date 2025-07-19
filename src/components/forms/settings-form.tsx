@@ -37,9 +37,9 @@ import {
 } from "@/src/components/ui/select";
 import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
-import { stylesheetSchema } from "@/src/config/stylesheet";
 import { cn } from "@/src/lib/utils";
 import { type Config, configSchema } from "@/src/schemas/config-schema";
+import { stylesheetSchema } from "@/src/schemas/stylesheet-schema";
 import { themeSchema } from "@/src/schemas/theme-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
