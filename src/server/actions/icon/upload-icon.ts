@@ -6,7 +6,9 @@ export async function uploadIcon(icon: File) {
 			const dataFile = Bun.file(
 				`${process.env.APP_DATA_PATH}/images/${icon.name}`,
 			);
-			const publicFile = Bun.file(`public/images/${icon.name}`);
+			const publicFile = Bun.file(
+				`${process.env.APP_PATH}/public/images/${icon.name}`,
+			);
 
 			await Bun.write(dataFile, icon);
 			await Bun.write(publicFile, icon);

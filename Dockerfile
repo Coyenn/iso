@@ -27,6 +27,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV APP_DATA_PATH=/config
+ENV APP_PATH=/app
 
 RUN apt-get update -y && apt-get install -y openssl
 
