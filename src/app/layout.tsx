@@ -1,5 +1,6 @@
 import "@/src/styles/globals.css";
 
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
@@ -70,6 +71,7 @@ export default async function RootLayout(props: RootLayoutProps) {
 						</ThemeProvider>
 					</SessionProvider>
 				</NextIntlClientProvider>
+				{process.env.VERCEL && <Analytics />}
 			</body>
 		</html>
 	);
