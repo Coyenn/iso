@@ -6,7 +6,7 @@ export async function getCustomStylesheet() {
 	try {
 		const file = Bun.file(customStylesheetLocation);
 
-		if (!file.exists()) {
+		if (!(await file.exists())) {
 			await Bun.write(customStylesheetLocation, "");
 		}
 

@@ -13,7 +13,7 @@ export async function updateCustomStylesheet(values: unknown) {
 
 		const file = Bun.file(customStylesheetLocation);
 
-		if (!file.exists()) {
+		if (!(await file.exists())) {
 			await Bun.write(
 				customStylesheetLocation,
 				parsedPayload.data.customStylesheet,

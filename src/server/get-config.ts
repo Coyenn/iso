@@ -9,7 +9,7 @@ export const getConfig = async (): Promise<Config> => {
 	try {
 		const file = Bun.file(configLocation);
 
-		if (!file.exists()) {
+		if (!(await file.exists())) {
 			await Bun.write(configLocation, JSON.stringify(defaultConfig, null, 2));
 		}
 
