@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://iso.tim.cv/" target="_blank">
-    <img src="./.github/assets/preview.png" alt="Iso dashboard screenshot" width="800" />
+    <img src="./.github/assets/preview-dashboard.png" alt="Iso dashboard screenshot" width="800" />
   </a>
 </div>
 
@@ -22,103 +22,124 @@ Built for my personal homelab — now open-sourced for yours.
 - **Icon ready**: choose from a set of built-in icons or supply your own
 - **Docker-first**: run anywhere with one simple command
 
+## More Screenshots
+
+<img src="./.github/assets/preview-settings.png" alt="Iso settings screenshot" width="400" />
+<img src="./.github/assets/preview-login.png" alt="Iso login screenshot" width="400" />
+
 ## ‍️Quick Start
 
-```bash
-docker run -d \
-  --name iso \
-  -p 3000:3000 \
-  coyann/iso
-```
-
-Open http://localhost:3000 and you’re up and running!
-
-### With a custom config
-
-1. Create a `config.json` (see [Configuration](#-configuration)).
-2. Mount it into the container at `/app/config.json`:
+### Docker
 
 ```bash
 docker run -d \
   --name iso \
   -p 3000:3000 \
-  -v $(pwd)/config.json:/app/config.json:ro \
+  -e AUTH_SECRET="changeme" \
+  -e AUTH_PASSWORD="changeme" \
+  -v ./config:/config \
   coyann/iso
 ```
 
-### Adding custom icons
+### Docker Compose
 
-```bash
-# Assuming your icons live in ./my-icons
-# They will be available at http://<ISO_URL>/custom-icons/<filename>
-docker run -d \
-  --name iso \
-  -p 3000:3000 \
-  -v $(pwd)/config.json:/app/config.json:ro \
-  -v $(pwd)/my-icons:/app/public/custom-icons:ro \
-  coyann/iso
+```yaml
+services:
+  iso:
+    image: coyann/iso:latest
+    container_name: iso
+    ports:
+      - "3000:3000"
+    environment:
+      - AUTH_SECRET=changeme
+      - AUTH_PASSWORD=changeme
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
 ```
 
-Refer to them in your `config.json` just like this:
-
-```json
-{
-  "services": [
-    {
-      "icon": "/custom-icons/unifi.png",
-      "label": "UniFi Controller",
-      "href": "https://unifi.my-home.local"
-    }
-  ]
-}
-```
-
-### Adding custom CSS overrides
-
-```bash
-# Assuming your overrides live in ./iso-dashboard/css directory
-# Any .css files inside this folder will automatically be injected into the <head> of Iso at runtime
-# They can be used to tweak colors, spacing, etc.
-docker run -d \
-  --name iso \
-  -p 3000:3000 \
-  -v $(pwd)/config.json:/app/config.json:ro \
-  -v $(pwd)/iso-dashboard/css:/app/public/css:ro \
-  coyann/iso
-```
-
-All stylesheets mounted in `/app/public/css` will be served at `http://<ISO_URL>/css/<filename>` and automatically loaded by Iso in the order returned by the file system (typically alphabetical). This lets you fully override Tailwind variables or add your own custom rules without rebuilding the image.
+Open http://localhost:3000 and you're up and running!
 
 ## Configuration
 
-Iso is driven entirely by a single JSON file.
+Iso is configured through a single `config.json` file located in the `/config` directory.
 
-### Example `config.json`
+### Example Configuration
 
-```json5
+```json
 {
-  "title": "My Homelab",
+  "title": "My Dashboard",
   "services": [
     {
-      "icon": "recordPlayer", // built-in icon from Iso
-      "label": "Audiobooks",
-      "href": "https://audiobooks.my-home.local"
+      "order": 1,
+      "icon": "tv",
+      "label": "Plex",
+      "href": "https://plex.example.com"
     },
     {
-      "icon": "/custom-icons/unifi.png", // custom icon
-      "label": "UniFi Controller",
-      "href": "https://unifi.my-home.local"
+      "order": 2,
+      "icon": "lock",
+      "label": "Bitwarden",
+      "href": "https://vault.example.com"
     }
   ],
   "locale": "en",
-  "greetings": [
-    "Rise and shine!",
-    "Hey there!",
-    "Good evening 😊",
-    "Sleep tight"
-  ]
+  "theme": "amethyst",
+  "greetings": [],
+  "pageLoadAnimation": true
 }
 ```
+
+### Configuration Options
+
+- **title**: Dashboard title displayed in the header
+- **services**: Array of service objects with:
+  - `order`: Display order (number)
+  - `icon`: Icon name from built-in set
+  - `label`: Service display name
+  - `href`: Service URL
+- **locale**: Language code (`en`, `es`, `fr`, `de`)
+- **theme**: Color theme (e.g., `amethyst`)
+- **greetings**: Custom greeting messages
+- **pageLoadAnimation**: Enable/disable page animations
+
+## Environment Variables
+
+| Variable | Description | Default | Required |
+|----------|-------------|---------|----------|
+| `AUTH_SECRET` | Secret key for authentication | - | No |
+| `AUTH_PASSWORD` | Password for dashboard access | - | No |
+| `APP_DATA_PATH` | Path to config directory | `/config` | No |
+
+## Development
+
+### Prerequisites
+
+- Nix
+
+Or
+
+- The [Bun](https://bun.sh/) JavaScript runtime
+
+### Local Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/Coyenn/iso.git
+cd iso
+```
+
+2. Install dependencies:
+```bash
+bun install
+```
+
+3. Start the development server:
+```bash
+bun dev
+```
+
+4. Open http://localhost:3000 in your browser
 
 ## License
 
