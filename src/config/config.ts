@@ -1,7 +1,8 @@
 import { icons } from "@/src/config/icons";
+import { env } from "@/src/env";
 import type { Config } from "@/src/schemas/config-schema";
 
-export const configLocation = `${process.env.APP_DATA_PATH}/config.json`;
+export const configLocation = `${env.APP_DATA_PATH}/config.json`;
 
 export const defaultConfig = {
 	title: "Iso Dashboard",

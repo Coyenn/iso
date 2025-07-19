@@ -1,5 +1,6 @@
 import type { DefaultSession, NextAuthConfig } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { env } from "@/src/env";
 import { loginFormSchema } from "@/src/schemas/login-form-schema";
 
 /**
@@ -36,8 +37,8 @@ export const authConfig = {
 				const parsedCredentials = loginFormSchema.parse(credentials);
 
 				if (
-					!process.env.AUTH_PASSWORD ||
-					parsedCredentials.password !== process.env.AUTH_PASSWORD
+					!env.AUTH_PASSWORD ||
+					parsedCredentials.password !== env.AUTH_PASSWORD
 				) {
 					return null;
 				}

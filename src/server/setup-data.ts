@@ -1,8 +1,9 @@
 import { existsSync } from "node:fs";
 import { cp, mkdir, rm } from "node:fs/promises";
+import { env } from "@/src/env";
 
 export const setupData = async () => {
-	const appDataPath = process.env.APP_DATA_PATH;
+	const appDataPath = env.APP_DATA_PATH;
 	const imagesPath = `${appDataPath}/images`;
 	const cssPath = `${appDataPath}/css`;
 
