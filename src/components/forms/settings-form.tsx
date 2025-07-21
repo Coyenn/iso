@@ -347,14 +347,14 @@ export function SettingsForm(props: SettingsFormProps) {
 									)}
 								/>
 
-								{/* Show Searchbar */}
+								{/* Enable Searchbar */}
 								<FormField
 									control={form.control}
-									name="showSearchbar"
+									name="search.enabled"
 									render={({ field }) => (
 										<FormItem className="flex flex-row items-center justify-between gap-2">
 											<div className="grid gap-2">
-												<FormLabel htmlFor="showSearchbar">
+												<FormLabel htmlFor="searchEnabled">
 													{t("showSearchbar.title")}
 												</FormLabel>
 												<p className="text-muted-foreground text-sm">
@@ -372,10 +372,10 @@ export function SettingsForm(props: SettingsFormProps) {
 								/>
 
 								{/* Search Engine */}
-								{form.watch("showSearchbar") && (
+								{form.watch("search.enabled") && (
 									<FormField
 										control={form.control}
-										name="searchEngine"
+										name="search.engine"
 										render={({ field }) => (
 											<FormItem className="grid gap-2">
 												<FormLabel htmlFor="searchEngine">
@@ -428,10 +428,10 @@ export function SettingsForm(props: SettingsFormProps) {
 								)}
 
 								{/* Custom Search Engine URL */}
-								{form.watch("searchEngine") === "custom" && (
+								{form.watch("search.engine") === "custom" && (
 									<FormField
 										control={form.control}
-										name="searchEngineUrl"
+										name="search.engineUrl"
 										render={({ field }) => (
 											<FormItem className="grid gap-2">
 												<FormLabel htmlFor="searchEngineUrl">
@@ -454,10 +454,10 @@ export function SettingsForm(props: SettingsFormProps) {
 								)}
 
 								{/* Custom Search Placeholder */}
-								{form.watch("showSearchbar") && (
+								{form.watch("search.enabled") && (
 									<FormField
 										control={form.control}
-										name="searchPlaceholder"
+										name="search.placeholder"
 										render={({ field }) => (
 											<FormItem className="grid gap-2">
 												<FormLabel htmlFor="searchPlaceholder">

@@ -26,9 +26,9 @@ export function Searchbar(props: SearchbarProps) {
 		if (!query.trim()) return;
 
 		const searchUrl = searchWithEngine(
-			config.searchEngine,
+			config.search?.engine || "google",
 			encodeURIComponent(query.trim()),
-			config.searchEngineUrl || "",
+			config.search?.engineUrl || "",
 		);
 
 		if (searchUrl) {
@@ -42,9 +42,9 @@ export function Searchbar(props: SearchbarProps) {
 			if (!query.trim()) return;
 
 			const searchUrl = searchWithEngine(
-				config.searchEngine,
+				config.search?.engine || "google",
 				encodeURIComponent(query.trim()),
-				config.searchEngineUrl || "",
+				config.search?.engineUrl || "",
 			);
 
 			if (searchUrl) {
@@ -57,7 +57,11 @@ export function Searchbar(props: SearchbarProps) {
 		<motion.div
 			initial={{ opacity: 0, y: 10, scale: 0.95 }}
 			animate={{ opacity: 1, y: 0, scale: 1 }}
-			transition={{ duration: 0.2, ease: "easeInOut", delay: 0.1 }}
+			transition={{
+				duration: config.pageLoadAnimation ? 0.2 : 0,
+				ease: "easeInOut",
+				delay: config.pageLoadAnimation ? 0.1 : 0,
+			}}
 			className={cn("w-full max-w-2xl", className)}
 		>
 			<form onSubmit={handleSearch} className="relative">
@@ -70,7 +74,7 @@ export function Searchbar(props: SearchbarProps) {
 					<Input
 						type="text"
 						name="search"
-						placeholder={config.searchPlaceholder || t("searchPlaceholder")}
+						placeholder={config.search?.placeholder || t("searchPlaceholder")}
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
 						onKeyDown={handleKeyPress}

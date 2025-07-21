@@ -81,7 +81,13 @@ Iso is configured through a single `config.json` file located in the `/config` d
   "locale": "en",
   "theme": "amethyst",
   "greetings": [],
-  "pageLoadAnimation": true
+  "pageLoadAnimation": true,
+  "search": {
+    "enabled": true,
+    "engine": "google",
+    "engineUrl": "",
+    "placeholder": "Search ..."
+  }
 }
 ```
 
@@ -97,6 +103,11 @@ Iso is configured through a single `config.json` file located in the `/config` d
 - **theme**: Color theme (e.g., `amethyst`)
 - **greetings**: Custom greeting messages
 - **pageLoadAnimation**: Enable/disable page animations
+- **search**: Object containing search bar settings
+  - `enabled`: Toggle visibility of the search bar
+  - `engine`: Built-in search engine (`google`, `bing`, `duckduckgo`, `startpage`, `qwant`, `searx`, or `custom`)
+  - `engineUrl`: Custom search engine URL. Use `[q]` as placeholder for the search query.
+  - `placeholder`: Input placeholder text shown in the search bar
 
 ## Environment Variables
 
@@ -110,7 +121,7 @@ Iso is configured through a single `config.json` file located in the `/config` d
 
 <div style="display: flex;">
   <img src="./.github/assets/preview-settings.png" alt="Iso settings screenshot" width="400" style="width: 49%;" />
-  <img src="./.github/assets/preview-login.png" alt="Iso login screenshot" width="400"style="width: 49%;" />
+  <img src="./.github/assets/preview-login.png" alt="Iso login screenshot" width="400" style="width: 49%;" />
 </div>
 
 ## Development

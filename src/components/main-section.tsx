@@ -35,18 +35,21 @@ export function MainSection(props: MainSectionProps) {
 		<section
 			className={cn(
 				"container flex flex-1 flex-col items-center justify-center gap-6 py-16 sm:gap-10 md:gap-16",
-				config.showSearchbar && "pb-0 md:gap-12",
+				config.search?.enabled && "pb-0 md:gap-12",
 			)}
 		>
 			<motion.h1
 				initial={{ opacity: 0, y: 10, scale: 0.9 }}
 				animate={{ opacity: 1, y: 0, scale: 1 }}
-				transition={{ duration: 0.2, ease: "easeInOut" }}
+				transition={{
+					duration: config.pageLoadAnimation ? 0.2 : 0,
+					ease: "easeInOut",
+				}}
 				className="font-instrument-serif text-4xl sm:text-5xl md:text-6xl"
 			>
 				{randomGreeting ?? t("defaultGreeting")}
 			</motion.h1>
-			{config.showSearchbar && (
+			{config.search?.enabled && (
 				<Searchbar config={config} className="mb-4 md:mb-8" />
 			)}
 			<ServiceIconList pageLoadAnimation={config.pageLoadAnimation} />

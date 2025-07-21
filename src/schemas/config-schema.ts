@@ -11,10 +11,14 @@ export const configSchema = z.object({
 	theme: themeSchema.default("neutral"),
 	greetings: z.array(greetingSchema),
 	pageLoadAnimation: z.boolean().default(true),
-	showSearchbar: z.boolean().default(false),
-	searchEngine: searchEngineSchema.default("google"),
-	searchEngineUrl: z.string().optional(),
-	searchPlaceholder: z.string().optional(),
+	search: z
+		.object({
+			enabled: z.boolean().default(false),
+			engine: searchEngineSchema.default("google"),
+			engineUrl: z.string().optional(),
+			placeholder: z.string().optional(),
+		})
+		.default({ enabled: false, engine: "google" }),
 });
 
 export type Config = z.infer<typeof configSchema>;
