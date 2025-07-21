@@ -1,6 +1,7 @@
 {
 	"defaultGreeting": "Welcome!",
 	"goBack": "Go back",
+	"searchPlaceholder": "Search the web...",
 	"theme": {
 		"title": "Theme"
 	},
@@ -54,6 +55,23 @@
 		"pageLoadAnimation": {
 			"title": "Page load animation",
 			"description": "If enabled, an animation will be displayed when the page loads."
+		},
+		"showSearchbar": {
+			"title": "Show search bar",
+			"description": "If enabled, a search bar will be displayed on the main page."
+		},
+		"searchEngine": {
+			"title": "Search engine",
+			"description": "Select your preferred search engine for web searches."
+		},
+		"searchEngineUrl": {
+			"title": "Custom search engine URL",
+			"description": "Enter the URL for your custom search engine. Use [q] as a placeholder for the search query."
+		},
+		"searchPlaceholder": {
+			"title": "Custom search placeholder",
+			"description": "Override the default search placeholder text with your own custom text.",
+			"placeholder": "Search the web..."
 		},
 		"save": "Save",
 		"success": "Settings saved",

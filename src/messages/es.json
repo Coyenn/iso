@@ -1,6 +1,7 @@
 {
 	"defaultGreeting": "¡Bienvenido!",
 	"goBack": "Regresar",
+	"searchPlaceholder": "Buscar en la web...",
 	"theme": {
 		"title": "Esquema de color"
 	},
@@ -54,6 +55,23 @@
 		"pageLoadAnimation": {
 			"title": "Animación de carga de página",
 			"description": "Si está activada, se mostrará una animación cuando se cargue la página."
+		},
+		"showSearchbar": {
+			"title": "Mostrar barra de búsqueda",
+			"description": "Si está activada, se mostrará una barra de búsqueda en la página principal."
+		},
+		"searchEngine": {
+			"title": "Motor de búsqueda",
+			"description": "Selecciona tu motor de búsqueda preferido para búsquedas web."
+		},
+		"searchEngineUrl": {
+			"title": "URL del motor de búsqueda personalizado",
+			"description": "Introduce la URL para tu motor de búsqueda personalizado. Usa [q] como marcador de posición para la consulta de búsqueda."
+		},
+		"searchPlaceholder": {
+			"title": "Texto de búsqueda personalizado",
+			"description": "Reemplaza el texto de marcador de posición predeterminado con tu propio texto personalizado.",
+			"placeholder": "Buscar en la web..."
 		},
 		"save": "Guardar",
 		"success": "Configuración guardada",

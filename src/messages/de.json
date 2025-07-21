@@ -1,6 +1,7 @@
 {
 	"defaultGreeting": "Willkommen!",
 	"goBack": "Zurück",
+	"searchPlaceholder": "Im Web suchen...",
 	"theme": {
 		"title": "Farbschema"
 	},
@@ -39,7 +40,7 @@
 		},
 		"locale": {
 			"title": "Sprache",
-			"description": "Wählen Sie die Sprache des Dashboards."
+			"description": "Wähle die Sprache des Dashboards."
 		},
 		"greetings": {
 			"title": "Benutzerdefinierte Willkommensnachrichten",
@@ -54,6 +55,23 @@
 		"pageLoadAnimation": {
 			"title": "Animation beim Laden der Seite",
 			"description": "Wenn aktiviert, wird eine Animation beim Laden der Seite angezeigt."
+		},
+		"showSearchbar": {
+			"title": "Suchleiste anzeigen",
+			"description": "Wenn aktiviert, wird eine Suchleiste auf der Hauptseite angezeigt."
+		},
+		"searchEngine": {
+			"title": "Suchmaschine",
+			"description": "Wähle deine bevorzugte Suchmaschine für Websuchen."
+		},
+		"searchEngineUrl": {
+			"title": "Benutzerdefinierte Suchmaschinen-URL",
+			"description": "Gib die URL für deine benutzerdefinierte Suchmaschine ein. Verwende [q] als Platzhalter für die Suchanfrage."
+		},
+		"searchPlaceholder": {
+			"title": "Benutzerdefinierter Suchtext",
+			"description": "Überschreibe den Standard-Platzhaltertext mit deinem eigenen Text.",
+			"placeholder": "Im Web suchen..."
 		},
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",

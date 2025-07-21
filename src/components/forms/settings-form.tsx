@@ -39,6 +39,7 @@ import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
 import { cn } from "@/src/lib/utils";
 import { type Config, configSchema } from "@/src/schemas/config-schema";
+import { searchEngineSchema } from "@/src/schemas/search-engine-schema";
 import { stylesheetSchema } from "@/src/schemas/stylesheet-schema";
 import { themeSchema } from "@/src/schemas/theme-schema";
 import { updateConfig } from "@/src/server/actions/config/update-config";
@@ -345,6 +346,138 @@ export function SettingsForm(props: SettingsFormProps) {
 										</FormItem>
 									)}
 								/>
+
+								{/* Show Searchbar */}
+								<FormField
+									control={form.control}
+									name="showSearchbar"
+									render={({ field }) => (
+										<FormItem className="flex flex-row items-center justify-between gap-2">
+											<div className="grid gap-2">
+												<FormLabel htmlFor="showSearchbar">
+													{t("showSearchbar.title")}
+												</FormLabel>
+												<p className="text-muted-foreground text-sm">
+													{t("showSearchbar.description")}
+												</p>
+											</div>
+											<FormControl>
+												<Switch
+													checked={field.value}
+													onCheckedChange={field.onChange}
+												/>
+											</FormControl>
+										</FormItem>
+									)}
+								/>
+
+								{/* Search Engine */}
+								{form.watch("showSearchbar") && (
+									<FormField
+										control={form.control}
+										name="searchEngine"
+										render={({ field }) => (
+											<FormItem className="grid gap-2">
+												<FormLabel htmlFor="searchEngine">
+													{t("searchEngine.title")}
+												</FormLabel>
+												<p className="text-muted-foreground text-sm">
+													{t("searchEngine.description")}
+												</p>
+												<div className="rounded-md border border-input bg-background p-4 shadow-xs">
+													<FormControl>
+														<div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
+															{searchEngineSchema.options.map((engine) => (
+																<div
+																	key={engine}
+																	className="flex flex-col items-center gap-2"
+																>
+																	<button
+																		type="button"
+																		onClick={() => {
+																			field.onChange(engine);
+																		}}
+																		className={cn(
+																			"flex aspect-square w-full flex-col items-center justify-center gap-1 rounded-md border border-input p-3 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",
+																			field.value === engine &&
+																				"border-primary bg-primary/5",
+																		)}
+																		aria-label={`Select ${engine} search engine`}
+																		aria-pressed={field.value === engine}
+																	>
+																		<Image
+																			src={`/icons/search-engines/${engine}.svg`}
+																			alt={`${engine} search engine`}
+																			className="h-8 w-8"
+																			width={32}
+																			height={32}
+																		/>
+																	</button>
+																	<span className="text-center text-xs capitalize">
+																		{engine}
+																	</span>
+																</div>
+															))}
+														</div>
+													</FormControl>
+												</div>
+												<FormMessage className="text-center" />
+											</FormItem>
+										)}
+									/>
+								)}
+
+								{/* Custom Search Engine URL */}
+								{form.watch("searchEngine") === "custom" && (
+									<FormField
+										control={form.control}
+										name="searchEngineUrl"
+										render={({ field }) => (
+											<FormItem className="grid gap-2">
+												<FormLabel htmlFor="searchEngineUrl">
+													{t("searchEngineUrl.title")}
+												</FormLabel>
+												<p className="text-muted-foreground text-sm">
+													{t("searchEngineUrl.description")}
+												</p>
+												<FormControl>
+													<Input
+														id="searchEngineUrl"
+														placeholder="https://example.com/search"
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage className="text-center" />
+											</FormItem>
+										)}
+									/>
+								)}
+
+								{/* Custom Search Placeholder */}
+								{form.watch("showSearchbar") && (
+									<FormField
+										control={form.control}
+										name="searchPlaceholder"
+										render={({ field }) => (
+											<FormItem className="grid gap-2">
+												<FormLabel htmlFor="searchPlaceholder">
+													{t("searchPlaceholder.title")}
+												</FormLabel>
+												<p className="text-muted-foreground text-sm">
+													{t("searchPlaceholder.description")}
+												</p>
+												<FormControl>
+													<Input
+														id="searchPlaceholder"
+														placeholder={t("searchPlaceholder.placeholder")}
+														{...field}
+													/>
+												</FormControl>
+												<FormMessage className="text-center" />
+											</FormItem>
+										)}
+									/>
+								)}
 
 								<Button
 									type="submit"

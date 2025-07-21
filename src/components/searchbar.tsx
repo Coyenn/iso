@@ -1,0 +1,93 @@
+"use client";
+
+import { Search } from "lucide-react";
+import { motion } from "motion/react";
+import { useTranslations } from "next-intl";
+import type React from "react";
+import { useRef, useState } from "react";
+import { Button } from "@/src/components/ui/button";
+import { Input } from "@/src/components/ui/input";
+import { searchWithEngine } from "@/src/lib/search-with-engine";
+import { cn } from "@/src/lib/utils";
+import type { Config } from "@/src/schemas/config-schema";
+
+export interface SearchbarProps extends React.ComponentProps<"div"> {
+	config: Config;
+}
+
+export function Searchbar(props: SearchbarProps) {
+	const { config, className } = props;
+	const t = useTranslations();
+	const searchInputRef = useRef<HTMLInputElement>(null);
+	const [query, setQuery] = useState("");
+
+	const handleSearch = (e: React.FormEvent) => {
+		e.preventDefault();
+		if (!query.trim()) return;
+
+		const searchUrl = searchWithEngine(
+			config.searchEngine,
+			encodeURIComponent(query.trim()),
+			config.searchEngineUrl || "",
+		);
+
+		if (searchUrl) {
+			window.open(searchUrl, "_blank", "noopener,noreferrer");
+		}
+	};
+
+	const handleKeyPress = (e: React.KeyboardEvent) => {
+		if (e.key === "Enter") {
+			e.preventDefault();
+			if (!query.trim()) return;
+
+			const searchUrl = searchWithEngine(
+				config.searchEngine,
+				encodeURIComponent(query.trim()),
+				config.searchEngineUrl || "",
+			);
+
+			if (searchUrl) {
+				window.open(searchUrl, "_blank", "noopener,noreferrer");
+			}
+		}
+	};
+
+	return (
+		<motion.div
+			initial={{ opacity: 0, y: 10, scale: 0.95 }}
+			animate={{ opacity: 1, y: 0, scale: 1 }}
+			transition={{ duration: 0.2, ease: "easeInOut", delay: 0.1 }}
+			className={cn("w-full max-w-2xl", className)}
+		>
+			<form onSubmit={handleSearch} className="relative">
+				{/** biome-ignore lint/a11y/noStaticElementInteractions: Very searchbar specific markup */}
+				{/** biome-ignore lint/a11y/useKeyWithClickEvents: Very searchbar specific markup */}
+				<div
+					onClick={() => searchInputRef.current?.focus()}
+					className="relative flex w-full cursor-text items-center gap-2 rounded-full border border-input bg-input/30 px-2 py-2 transition-colors focus-within:ring-3 focus-within:ring-primary/20 sm:px-4 sm:py-3 dark:bg-input/20"
+				>
+					<Input
+						type="text"
+						name="search"
+						placeholder={config.searchPlaceholder || t("searchPlaceholder")}
+						value={query}
+						onChange={(e) => setQuery(e.target.value)}
+						onKeyDown={handleKeyPress}
+						ref={searchInputRef}
+						className="!bg-transparent flex-1 border-none p-0 text-sm shadow-none placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 md:text-base"
+					/>
+					<Button
+						type="submit"
+						size="sm"
+						className="flex-shrink-0 rounded-full"
+						disabled={!query.trim()}
+					>
+						<Search className="h-4 w-4" />
+						<span className="sr-only">Search</span>
+					</Button>
+				</div>
+			</form>
+		</motion.div>
+	);
+}

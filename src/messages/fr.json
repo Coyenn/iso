@@ -1,6 +1,7 @@
 {
 	"defaultGreeting": "Bienvenue !",
 	"goBack": "Retour",
+	"searchPlaceholder": "Rechercher sur le web...",
 	"theme": {
 		"title": "Schéma de couleurs"
 	},
@@ -39,7 +40,7 @@
 		},
 		"locale": {
 			"title": "Langue",
-			"description": "Sélectionnez la langue du tableau de bord."
+			"description": "Sélectionne la langue du tableau de bord."
 		},
 		"greetings": {
 			"title": "Messages d'accueil personnalisés",
@@ -55,6 +56,23 @@
 			"title": "Animation de chargement de la page",
 			"description": "Si activé, une animation sera affichée lors du chargement de la page."
 		},
+		"showSearchbar": {
+			"title": "Afficher la barre de recherche",
+			"description": "Si activé, une barre de recherche sera affichée sur la page principale."
+		},
+		"searchEngine": {
+			"title": "Moteur de recherche",
+			"description": "Sélectionne ton moteur de recherche préféré pour les recherches web."
+		},
+		"searchEngineUrl": {
+			"title": "URL du moteur de recherche personnalisé",
+			"description": "Entre l'URL de ton moteur de recherche personnalisé. Utilise [q] comme espace réservé pour la requête de recherche."
+		},
+		"searchPlaceholder": {
+			"title": "Texte de recherche personnalisé",
+			"description": "Remplace le texte d'espace réservé par défaut avec ton propre texte personnalisé.",
+			"placeholder": "Rechercher sur le web..."
+		},
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",
 		"error": "Une erreur est survenue. Veuillez réessayer."
@@ -68,7 +86,7 @@
 		"chooseFile": "Choisir un fichier",
 		"addService": {
 			"iconLabel": "Icône",
-			"iconDescription": "Choisissez une icône existante ou téléchargez-en une nouvelle.",
+			"iconDescription": "Choisis une icône existante ou télécharge-en une nouvelle.",
 			"nameLabel": "Nom",
 			"urlLabel": "URL",
 			"serviceNamePlaceholder": "Nom du service",
@@ -77,7 +95,7 @@
 			"success": "Service ajouté avec succès",
 			"error": "Échec de l'ajout du service",
 			"dialogTitle": "Ajouter un service",
-			"dialogDescription": "Ajoutez un nouveau service au tableau de bord"
+			"dialogDescription": "Ajoute un nouveau service au tableau de bord"
 		}
 	}
 }

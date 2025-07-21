@@ -42,4 +42,8 @@ export const defaultConfig = {
 	pageLoadAnimation: true,
 	theme: "neutral",
 	greetings: [],
+	showSearchbar: false,
+	searchEngine: "google",
+	searchEngineUrl: "",
+	searchPlaceholder: "",
 } satisfies Config;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="logosandtypes_com" data-name="logosandtypes com" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 150">
+  <defs>
+    <style>
+      .cls-1 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1, .cls-2 {
+        fill: #282b2f;
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+    </style>
+  </defs>
+  <g id="Layer_3" data-name="Layer 3">
+    <g id="Layer_3-2" data-name="Layer 3-2">
+      <g id="Layer_2" data-name="Layer 2">
+        <path id="Layer_3-3" data-name="Layer 3-3" class="cls-3" d="M0,0H150V150H0V0Z"/>
+      </g>
+    </g>
+  </g>
+  <path class="cls-2" d="M125,2l-3.8,14.73-14.57,3.76v1.5l14.57,3.76,3.8,14.73h1.42l3.8-14.73,14.89-3.84v-1.34l-14.89-3.84-3.8-14.73h-1.42Z"/>
+  <path class="cls-1" d="M74.19,28.93c23.29,0,42.16,14.05,42.16,41.35,0,25.83-16.68,39.64-38.02,41.2,10.15,6.2,25.48,6.21,35.01-1.89l2.98,1.61-1.74,16.32-1.23,1.55c-16.93,4.98-33.69-.22-44.58-17.71-20.73-2.01-36.75-15.74-36.75-41.09,0-27.3,18.88-41.35,42.16-41.35Zm0,75.36c14.96,0,22.15-15.23,22.15-34.01s-6.23-34.01-22.15-34.01-22.15,15.23-22.15,34.01,6.41,34.01,22.15,34.01Z"/>
+</svg>

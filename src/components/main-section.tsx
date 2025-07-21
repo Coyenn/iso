@@ -3,7 +3,9 @@
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { Searchbar } from "@/src/components/searchbar";
 import { ServiceIconList } from "@/src/components/service-icon-list";
+import { cn } from "@/src/lib/utils";
 import type { Config } from "@/src/schemas/config-schema";
 import type { Greeting } from "@/src/schemas/greeting-schema";
 
@@ -30,7 +32,12 @@ export function MainSection(props: MainSectionProps) {
 	}
 
 	return (
-		<section className="container flex flex-1 flex-col items-center justify-center gap-6 py-16 sm:gap-10 md:gap-16">
+		<section
+			className={cn(
+				"container flex flex-1 flex-col items-center justify-center gap-6 py-16 sm:gap-10 md:gap-16",
+				config.showSearchbar && "pb-0 md:gap-12",
+			)}
+		>
 			<motion.h1
 				initial={{ opacity: 0, y: 10, scale: 0.9 }}
 				animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -39,6 +46,9 @@ export function MainSection(props: MainSectionProps) {
 			>
 				{randomGreeting ?? t("defaultGreeting")}
 			</motion.h1>
+			{config.showSearchbar && (
+				<Searchbar config={config} className="mb-4 md:mb-8" />
+			)}
 			<ServiceIconList pageLoadAnimation={config.pageLoadAnimation} />
 		</section>
 	);
