@@ -4,7 +4,7 @@ import { Search } from "lucide-react";
 import { motion } from "motion/react";
 import { useTranslations } from "next-intl";
 import type React from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/src/components/ui/button";
 import { Input } from "@/src/components/ui/input";
 import { searchWithEngine } from "@/src/lib/search-with-engine";
@@ -53,6 +53,12 @@ export function Searchbar(props: SearchbarProps) {
 		}
 	};
 
+	useEffect(() => {
+		if (config.search?.enabled) {
+			searchInputRef.current?.focus();
+		}
+	}, [config.search?.enabled]);
+
 	return (
 		<motion.div
 			initial={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -69,7 +75,10 @@ export function Searchbar(props: SearchbarProps) {
 				{/** biome-ignore lint/a11y/useKeyWithClickEvents: Very searchbar specific markup */}
 				<div
 					onClick={() => searchInputRef.current?.focus()}
-					className="relative flex w-full cursor-text items-center gap-2 rounded-full border border-input bg-input/30 px-2 py-2 transition-colors focus-within:ring-3 focus-within:ring-primary/20 sm:px-4 sm:py-3 dark:bg-input/20"
+					className={cn(
+						"relative flex w-full cursor-text items-center gap-2 rounded-lg transition-colors sm:px-4 sm:py-3 md:rounded-xl",
+						"border border-neutral-300 bg-input/80 px-2 py-2 backdrop-blur-md focus-within:ring-3 focus-within:ring-primary/20 dark:border-neutral-700 dark:bg-input/20",
+					)}
 				>
 					<Input
 						type="text"
@@ -79,7 +88,10 @@ export function Searchbar(props: SearchbarProps) {
 						onChange={(e) => setQuery(e.target.value)}
 						onKeyDown={handleKeyPress}
 						ref={searchInputRef}
-						className="!bg-transparent flex-1 border-none p-0 text-sm shadow-none placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0 md:text-base"
+						className={cn(
+							"!bg-transparent flex-1 border-none p-0 text-sm shadow-none md:text-base",
+							"placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0",
+						)}
 					/>
 					<Button
 						type="submit"
