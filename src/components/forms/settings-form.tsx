@@ -1,16 +1,9 @@
 "use client";
 
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash2, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { useFieldArray, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import type { z } from "zod";
 import HighlightedTextarea from "@/src/components/common/highlighted-textarea";
 import { Button } from "@/src/components/ui/button";
 import {
@@ -39,111 +32,30 @@ import {
 import { Slider } from "@/src/components/ui/slider";
 import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
+import { useSettingsForm } from "@/src/hooks/use-settings-form";
 import { cn } from "@/src/lib/utils";
-import { backgroundImageFormSchema } from "@/src/schemas/background-image-schema";
-import { type Config, configSchema } from "@/src/schemas/config-schema";
+import type { Config } from "@/src/schemas/config-schema";
 import { searchEngineSchema } from "@/src/schemas/search-engine-schema";
-import { stylesheetSchema } from "@/src/schemas/stylesheet-schema";
 import { themeSchema } from "@/src/schemas/theme-schema";
-import { uploadBackgroundImages } from "@/src/server/actions/background/upload-background-images";
-import { updateConfig } from "@/src/server/actions/config/update-config";
-import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
 
 export interface SettingsFormProps {
 	currentConfig: Config;
 	customStylesheet: string;
 }
 
-const configSchemaWithStylesheet = configSchema
-	.omit({ backgroundImage: true })
-	.extend(stylesheetSchema.shape)
-	.extend({
-		backgroundImage: backgroundImageFormSchema,
-	});
-
 export function SettingsForm(props: SettingsFormProps) {
 	const { currentConfig, customStylesheet } = props;
-	const { refresh } = useRouter();
-	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState<string | null>(null);
-	const [greetingsParent] = useAutoAnimate<HTMLDivElement>();
-	const form = useForm({
-		resolver: zodResolver(configSchemaWithStylesheet),
-		defaultValues: { ...currentConfig, customStylesheet },
-		mode: "onSubmit",
-	});
-	const t = useTranslations("settings");
-
 	const {
-		fields: greetingFields,
-		append: appendGreeting,
-		remove: removeGreeting,
-	} = useFieldArray({
-		control: form.control,
-		name: "greetings",
-	});
-
-	async function onSubmit(values: z.infer<typeof configSchemaWithStylesheet>) {
-		try {
-			if (isLoading) return;
-
-			setIsLoading(true);
-			setError(null);
-
-			const backgroundImagesResult = await uploadBackgroundImages(
-				values.backgroundImage,
-			);
-
-			if (!backgroundImagesResult.success) {
-				toast.error(backgroundImagesResult.error || t("error"));
-				return;
-			}
-
-			const uploadedImages = backgroundImagesResult.images ?? {
-				light: "",
-				dark: "",
-			};
-
-			const backgroundImageData = {
-				light:
-					uploadedImages.light !== ""
-						? uploadedImages.light
-						: typeof values.backgroundImage.light === "string"
-							? values.backgroundImage.light
-							: "",
-				dark:
-					uploadedImages.dark !== ""
-						? uploadedImages.dark
-						: typeof values.backgroundImage.dark === "string"
-							? values.backgroundImage.dark
-							: "",
-				opacity: values.backgroundImage.opacity,
-				blur: values.backgroundImage.blur,
-			};
-
-			const configData: Config = {
-				...values,
-				backgroundImage: backgroundImageData as Config["backgroundImage"],
-			};
-
-			const configResult = await updateConfig(configData);
-			const stylesheetResult = await updateCustomStylesheet(values);
-
-			if (!stylesheetResult.success || !configResult.success) {
-				toast.error(stylesheetResult.error || configResult.error || t("error"));
-			} else {
-				toast.success(t("success"));
-			}
-		} catch (e) {
-			console.error(e);
-			toast.error(t("error"));
-		} finally {
-			refresh();
-			setTimeout(() => {
-				setIsLoading(false);
-			}, 500);
-		}
-	}
+		form,
+		t,
+		isLoading,
+		error,
+		greetingFields,
+		appendGreeting,
+		removeGreeting,
+		onSubmit,
+	} = useSettingsForm({ currentConfig, customStylesheet });
+	const [greetingsParent] = useAutoAnimate<HTMLDivElement>();
 
 	return (
 		<motion.div

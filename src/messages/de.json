@@ -97,7 +97,11 @@
 		},
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",
-		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut."
+		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut.",
+		"unsavedSettings": {
+			"message": "Du hast ungespeicherte Änderungen",
+			"save": "Speichern"
+		}
 	},
 	"service": {
 		"add": "Hinzufügen",

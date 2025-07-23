@@ -97,7 +97,11 @@
 		},
 		"save": "Save",
 		"success": "Settings saved",
-		"error": "Something went wrong. Please try again."
+		"error": "Something went wrong. Please try again.",
+		"unsavedSettings": {
+			"message": "You have unsaved changes",
+			"save": "Save"
+		}
 	},
 	"service": {
 		"add": "Add",

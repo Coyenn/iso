@@ -97,7 +97,11 @@
 		},
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",
-		"error": "Une erreur est survenue. Veuillez réessayer."
+		"error": "Une erreur est survenue. Veuillez réessayer.",
+		"unsavedSettings": {
+			"message": "Vous avez des modifications non enregistrées",
+			"save": "Enregistrer"
+		}
 	},
 	"service": {
 		"add": "Ajouter",

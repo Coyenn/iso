@@ -97,7 +97,11 @@
 		},
 		"save": "Guardar",
 		"success": "Configuración guardada",
-		"error": "Algo salió mal. Por favor, inténtalo de nuevo."
+		"error": "Algo salió mal. Por favor, inténtalo de nuevo.",
+		"unsavedSettings": {
+			"message": "Tienes cambios sin guardar",
+			"save": "Guardar"
+		}
 	},
 	"service": {
 		"add": "Agregar",
