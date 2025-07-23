@@ -85,6 +85,14 @@
 			"dark": {
 				"title": "Fondo para modo oscuro",
 				"description": "Imagen de fondo mostrada en modo oscuro."
+			},
+			"opacity": {
+				"title": "Opacidad de fondo",
+				"description": "Ajusta la transparencia de la imagen de fondo."
+			},
+			"blur": {
+				"title": "Desenfoque de fondo",
+				"description": "Selecciona la intensidad del desenfoque aplicada a la imagen de fondo."
 			}
 		},
 		"save": "Guardar",

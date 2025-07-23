@@ -36,6 +36,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/src/components/ui/select";
+import { Slider } from "@/src/components/ui/slider";
 import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
 import { cn } from "@/src/lib/utils";
@@ -54,9 +55,10 @@ export interface SettingsFormProps {
 }
 
 const configSchemaWithStylesheet = configSchema
+	.omit({ backgroundImage: true })
 	.extend(stylesheetSchema.shape)
 	.extend({
-		backgroundImage: backgroundImageFormSchema.default({ light: "", dark: "" }),
+		backgroundImage: backgroundImageFormSchema,
 	});
 
 export function SettingsForm(props: SettingsFormProps) {
@@ -97,12 +99,31 @@ export function SettingsForm(props: SettingsFormProps) {
 				return;
 			}
 
+			const uploadedImages = backgroundImagesResult.images ?? {
+				light: "",
+				dark: "",
+			};
+
+			const backgroundImageData = {
+				light:
+					uploadedImages.light !== ""
+						? uploadedImages.light
+						: typeof values.backgroundImage.light === "string"
+							? values.backgroundImage.light
+							: "",
+				dark:
+					uploadedImages.dark !== ""
+						? uploadedImages.dark
+						: typeof values.backgroundImage.dark === "string"
+							? values.backgroundImage.dark
+							: "",
+				opacity: values.backgroundImage.opacity,
+				blur: values.backgroundImage.blur,
+			};
+
 			const configData: Config = {
 				...values,
-				backgroundImage: backgroundImagesResult.images || {
-					light: "",
-					dark: "",
-				},
+				backgroundImage: backgroundImageData as Config["backgroundImage"],
 			};
 
 			const configResult = await updateConfig(configData);
@@ -621,6 +642,88 @@ export function SettingsForm(props: SettingsFormProps) {
 																</Button>
 															</div>
 														)}
+													<FormMessage className="text-center" />
+												</FormItem>
+											)}
+										/>
+
+										{/* Background Opacity Slider */}
+										<FormField
+											control={form.control}
+											name="backgroundImage.opacity"
+											render={({ field }) => (
+												<FormItem className="grid gap-2">
+													<FormLabel htmlFor="backgroundImageOpacity">
+														{t("backgroundImage.opacity.title") ||
+															"Background Opacity"}
+													</FormLabel>
+													<p className="text-muted-foreground text-sm">
+														{t("backgroundImage.opacity.description") ||
+															"Adjust the transparency of the background image."}
+													</p>
+													<FormControl>
+														<div className="flex items-center gap-2">
+															<Slider
+																id="backgroundImageOpacity"
+																min={0}
+																max={100}
+																step={5}
+																defaultValue={[field.value ?? 50]}
+																onValueChange={(value) =>
+																	field.onChange(Number(value))
+																}
+																className="flex-1"
+															/>
+															<span className="w-10 text-right text-sm">
+																{field.value ?? 50}%
+															</span>
+														</div>
+													</FormControl>
+													<FormMessage className="text-center" />
+												</FormItem>
+											)}
+										/>
+
+										{/* Background Blur Dropdown */}
+										<FormField
+											control={form.control}
+											name="backgroundImage.blur"
+											render={({ field }) => (
+												<FormItem className="grid gap-2">
+													<FormLabel htmlFor="backgroundImageBlur">
+														{t("backgroundImage.blur.title") ||
+															"Background Blur"}
+													</FormLabel>
+													<p className="text-muted-foreground text-sm">
+														{t("backgroundImage.blur.description") ||
+															"Select the blur intensity applied to the background image."}
+													</p>
+													<FormControl>
+														<Select
+															onValueChange={field.onChange}
+															defaultValue={field.value ?? "xs"}
+														>
+															<SelectTrigger className="w-full">
+																<SelectValue placeholder="Select blur" />
+															</SelectTrigger>
+															<SelectContent>
+																{[
+																	"none",
+																	"xs",
+																	"sm",
+																	"md",
+																	"lg",
+																	"xl",
+																	"2xl",
+																	"3xl",
+																].map((b) => (
+																	<SelectItem key={b} value={b}>
+																		{b}
+																	</SelectItem>
+																))}
+															</SelectContent>
+														</Select>
+													</FormControl>
 													<FormMessage className="text-center" />
 												</FormItem>
 											)}

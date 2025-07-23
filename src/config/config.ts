@@ -51,5 +51,7 @@ export const defaultConfig = {
 	backgroundImage: {
 		light: "",
 		dark: "",
+		opacity: 50,
+		blur: "xs",
 	},
 } satisfies Config;

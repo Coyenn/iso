@@ -85,6 +85,14 @@
 			"dark": {
 				"title": "Dark mode background",
 				"description": "Background image displayed in dark mode."
+			},
+			"opacity": {
+				"title": "Background opacity",
+				"description": "Adjust the transparency of the background image."
+			},
+			"blur": {
+				"title": "Background blur",
+				"description": "Select the blur intensity applied to the background image."
 			}
 		},
 		"save": "Save",

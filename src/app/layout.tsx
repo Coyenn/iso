@@ -68,6 +68,8 @@ export default async function RootLayout(props: RootLayoutProps) {
 							<BackgroundImages
 								light={config.backgroundImage.light ?? ""}
 								dark={config.backgroundImage.dark ?? ""}
+								opacity={config.backgroundImage.opacity ?? 50}
+								blur={config.backgroundImage.blur ?? "xs"}
 							/>
 							<CurrentServicesProvider initialServices={config.services}>
 								{children}

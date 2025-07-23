@@ -68,7 +68,7 @@ export function ServiceIcon(props: ServiceIconProps) {
 				!isDragging && "duration-200",
 			)}
 		>
-			<div className="relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-foreground/10 focus-visible:bg-muted group-focus-visible:bg-muted motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px] dark:hover:bg-foreground/20">
+			<div className="relative flex w-[150px] flex-col items-center overflow-hidden rounded-lg p-4 transition-colors duration-100 hover:bg-foreground/10 focus-visible:bg-foreground/10 group-focus-visible:bg-foreground/10 motion-reduce:duration-0 contrast-more:hover:underline sm:w-[175px] md:w-[225px] dark:group-focus-visible:bg-foreground/20 dark:focus-visible:bg-foreground/20 dark:hover:bg-foreground/20">
 				{editMode && (
 					<Button
 						variant="ghost"

@@ -20,7 +20,12 @@ export const configSchema = z.object({
 			placeholder: z.string().optional(),
 		})
 		.default({ enabled: false, engine: "google" }),
-	backgroundImage: backgroundImageSchema.default({ light: "", dark: "" }),
+	backgroundImage: backgroundImageSchema.default({
+		light: "",
+		dark: "",
+		opacity: 50,
+		blur: "xs",
+	}),
 });
 
 export type Config = z.infer<typeof configSchema>;

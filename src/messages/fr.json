@@ -85,6 +85,14 @@
 			"dark": {
 				"title": "Fond pour mode sombre",
 				"description": "Image de fond affichée en mode sombre."
+			},
+			"opacity": {
+				"title": "Opacité du fond",
+				"description": "Ajuste la transparence de l'image de fond."
+			},
+			"blur": {
+				"title": "Flou d'arrière-plan",
+				"description": "Sélectionne l'intensité du flou appliqué à l'image de fond."
 			}
 		},
 		"save": "Enregistrer",

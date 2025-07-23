@@ -85,6 +85,14 @@
 			"dark": {
 				"title": "Hintergrund für dunklen Modus",
 				"description": "Hintergrundbild, das im dunklen Modus angezeigt wird."
+			},
+			"opacity": {
+				"title": "Hintergrund-Transparenz",
+				"description": "Passe die Transparenz des Hintergrundbildes an."
+			},
+			"blur": {
+				"title": "Hintergrund-Unschärfe",
+				"description": "Wähle die Stärke der Unschärfe, die auf das Hintergrundbild angewendet wird."
 			}
 		},
 		"save": "Speichern",
