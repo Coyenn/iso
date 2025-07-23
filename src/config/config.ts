@@ -48,4 +48,8 @@ export const defaultConfig = {
 		engineUrl: "",
 		placeholder: "",
 	},
+	backgroundImage: {
+		light: "",
+		dark: "",
+	},
 } satisfies Config;

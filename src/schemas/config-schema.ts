@@ -1,4 +1,5 @@
 import z from "zod";
+import { backgroundImageSchema } from "@/src/schemas/background-image-schema";
 import { greetingSchema } from "@/src/schemas/greeting-schema";
 import { searchEngineSchema } from "@/src/schemas/search-engine-schema";
 import { serviceSchema } from "@/src/schemas/service-schema";
@@ -19,6 +20,7 @@ export const configSchema = z.object({
 			placeholder: z.string().optional(),
 		})
 		.default({ enabled: false, engine: "google" }),
+	backgroundImage: backgroundImageSchema.default({ light: "", dark: "" }),
 });
 
 export type Config = z.infer<typeof configSchema>;

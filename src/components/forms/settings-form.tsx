@@ -19,6 +19,7 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/src/components/ui/card";
+import { FileInput } from "@/src/components/ui/file-input";
 import {
 	Form,
 	FormControl,
@@ -38,10 +39,12 @@ import {
 import { Switch } from "@/src/components/ui/switch";
 import { locales } from "@/src/config/locale";
 import { cn } from "@/src/lib/utils";
+import { backgroundImageFormSchema } from "@/src/schemas/background-image-schema";
 import { type Config, configSchema } from "@/src/schemas/config-schema";
 import { searchEngineSchema } from "@/src/schemas/search-engine-schema";
 import { stylesheetSchema } from "@/src/schemas/stylesheet-schema";
 import { themeSchema } from "@/src/schemas/theme-schema";
+import { uploadBackgroundImages } from "@/src/server/actions/background/upload-background-images";
 import { updateConfig } from "@/src/server/actions/config/update-config";
 import { updateCustomStylesheet } from "@/src/server/actions/stylesheet/update-custom-stylesheet";
 
@@ -50,7 +53,11 @@ export interface SettingsFormProps {
 	customStylesheet: string;
 }
 
-const configSchemaWithStylesheet = configSchema.extend(stylesheetSchema.shape);
+const configSchemaWithStylesheet = configSchema
+	.extend(stylesheetSchema.shape)
+	.extend({
+		backgroundImage: backgroundImageFormSchema.default({ light: "", dark: "" }),
+	});
 
 export function SettingsForm(props: SettingsFormProps) {
 	const { currentConfig, customStylesheet } = props;
@@ -61,6 +68,7 @@ export function SettingsForm(props: SettingsFormProps) {
 	const form = useForm({
 		resolver: zodResolver(configSchemaWithStylesheet),
 		defaultValues: { ...currentConfig, customStylesheet },
+		mode: "onSubmit",
 	});
 	const t = useTranslations("settings");
 
@@ -73,18 +81,37 @@ export function SettingsForm(props: SettingsFormProps) {
 		name: "greetings",
 	});
 
-	async function onSubmit(values: z.infer<typeof configSchema>) {
+	async function onSubmit(values: z.infer<typeof configSchemaWithStylesheet>) {
 		try {
 			if (isLoading) return;
 
 			setIsLoading(true);
 			setError(null);
 
-			const configResult = await updateConfig(values);
+			const backgroundImagesResult = await uploadBackgroundImages(
+				values.backgroundImage,
+			);
+
+			if (!backgroundImagesResult.success) {
+				toast.error(backgroundImagesResult.error || t("error"));
+				return;
+			}
+
+			const configData: Config = {
+				...values,
+				backgroundImage: backgroundImagesResult.images || {
+					light: "",
+					dark: "",
+				},
+			};
+
+			const configResult = await updateConfig(configData);
 			const stylesheetResult = await updateCustomStylesheet(values);
 
 			if (!stylesheetResult.success || !configResult.success) {
 				toast.error(stylesheetResult.error || configResult.error || t("error"));
+			} else {
+				toast.success(t("success"));
 			}
 		} catch (e) {
 			console.error(e);
@@ -137,7 +164,6 @@ export function SettingsForm(props: SettingsFormProps) {
 																	type="button"
 																	onClick={() => {
 																		field.onChange(theme);
-																		form.handleSubmit(onSubmit)();
 																	}}
 																	className={cn(
 																		"flex w-full flex-col items-center gap-1 rounded-md border border-input p-2 transition-colors hover:bg-accent/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary dark:bg-input/30 dark:hover:bg-accent/50",
@@ -479,6 +505,128 @@ export function SettingsForm(props: SettingsFormProps) {
 									/>
 								)}
 
+								{/* Background Images */}
+								<div className="grid gap-2">
+									<p className="font-medium text-sm">
+										{t("backgroundImage.title")}
+									</p>
+									<p className="text-muted-foreground text-sm">
+										{t("backgroundImage.description")}
+									</p>
+									<div className="space-y-4 rounded-md border border-input bg-background p-4 shadow-xs">
+										{/* Light Mode Background */}
+										<FormField
+											control={form.control}
+											name="backgroundImage.light"
+											render={({ field }) => (
+												<FormItem className="grid gap-2">
+													<FormLabel htmlFor="backgroundImageLight">
+														{t("backgroundImage.light.title")}
+													</FormLabel>
+													<p className="text-muted-foreground text-sm">
+														{t("backgroundImage.light.description")}
+													</p>
+													<FormControl>
+														<FileInput
+															id="backgroundImageLight"
+															accept="image/*"
+															onChange={(e) => {
+																const file = e.target.files?.[0];
+																if (file) {
+																	field.onChange(file);
+																}
+															}}
+															buttonLabel={
+																field.value
+																	? t("backgroundImage.changeImage")
+																	: t("backgroundImage.selectImage")
+															}
+														/>
+													</FormControl>
+													{field.value &&
+														typeof field.value === "string" &&
+														field.value.startsWith("/images/") && (
+															<div className="relative">
+																<Image
+																	src={field.value}
+																	alt="Light mode background preview"
+																	className="h-24 w-full rounded-md object-cover"
+																	width={200}
+																	height={96}
+																/>
+																<Button
+																	type="button"
+																	variant="outline"
+																	size="sm"
+																	className="absolute top-2 right-2"
+																	onClick={() => field.onChange("")}
+																>
+																	<X className="h-3 w-3" />
+																</Button>
+															</div>
+														)}
+													<FormMessage className="text-center" />
+												</FormItem>
+											)}
+										/>
+
+										{/* Dark Mode Background */}
+										<FormField
+											control={form.control}
+											name="backgroundImage.dark"
+											render={({ field }) => (
+												<FormItem className="grid gap-2">
+													<FormLabel htmlFor="backgroundImageDark">
+														{t("backgroundImage.dark.title")}
+													</FormLabel>
+													<p className="text-muted-foreground text-sm">
+														{t("backgroundImage.dark.description")}
+													</p>
+													<FormControl>
+														<FileInput
+															id="backgroundImageDark"
+															accept="image/*"
+															onChange={(e) => {
+																const file = e.target.files?.[0];
+																if (file) {
+																	field.onChange(file);
+																}
+															}}
+															buttonLabel={
+																field.value
+																	? t("backgroundImage.changeImage")
+																	: t("backgroundImage.selectImage")
+															}
+														/>
+													</FormControl>
+													{field.value &&
+														typeof field.value === "string" &&
+														field.value.startsWith("/images/") && (
+															<div className="relative">
+																<Image
+																	src={field.value}
+																	alt="Dark mode background preview"
+																	className="h-24 w-full rounded-md object-cover"
+																	width={200}
+																	height={96}
+																/>
+																<Button
+																	type="button"
+																	variant="outline"
+																	size="sm"
+																	className="absolute top-2 right-2"
+																	onClick={() => field.onChange("")}
+																>
+																	<X className="h-3 w-3" />
+																</Button>
+															</div>
+														)}
+													<FormMessage className="text-center" />
+												</FormItem>
+											)}
+										/>
+									</div>
+								</div>
 								<Button
 									type="submit"
 									className="w-full"

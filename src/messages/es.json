@@ -73,6 +73,20 @@
 			"description": "Reemplaza el texto de marcador de posición predeterminado con tu propio texto personalizado.",
 			"placeholder": "Buscar en la web..."
 		},
+		"backgroundImage": {
+			"title": "Imágenes de fondo",
+			"description": "Establece imágenes de fondo personalizadas para los modos claro y oscuro.",
+			"selectImage": "Seleccionar imagen",
+			"changeImage": "Cambiar imagen",
+			"light": {
+				"title": "Fondo para modo claro",
+				"description": "Imagen de fondo mostrada en modo claro."
+			},
+			"dark": {
+				"title": "Fondo para modo oscuro",
+				"description": "Imagen de fondo mostrada en modo oscuro."
+			}
+		},
 		"save": "Guardar",
 		"success": "Configuración guardada",
 		"error": "Algo salió mal. Por favor, inténtalo de nuevo."

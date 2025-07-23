@@ -73,6 +73,20 @@
 			"description": "Überschreibe den Standard-Platzhaltertext mit deinem eigenen Text.",
 			"placeholder": "Im Web suchen..."
 		},
+		"backgroundImage": {
+			"title": "Hintergrundbilder",
+			"description": "Setze benutzerdefinierte Hintergrundbilder für hellen und dunklen Modus.",
+			"selectImage": "Bild auswählen",
+			"changeImage": "Bild ändern",
+			"light": {
+				"title": "Hintergrund für hellen Modus",
+				"description": "Hintergrundbild, das im hellen Modus angezeigt wird."
+			},
+			"dark": {
+				"title": "Hintergrund für dunklen Modus",
+				"description": "Hintergrundbild, das im dunklen Modus angezeigt wird."
+			}
+		},
 		"save": "Speichern",
 		"success": "Einstellungen gespeichert",
 		"error": "Etwas ist schief gelaufen. Bitte versuche es erneut."

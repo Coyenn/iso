@@ -73,6 +73,20 @@
 			"description": "Override the default search placeholder text with your own custom text.",
 			"placeholder": "Search the web..."
 		},
+		"backgroundImage": {
+			"title": "Background images",
+			"description": "Set custom background images for light and dark modes.",
+			"selectImage": "Select image",
+			"changeImage": "Change image",
+			"light": {
+				"title": "Light mode background",
+				"description": "Background image displayed in light mode."
+			},
+			"dark": {
+				"title": "Dark mode background",
+				"description": "Background image displayed in dark mode."
+			}
+		},
 		"save": "Save",
 		"success": "Settings saved",
 		"error": "Something went wrong. Please try again."

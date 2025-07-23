@@ -73,6 +73,20 @@
 			"description": "Remplace le texte d'espace réservé par défaut avec ton propre texte personnalisé.",
 			"placeholder": "Rechercher sur le web..."
 		},
+		"backgroundImage": {
+			"title": "Images de fond",
+			"description": "Définis des images de fond personnalisées pour les modes clair et sombre.",
+			"selectImage": "Sélectionner une image",
+			"changeImage": "Changer l'image",
+			"light": {
+				"title": "Fond pour mode clair",
+				"description": "Image de fond affichée en mode clair."
+			},
+			"dark": {
+				"title": "Fond pour mode sombre",
+				"description": "Image de fond affichée en mode sombre."
+			}
+		},
 		"save": "Enregistrer",
 		"success": "Paramètres enregistrés",
 		"error": "Une erreur est survenue. Veuillez réessayer."

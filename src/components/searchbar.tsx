@@ -76,8 +76,8 @@ export function Searchbar(props: SearchbarProps) {
 				<div
 					onClick={() => searchInputRef.current?.focus()}
 					className={cn(
-						"relative flex w-full cursor-text items-center gap-2 rounded-lg transition-colors sm:px-4 sm:py-3 md:rounded-xl",
-						"border border-neutral-300 bg-input/80 px-2 py-2 backdrop-blur-md focus-within:ring-3 focus-within:ring-primary/20 dark:border-neutral-700 dark:bg-input/20",
+						"relative flex w-full cursor-text items-center gap-2 rounded-lg shadow-lg transition-colors sm:px-4 sm:py-3 md:rounded-xl",
+						"border border-foreground/15 bg-border/50 px-2 py-2 backdrop-blur-md dark:border-input/75 dark:bg-border/60",
 					)}
 				>
 					<Input

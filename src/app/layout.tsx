@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Instrument_Serif, Inter, Newsreader } from "next/font/google";
 import { SessionProvider } from "next-auth/react";
 import { NextIntlClientProvider } from "next-intl";
+import { BackgroundImages } from "@/src/components/common/background-images";
 import { ThemeProvider } from "@/src/components/providers/theme-provider";
 import { Toaster } from "@/src/components/ui/sonner";
 import { getCustomStylesheet } from "@/src/server/actions/stylesheet/get-custom-stylesheet";
@@ -64,6 +65,10 @@ export default async function RootLayout(props: RootLayoutProps) {
 				<NextIntlClientProvider>
 					<SessionProvider>
 						<ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+							<BackgroundImages
+								light={config.backgroundImage.light ?? ""}
+								dark={config.backgroundImage.dark ?? ""}
+							/>
 							<CurrentServicesProvider initialServices={config.services}>
 								{children}
 							</CurrentServicesProvider>
