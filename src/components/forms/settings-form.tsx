@@ -165,12 +165,13 @@ export function SettingsForm(props: SettingsFormProps) {
 									control={form.control}
 									name="theme"
 									render={({ field }) => (
-										<FormItem className="grid gap-2">
+										<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 											<FormLabel htmlFor="theme">{t("theme.title")}</FormLabel>
 											<p className="text-muted-foreground text-sm">
 												{t("theme.description")}
 											</p>
-											<div className="py-4">
+											<hr className="my-2 border-input" />
+											<div>
 												<FormControl>
 													<div className="grid grid-cols-3 gap-4 md:grid-cols-6 md:gap-2">
 														{themeSchema.options.map((theme) => (
@@ -219,14 +220,15 @@ export function SettingsForm(props: SettingsFormProps) {
 									control={form.control}
 									name="title"
 									render={({ field }) => (
-										<FormItem className="grid gap-2">
+										<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 											<FormLabel htmlFor="title">
 												{t("pageTitle.title")}
 											</FormLabel>
 											<p className="text-muted-foreground text-sm">
 												{t("pageTitle.description")}
 											</p>
-											<div className="rounded-md border border-input bg-background p-4 shadow-xs">
+											<hr className="my-2 border-input" />
+											<div>
 												<div className="mb-4 flex w-max items-center gap-2 rounded-t-xl bg-input/30 p-2">
 													<Image
 														src="/favicon.ico"
@@ -257,14 +259,15 @@ export function SettingsForm(props: SettingsFormProps) {
 									control={form.control}
 									name="locale"
 									render={({ field }) => (
-										<FormItem className="grid gap-2">
+										<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 											<FormLabel htmlFor="locale">
 												{t("locale.title")}
 											</FormLabel>
 											<p className="text-muted-foreground text-sm">
 												{t("locale.description")}
 											</p>
-											<div className="rounded-md border border-input bg-background p-4 shadow-xs">
+											<hr className="my-2 border-input" />
+											<div>
 												<p className="mb-4 font-instrument-serif text-xl sm:text-2xl md:text-3xl">
 													{
 														locales.find((l) => l.code === field.value)
@@ -295,15 +298,13 @@ export function SettingsForm(props: SettingsFormProps) {
 								/>
 
 								{/* Greetings */}
-								<div className="grid gap-2">
+								<div className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 									<p className="font-medium text-sm">{t("greetings.title")}</p>
 									<p className="text-muted-foreground text-sm">
 										{t("greetings.description")}
 									</p>
-									<div
-										className="space-y-4 rounded-md border border-input bg-background p-4 shadow-xs"
-										ref={greetingsParent}
-									>
+									<hr className="my-2 border-input" />
+									<div className="space-y-4" ref={greetingsParent}>
 										{greetingFields.map((greeting, index) => (
 											<div
 												key={greeting.id}
@@ -354,13 +355,14 @@ export function SettingsForm(props: SettingsFormProps) {
 								</div>
 
 								{/* Custom Stylesheet */}
-								<div className="grid gap-2">
+								<div className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 									<p className="font-medium text-sm">
 										{t("customStylesheet.title")}
 									</p>
 									<p className="text-muted-foreground text-sm">
 										{t("customStylesheet.description")}
 									</p>
+									<hr className="my-2 border-input" />
 									<FormControl>
 										<HighlightedTextarea
 											value={form.watch("customStylesheet")}
@@ -375,7 +377,7 @@ export function SettingsForm(props: SettingsFormProps) {
 									control={form.control}
 									name="pageLoadAnimation"
 									render={({ field }) => (
-										<FormItem className="flex flex-row items-center justify-between gap-2">
+										<FormItem className="flex flex-row items-center justify-between gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 											<div className="grid gap-2">
 												<FormLabel htmlFor="pageLoadAnimation">
 													{t("pageLoadAnimation.title")}
@@ -399,7 +401,7 @@ export function SettingsForm(props: SettingsFormProps) {
 									control={form.control}
 									name="search.enabled"
 									render={({ field }) => (
-										<FormItem className="flex flex-row items-center justify-between gap-2">
+										<FormItem className="flex flex-row items-center justify-between gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 											<div className="grid gap-2">
 												<FormLabel htmlFor="searchEnabled">
 													{t("showSearchbar.title")}
@@ -424,14 +426,15 @@ export function SettingsForm(props: SettingsFormProps) {
 										control={form.control}
 										name="search.engine"
 										render={({ field }) => (
-											<FormItem className="grid gap-2">
+											<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 												<FormLabel htmlFor="searchEngine">
 													{t("searchEngine.title")}
 												</FormLabel>
 												<p className="text-muted-foreground text-sm">
 													{t("searchEngine.description")}
 												</p>
-												<div className="rounded-md border border-input bg-background p-4 shadow-xs">
+												<hr className="my-2 border-input" />
+												<div>
 													<FormControl>
 														<div className="grid grid-cols-2 gap-4 md:grid-cols-4 lg:grid-cols-7">
 															{searchEngineSchema.options.map((engine) => (
@@ -480,13 +483,14 @@ export function SettingsForm(props: SettingsFormProps) {
 										control={form.control}
 										name="search.engineUrl"
 										render={({ field }) => (
-											<FormItem className="grid gap-2">
+											<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 												<FormLabel htmlFor="searchEngineUrl">
 													{t("searchEngineUrl.title")}
 												</FormLabel>
 												<p className="text-muted-foreground text-sm">
 													{t("searchEngineUrl.description")}
 												</p>
+												<hr className="my-2 border-input" />
 												<FormControl>
 													<Input
 														id="searchEngineUrl"
@@ -506,13 +510,14 @@ export function SettingsForm(props: SettingsFormProps) {
 										control={form.control}
 										name="search.placeholder"
 										render={({ field }) => (
-											<FormItem className="grid gap-2">
+											<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 												<FormLabel htmlFor="searchPlaceholder">
 													{t("searchPlaceholder.title")}
 												</FormLabel>
 												<p className="text-muted-foreground text-sm">
 													{t("searchPlaceholder.description")}
 												</p>
+												<hr className="my-2 border-input" />
 												<FormControl>
 													<Input
 														id="searchPlaceholder"
@@ -528,25 +533,20 @@ export function SettingsForm(props: SettingsFormProps) {
 
 								{/* Background Images */}
 								<div className="grid gap-2">
-									<p className="font-medium text-sm">
-										{t("backgroundImage.title")}
-									</p>
-									<p className="text-muted-foreground text-sm">
-										{t("backgroundImage.description")}
-									</p>
-									<div className="space-y-4 rounded-md border border-input bg-background p-4 shadow-xs">
+									<div className="space-y-4">
 										{/* Light Mode Background */}
 										<FormField
 											control={form.control}
 											name="backgroundImage.light"
 											render={({ field }) => (
-												<FormItem className="grid gap-2">
+												<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 													<FormLabel htmlFor="backgroundImageLight">
 														{t("backgroundImage.light.title")}
 													</FormLabel>
 													<p className="text-muted-foreground text-sm">
 														{t("backgroundImage.light.description")}
 													</p>
+													<hr className="my-2 border-input" />
 													<FormControl>
 														<FileInput
 															id="backgroundImageLight"
@@ -596,13 +596,14 @@ export function SettingsForm(props: SettingsFormProps) {
 											control={form.control}
 											name="backgroundImage.dark"
 											render={({ field }) => (
-												<FormItem className="grid gap-2">
+												<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 													<FormLabel htmlFor="backgroundImageDark">
 														{t("backgroundImage.dark.title")}
 													</FormLabel>
 													<p className="text-muted-foreground text-sm">
 														{t("backgroundImage.dark.description")}
 													</p>
+													<hr className="my-2 border-input" />
 													<FormControl>
 														<FileInput
 															id="backgroundImageDark"
@@ -652,7 +653,7 @@ export function SettingsForm(props: SettingsFormProps) {
 											control={form.control}
 											name="backgroundImage.opacity"
 											render={({ field }) => (
-												<FormItem className="grid gap-2">
+												<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 													<FormLabel htmlFor="backgroundImageOpacity">
 														{t("backgroundImage.opacity.title") ||
 															"Background Opacity"}
@@ -661,6 +662,7 @@ export function SettingsForm(props: SettingsFormProps) {
 														{t("backgroundImage.opacity.description") ||
 															"Adjust the transparency of the background image."}
 													</p>
+													<hr className="my-2 border-input" />
 													<FormControl>
 														<div className="flex items-center gap-2">
 															<Slider
@@ -689,7 +691,7 @@ export function SettingsForm(props: SettingsFormProps) {
 											control={form.control}
 											name="backgroundImage.blur"
 											render={({ field }) => (
-												<FormItem className="grid gap-2">
+												<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
 													<FormLabel htmlFor="backgroundImageBlur">
 														{t("backgroundImage.blur.title") ||
 															"Background Blur"}
@@ -698,6 +700,7 @@ export function SettingsForm(props: SettingsFormProps) {
 														{t("backgroundImage.blur.description") ||
 															"Select the blur intensity applied to the background image."}
 													</p>
+													<hr className="my-2 border-input" />
 													<FormControl>
 														<Select
 															onValueChange={field.onChange}
