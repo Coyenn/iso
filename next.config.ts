@@ -22,6 +22,9 @@ const config: NextConfig = {
 	experimental: {
 		scrollRestoration: true,
 		reactCompiler: true,
+		serverActions: {
+			bodySizeLimit: "10mb",
+		},
 	},
 };
 

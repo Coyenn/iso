@@ -15,6 +15,7 @@ const uploadImage = async (file: File, prefix: string): Promise<string> => {
 
 	await Bun.write(dataFile, file);
 	await Bun.write(publicFile, file);
+
 	return `/images/${filename}`;
 };
 

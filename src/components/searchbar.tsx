@@ -68,7 +68,10 @@ export function Searchbar(props: SearchbarProps) {
 				ease: "easeInOut",
 				delay: config.pageLoadAnimation ? 0.1 : 0,
 			}}
-			className={cn("w-full max-w-2xl", className)}
+			className={cn(
+				"w-full max-w-2xl rounded-lg md:rounded-xl dark:bg-background/50",
+				className,
+			)}
 		>
 			<form onSubmit={handleSearch} className="relative">
 				{/** biome-ignore lint/a11y/noStaticElementInteractions: Very searchbar specific markup */}
@@ -90,14 +93,13 @@ export function Searchbar(props: SearchbarProps) {
 						ref={searchInputRef}
 						className={cn(
 							"!bg-transparent flex-1 border-none p-0 text-sm shadow-none md:text-base",
-							"placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-0",
+							"placeholder:text-foreground/50 focus-visible:outline-none focus-visible:ring-0",
 						)}
 					/>
 					<Button
 						type="submit"
 						size="sm"
 						className="flex-shrink-0 rounded-full"
-						disabled={!query.trim()}
 					>
 						<Search className="h-4 w-4" />
 						<span className="sr-only">Search</span>
