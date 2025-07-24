@@ -19,7 +19,10 @@ const uploadImage = async (file: File, prefix: string): Promise<string> => {
 	return `/images/${filename}`;
 };
 
-const deletePreviousBackgroundImages = async (): Promise<void> => {
+const deletePreviousBackgroundImages = async (options: {
+	light?: boolean;
+	dark?: boolean;
+}): Promise<void> => {
 	try {
 		const dataImagesDir = `${env.APP_DATA_PATH}/images`;
 		const publicImagesDir = `${env.APP_PATH}/public/images`;
@@ -27,7 +30,10 @@ const deletePreviousBackgroundImages = async (): Promise<void> => {
 		// Delete from data directory
 		const dataFiles = await readdir(dataImagesDir);
 		for (const file of dataFiles) {
-			if (file.startsWith("bg-light-") || file.startsWith("bg-dark-")) {
+			if (
+				(options.light && file.startsWith("bg-light-")) ||
+				(options.dark && file.startsWith("bg-dark-"))
+			) {
 				await unlink(join(dataImagesDir, file));
 			}
 		}
@@ -35,7 +41,10 @@ const deletePreviousBackgroundImages = async (): Promise<void> => {
 		// Delete from public directory
 		const publicFiles = await readdir(publicImagesDir);
 		for (const file of publicFiles) {
-			if (file.startsWith("bg-light-") || file.startsWith("bg-dark-")) {
+			if (
+				(options.light && file.startsWith("bg-light-")) ||
+				(options.dark && file.startsWith("bg-dark-"))
+			) {
 				await unlink(join(publicImagesDir, file));
 			}
 		}
@@ -53,11 +62,13 @@ export async function uploadBackgroundImages(backgroundImages: {
 			const result = { light: "", dark: "" };
 
 			// Delete previous background images if new ones are being uploaded
-			if (
-				backgroundImages.light instanceof File ||
-				backgroundImages.dark instanceof File
-			) {
-				await deletePreviousBackgroundImages();
+			const deleteOptions = {
+				light: backgroundImages.light instanceof File,
+				dark: backgroundImages.dark instanceof File,
+			};
+
+			if (deleteOptions.light || deleteOptions.dark) {
+				await deletePreviousBackgroundImages(deleteOptions);
 			}
 
 			if (backgroundImages.light instanceof File) {

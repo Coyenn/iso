@@ -69,7 +69,7 @@ export function Searchbar(props: SearchbarProps) {
 				delay: config.pageLoadAnimation ? 0.1 : 0,
 			}}
 			className={cn(
-				"w-full max-w-2xl rounded-lg md:rounded-xl dark:bg-background/50",
+				"w-full max-w-2xl rounded-lg backdrop-blur-md md:rounded-xl dark:bg-background/50",
 				className,
 			)}
 		>
@@ -80,7 +80,7 @@ export function Searchbar(props: SearchbarProps) {
 					onClick={() => searchInputRef.current?.focus()}
 					className={cn(
 						"relative flex w-full cursor-text items-center gap-2 rounded-lg shadow-lg transition-colors sm:px-4 sm:py-3 md:rounded-xl",
-						"border border-foreground/15 bg-border/50 px-2 py-2 backdrop-blur-md dark:border-input/75 dark:bg-border/60",
+						"border border-foreground/15 bg-border/50 px-2 py-2 dark:border-input/75 dark:bg-border/60",
 					)}
 				>
 					<Input
