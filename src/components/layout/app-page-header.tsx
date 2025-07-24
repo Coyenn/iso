@@ -4,7 +4,7 @@ import { LoginLogoutButton } from "@/src/components/common/login-logout-button";
 import { SettingsButton } from "@/src/components/common/settings-button";
 import { ThemeToggle } from "@/src/components/common/theme-toggle";
 import { env } from "@/src/env";
-import { getUploadedIcons } from "@/src/server/actions/icon/get-upoaded-icons";
+import { getUploadedIcons } from "@/src/server/actions/icon/get-uploaded-icons";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
 
@@ -12,7 +12,7 @@ export async function AppPageHeader() {
 	const session = await auth();
 	const isLoggedIn = !!session?.user;
 	const config = await getConfig();
-	const result = await getUploadedIcons();
+	const result = await getUploadedIcons(["bg-light", "bg-dark"]);
 
 	return (
 		<div className="absolute top-4 right-4 z-50 flex items-center gap-2">
