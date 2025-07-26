@@ -69,7 +69,7 @@ export function Searchbar(props: SearchbarProps) {
 				delay: config.pageLoadAnimation ? 0.1 : 0,
 			}}
 			className={cn(
-				"w-full max-w-2xl rounded-lg backdrop-blur-md md:rounded-xl dark:bg-background/50",
+				"w-full max-w-2xl rounded-lg backdrop-blur-md md:rounded-xl dark:bg-background/70",
 				className,
 			)}
 		>

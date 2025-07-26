@@ -491,7 +491,7 @@ export function SettingsForm(props: SettingsFormProps) {
 																	type="button"
 																	variant="outline"
 																	size="sm"
-																	className="absolute top-2 right-2"
+																	className="absolute top-2 right-2 dark:bg-input"
 																	onClick={() => field.onChange("")}
 																>
 																	<X className="h-3 w-3" />
@@ -548,7 +548,7 @@ export function SettingsForm(props: SettingsFormProps) {
 																	type="button"
 																	variant="outline"
 																	size="sm"
-																	className="absolute top-2 right-2"
+																	className="absolute top-2 right-2 dark:bg-input"
 																	onClick={() => field.onChange("")}
 																>
 																	<X className="h-3 w-3" />
