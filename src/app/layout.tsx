@@ -60,7 +60,7 @@ export default async function RootLayout(props: RootLayoutProps) {
 				)}
 			</head>
 			<body
-				className={`theme-${config.theme ?? "neutral"} transition-colors flex min-h-[calc(100vh-10rem)] flex-col overflow-x-hidden bg-background antialiased`}
+				className={`theme-${config.theme ?? "neutral"} flex min-h-[calc(100vh-10rem)] flex-col overflow-x-hidden bg-background antialiased transition-colors`}
 			>
 				<NextIntlClientProvider>
 					<SessionProvider>

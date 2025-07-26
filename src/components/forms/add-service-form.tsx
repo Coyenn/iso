@@ -110,7 +110,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 									</p>
 									{/* Existing icons */}
 									<div
-										className="grid max-h-[200px] grid-cols-3 gap-2 overflow-y-auto md:grid-cols-4"
+										className="grid max-h-[300px] grid-cols-3 gap-2 overflow-y-auto md:grid-cols-4"
 										ref={iconsParent}
 									>
 										{[...allUploadedIcons, ...Object.entries(icons)].map(

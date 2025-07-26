@@ -115,7 +115,7 @@ export function ServiceIconList(props: ServiceIconListProps) {
 							return (
 								<motion.div
 									variants={itemVariants}
-									key={service.label}
+									key={`${service.label}-${index}`}
 									initial={hasAnimatedRef.current ? false : "hidden"}
 									animate="show"
 									exit="exit"
