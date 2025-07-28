@@ -1,6 +1,6 @@
 <div align="center">
   <a href="https://iso.tim.cv/" target="_blank">
-    <img src="./.github/assets/preview-dashboard.png" alt="Iso dashboard screenshot" width="800" />
+    <img src="./.github/assets/preview-dashboard-bg-image.png" alt="Iso dashboard screenshot" width="800" />
   </a>
 </div>
 
