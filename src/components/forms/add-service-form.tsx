@@ -134,7 +134,7 @@ export function AddServiceForm(props: AddServiceFormProps) {
 										)}
 									</div>
 									{/* Upload new icon */}
-									<div className="mt-4">
+									<div className="mt-4 overflow-x-hidden">
 										<FormControl>
 											<FileInput
 												accept="image/*"
