@@ -88,22 +88,24 @@ export function ServiceIcon(props: ServiceIconProps) {
 						repeat: Infinity,
 						repeatType: "mirror",
 					}}
-					className="flex flex-col items-center"
+					className="flex flex-col items-center gap-2"
 				>
-					<Image
-						src={
-							icon.startsWith("/")
-								? icon
-								: (icons[icon as keyof typeof icons] ?? icon)
-						}
-						alt={label}
-						width={250}
-						height={250}
-						quality={90}
-						loading="eager"
-						draggable={false}
-						className="aspect-square transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
-					/>
+					{!icon || (!icon.startsWith("/") && !icons[icon]) ? (
+						<div className="flex aspect-square w-[193px] items-center justify-center rounded-md bg-foreground/10">
+							<p className="text-center text-sm">No icon</p>
+						</div>
+					) : (
+						<Image
+							src={icon.startsWith("/") ? icon : (icons[icon] ?? "")}
+							alt={label}
+							width={250}
+							height={250}
+							quality={90}
+							loading="eager"
+							draggable={false}
+							className="aspect-square transition-transform duration-200 group-hover:scale-105 group-focus-visible:scale-105"
+						/>
+					)}
 					<h3 className="text-center font-medium text-md sm:text-lg md:text-xl">
 						{label}
 					</h3>

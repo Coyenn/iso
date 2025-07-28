@@ -34,4 +34,16 @@ jobs:
           tags: |
             ${{ vars.DOCKER_USERNAME }}/iso:${{ github.sha }}
             ${{ vars.DOCKER_USERNAME }}/iso:${{ github.event.release.tag_name }}
-            ${{ vars.DOCKER_USERNAME }}/iso:latest 
+            ${{ vars.DOCKER_USERNAME }}/iso:latest
+
+      - name: Build and push Docker image (slim)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile.slim
+          push: true
+          platforms: linux/amd64,linux/arm64
+          tags: |
+            ${{ vars.DOCKER_USERNAME }}/iso:${{ github.sha }}-slim
+            ${{ vars.DOCKER_USERNAME }}/iso:${{ github.event.release.tag_name }}-slim
+            ${{ vars.DOCKER_USERNAME }}/iso:latest-slim 

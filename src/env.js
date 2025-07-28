@@ -11,9 +11,9 @@ export const env = createEnv({
 			.enum(["development", "test", "production"])
 			.default("development"),
 		APP_DATA_PATH: z.string().optional().default("./config"),
+		APP_PATH: z.string().optional().default("."),
 		AUTH_SECRET: z.string().optional(),
 		AUTH_PASSWORD: z.string().optional(),
-		APP_PATH: z.string().optional().default("."),
 	},
 
 	/**
@@ -21,7 +21,9 @@ export const env = createEnv({
 	 * isn't built with invalid env vars. To expose them to the client, prefix them with
 	 * `NEXT_PUBLIC_`.
 	 */
-	client: {},
+	client: {
+		NEXT_PUBLIC_APP_SIZE: z.enum(["default", "slim"]).default("default"),
+	},
 
 	/**
 	 * You can't destruct `process.env` as a regular object in the Next.js edge runtimes (e.g.
@@ -33,6 +35,7 @@ export const env = createEnv({
 		AUTH_PASSWORD: process.env.AUTH_PASSWORD,
 		APP_DATA_PATH: process.env.APP_DATA_PATH,
 		APP_PATH: process.env.APP_PATH,
+		NEXT_PUBLIC_APP_SIZE: process.env.NEXT_PUBLIC_APP_SIZE,
 	},
 	/**
 	 * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

@@ -15,7 +15,7 @@ import {
 	SortableContext,
 	sortableKeyboardCoordinates,
 } from "@dnd-kit/sortable";
-import { AnimatePresence, motion } from "motion/react";
+import { motion } from "motion/react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useMemo, useRef, useState } from "react";
@@ -99,7 +99,7 @@ export function ServiceIconList(props: ServiceIconListProps) {
 	};
 
 	return (
-		<div className="group/order flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-8">
+		<div className="group/order flex flex-wrap justify-center gap-4 pb-8 sm:gap-6 md:gap-8">
 			<DndContext
 				sensors={sensors}
 				collisionDetection={closestCorners}
@@ -110,37 +110,35 @@ export function ServiceIconList(props: ServiceIconListProps) {
 					disabled={!editMode}
 					strategy={rectSortingStrategy}
 				>
-					<AnimatePresence>
-						{sortedServices.map((service, index) => {
-							return (
-								<motion.div
-									variants={itemVariants}
+					{sortedServices.map((service, index) => {
+						return (
+							<motion.div
+								variants={itemVariants}
+								key={`${service.label}-${index}`}
+								initial={hasAnimatedRef.current ? false : "hidden"}
+								animate="show"
+								exit="exit"
+								transition={{
+									duration: pageLoadAnimation ? 0.2 : 0,
+									delay: pageLoadAnimation
+										? hasAnimatedRef.current
+											? 0
+											: index * 0.1
+										: 0,
+								}}
+								onAnimationComplete={() => {
+									hasAnimatedRef.current = true;
+								}}
+							>
+								<ServiceIcon
 									key={`${service.label}-${index}`}
-									initial={hasAnimatedRef.current ? false : "hidden"}
-									animate="show"
-									exit="exit"
-									transition={{
-										duration: pageLoadAnimation ? 0.2 : 0,
-										delay: pageLoadAnimation
-											? hasAnimatedRef.current
-												? 0
-												: index * 0.1
-											: 0,
-									}}
-									onAnimationComplete={() => {
-										hasAnimatedRef.current = true;
-									}}
-								>
-									<ServiceIcon
-										key={`${service.label}-${index}`}
-										service={service}
-										index={index}
-										pageLoadAnimation={pageLoadAnimation}
-									/>
-								</motion.div>
-							);
-						})}
-					</AnimatePresence>
+									service={service}
+									index={index}
+									pageLoadAnimation={pageLoadAnimation}
+								/>
+							</motion.div>
+						);
+					})}
 				</SortableContext>
 			</DndContext>
 			{sortedServices.length === 0 && (

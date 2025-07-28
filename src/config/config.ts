@@ -9,31 +9,31 @@ export const defaultConfig = {
 	services: [
 		{
 			order: 1,
-			icon: icons.recordPlayer,
+			icon: icons.recordPlayer as string,
 			label: "Audiobooks",
 			href: "https://audiobooks.iso.com",
 		},
 		{
 			order: 2,
-			icon: icons.beamer,
+			icon: icons.beamer as string,
 			label: "Images & Videos",
 			href: "https://images-videos.iso.com",
 		},
 		{
 			order: 3,
-			icon: icons.popcornBucket,
+			icon: icons.popcornBucket as string,
 			label: "Movies & TV Shows",
 			href: "https://movies-tv-shows.iso.com",
 		},
 		{
 			order: 4,
-			icon: icons.lock,
+			icon: icons.lock as string,
 			label: "Backup & Restore",
 			href: "https://backup-restore.iso.com",
 		},
 		{
 			order: 5,
-			icon: icons.keychain,
+			icon: icons.keychain as string,
 			label: "Account",
 			href: "https://account.iso.com",
 		},
