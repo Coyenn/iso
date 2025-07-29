@@ -23,7 +23,7 @@ const config: NextConfig = {
 		scrollRestoration: true,
 		reactCompiler: true,
 		serverActions: {
-			bodySizeLimit: "10mb",
+			bodySizeLimit: "25mb",
 		},
 	},
 };
