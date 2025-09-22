@@ -3,10 +3,13 @@ import { EditModeButton } from "@/src/components/common/edit-mode-button";
 import { LoginLogoutButton } from "@/src/components/common/login-logout-button";
 import { SettingsButton } from "@/src/components/common/settings-button";
 import { ThemeToggle } from "@/src/components/common/theme-toggle";
+import { Button } from "@/src/components/ui/button";
 import { env } from "@/src/env";
 import { getUploadedIcons } from "@/src/server/actions/icon/get-uploaded-icons";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
+import { GithubIcon } from "lucide-react";
+import Link from "next/link";
 
 export async function AppPageHeader() {
 	const session = await auth();
@@ -16,6 +19,13 @@ export async function AppPageHeader() {
 
 	return (
 		<div className="absolute top-4 right-4 z-50 flex items-center gap-2">
+			{process.env.VERCEL && (
+				<Button size={"icon"} variant={"ghost"} aria-label="GitHub" asChild>
+					<Link href="https://github.com/Coyenn/iso" target="_blank">
+						<GithubIcon />
+					</Link>
+				</Button>
+			)}
 			{isLoggedIn && (
 				<>
 					<EditModeButton />
