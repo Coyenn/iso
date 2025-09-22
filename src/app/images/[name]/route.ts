@@ -33,7 +33,10 @@ export async function GET(
 							? "image/svg+xml"
 							: "application/octet-stream";
 
-		return new NextResponse(fileBuffer, {
+		const arrayBuffer = new ArrayBuffer(fileBuffer.byteLength);
+		new Uint8Array(arrayBuffer).set(fileBuffer);
+
+		return new NextResponse(arrayBuffer, {
 			headers: {
 				"Content-Type": contentType,
 				"Cache-Control": "public, max-age=31536000, immutable",
