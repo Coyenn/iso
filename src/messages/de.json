@@ -14,6 +14,7 @@
 		"login": "Anmelden",
 		"password": "Passwort",
 		"addService": "Service hinzufügen",
+		"github": "GitHub",
 		"editMode": {
 			"title": "Bearbeitungsmodus",
 			"activate": "Bearbeitungsmodus aktivieren",

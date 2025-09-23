@@ -14,6 +14,7 @@
 		"login": "Login",
 		"password": "Password",
 		"addService": "Add service",
+		"github": "GitHub",
 		"editMode": {
 			"title": "Edit mode",
 			"activate": "Activate edit mode",

@@ -35,7 +35,7 @@ export function IframeServiceViewer() {
 						animate={{ opacity: 1, scale: 1 }}
 						exit={{ opacity: 0, scale: 0.95 }}
 						transition={{ duration: 0.25, ease: "easeInOut" }}
-						className="fixed inset-0 z-[52] overflow-clip bg-background shadow-2xl md:inset-5 md:rounded-lg"
+						className="fixed inset-2 z-[52] overflow-clip bg-background shadow-2xl md:inset-5 md:rounded-lg"
 					>
 						<iframe
 							src={openIframe}
