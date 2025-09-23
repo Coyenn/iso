@@ -1,6 +1,8 @@
 {
 	"defaultGreeting": "Welcome!",
 	"goBack": "Go back",
+	"close": "Close",
+	"openInNewTab": "Open in new tab",
 	"searchPlaceholder": "Search the web...",
 	"theme": {
 		"title": "Theme"
@@ -55,6 +57,14 @@
 		"pageLoadAnimation": {
 			"title": "Page load animation",
 			"description": "If enabled, an animation will be displayed when the page loads."
+		},
+		"openServicesIn": {
+			"title": "Open services in",
+			"description": "Choose how services open by default.",
+			"placeholder": "Select where services open",
+			"sameTab": "Same tab",
+			"newTab": "New tab",
+			"iframe": "iFrame"
 		},
 		"showSearchbar": {
 			"title": "Show search bar",

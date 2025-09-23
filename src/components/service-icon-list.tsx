@@ -21,6 +21,7 @@ import { useTranslations } from "next-intl";
 import { useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { ServiceIcon } from "@/src/components/service-icon";
+import type { Config } from "@/src/schemas/config-schema";
 import { updateServices } from "@/src/server/actions/service/update-services";
 import { useCurrentServices } from "@/src/store/current-services-context";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
@@ -33,10 +34,11 @@ export const itemVariants = {
 
 export interface ServiceIconListProps {
 	pageLoadAnimation: boolean;
+	config: Config;
 }
 
 export function ServiceIconList(props: ServiceIconListProps) {
-	const { pageLoadAnimation } = props;
+	const { pageLoadAnimation, config } = props;
 	const { currentServices, setCurrentServices } = useCurrentServices();
 	const t = useTranslations("service");
 	const [isUpdating, setIsUpdating] = useState(false);
@@ -135,6 +137,7 @@ export function ServiceIconList(props: ServiceIconListProps) {
 									service={service}
 									index={index}
 									pageLoadAnimation={pageLoadAnimation}
+									config={config}
 								/>
 							</motion.div>
 						);

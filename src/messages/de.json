@@ -1,6 +1,8 @@
 {
 	"defaultGreeting": "Willkommen!",
 	"goBack": "Zurück",
+	"close": "Schließen",
+	"openInNewTab": "In neuem Tab öffnen",
 	"searchPlaceholder": "Im Web suchen...",
 	"theme": {
 		"title": "Farbschema"
@@ -55,6 +57,14 @@
 		"pageLoadAnimation": {
 			"title": "Animation beim Laden der Seite",
 			"description": "Wenn aktiviert, wird eine Animation beim Laden der Seite angezeigt."
+		},
+		"openServicesIn": {
+			"title": "Services öffnen in",
+			"description": "Wähle, wie Services standardmäßig geöffnet werden.",
+			"placeholder": "Wähle, wo Services geöffnet werden",
+			"sameTab": "Gleicher Tab",
+			"newTab": "Neuer Tab",
+			"iframe": "iFrame"
 		},
 		"showSearchbar": {
 			"title": "Suchleiste anzeigen",

@@ -308,6 +308,50 @@ export function SettingsForm(props: SettingsFormProps) {
 									)}
 								/>
 
+								{/* Open Services In */}
+								<FormField
+									control={form.control}
+									name="openServicesIn"
+									render={({ field }) => (
+										<FormItem className="grid gap-2 rounded-md border border-input bg-background p-4 shadow-xs">
+											<FormLabel htmlFor="openServicesIn">
+												{t("openServicesIn.title")}
+											</FormLabel>
+											<p className="text-muted-foreground text-sm">
+												{t("openServicesIn.description")}
+											</p>
+											<hr className="my-2 border-input" />
+											<div>
+												{" "}
+												<FormControl>
+													<Select
+														onValueChange={field.onChange}
+														defaultValue={field.value ?? "new-tab"}
+													>
+														<SelectTrigger className="w-full">
+															<SelectValue
+																placeholder={t("openServicesIn.placeholder")}
+															/>
+														</SelectTrigger>
+														<SelectContent>
+															<SelectItem value="same-tab">
+																{t("openServicesIn.sameTab")}
+															</SelectItem>
+															<SelectItem value="new-tab">
+																{t("openServicesIn.newTab")}
+															</SelectItem>
+															<SelectItem value="iframe">
+																{t("openServicesIn.iframe")}
+															</SelectItem>
+														</SelectContent>
+													</Select>
+												</FormControl>
+											</div>
+											<FormMessage className="text-center" />
+										</FormItem>
+									)}
+								/>
+
 								{/* Enable Searchbar */}
 								<FormField
 									control={form.control}

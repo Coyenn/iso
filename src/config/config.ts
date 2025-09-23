@@ -38,6 +38,7 @@ export const defaultConfig = {
 			href: "https://account.iso.com",
 		},
 	],
+	openServicesIn: "new-tab",
 	locale: "en",
 	pageLoadAnimation: true,
 	theme: "neutral",

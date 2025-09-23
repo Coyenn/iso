@@ -12,6 +12,10 @@ export const configSchema = z.object({
 	theme: themeSchema.default("neutral"),
 	greetings: z.array(greetingSchema),
 	pageLoadAnimation: z.boolean().default(true),
+	openServicesIn: z
+		.enum(["same-tab", "new-tab", "iframe"])
+		.default("new-tab")
+		.optional(),
 	search: z
 		.object({
 			enabled: z.boolean().default(false),

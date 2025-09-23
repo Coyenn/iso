@@ -1,3 +1,5 @@
+import { GithubIcon } from "lucide-react";
+import Link from "next/link";
 import { AddServiceButton } from "@/src/components/common/add-service-button";
 import { EditModeButton } from "@/src/components/common/edit-mode-button";
 import { LoginLogoutButton } from "@/src/components/common/login-logout-button";
@@ -8,8 +10,6 @@ import { env } from "@/src/env";
 import { getUploadedIcons } from "@/src/server/actions/icon/get-uploaded-icons";
 import { auth } from "@/src/server/auth";
 import { getConfig } from "@/src/server/get-config";
-import { GithubIcon } from "lucide-react";
-import Link from "next/link";
 
 export async function AppPageHeader() {
 	const session = await auth();

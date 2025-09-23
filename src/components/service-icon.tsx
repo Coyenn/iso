@@ -10,19 +10,23 @@ import { toast } from "sonner";
 import { Button } from "@/src/components/ui/button";
 import { icons } from "@/src/config/icons";
 import { cn } from "@/src/lib/utils";
+import type { Config } from "@/src/schemas/config-schema";
 import type { Service } from "@/src/schemas/service-schema";
 import { removeService } from "@/src/server/actions/service/remove-service";
 import { useCurrentServices } from "@/src/store/current-services-context";
 import { useEditModeStore } from "@/src/store/edit-mode-store";
+import { useOpenIframeStore } from "@/src/store/open-iframe-store";
 
 export interface ServiceIconProps {
 	service: Service;
 	index: number;
 	pageLoadAnimation: boolean;
+	config: Config;
 }
 
 export function ServiceIcon(props: ServiceIconProps) {
-	const { service, index, pageLoadAnimation } = props;
+	const { service, index, pageLoadAnimation, config } = props;
+	const { openServicesIn } = config;
 	const { label, href, icon } = service;
 	const {
 		attributes,
@@ -35,7 +39,12 @@ export function ServiceIcon(props: ServiceIconProps) {
 	const t = useTranslations("service");
 	const { currentServices, setCurrentServices } = useCurrentServices();
 	const { editMode } = useEditModeStore();
-	const WrapperTag = editMode ? motion.div : motion.a;
+	const { setOpenIframe, openIframe } = useOpenIframeStore();
+	const WrapperTag = editMode
+		? motion.div
+		: openServicesIn === "iframe"
+			? motion.button
+			: motion.a;
 
 	const onRemove = async (index: number) => {
 		const result = await removeService(index);
@@ -55,8 +64,18 @@ export function ServiceIcon(props: ServiceIconProps) {
 
 	return (
 		<WrapperTag
-			{...(!editMode
-				? { href, target: "_blank", rel: "noopener noreferrer" }
+			{...(!editMode && openServicesIn !== "iframe"
+				? {
+						href,
+						target: openServicesIn === "new-tab" ? "_blank" : "_self",
+						rel: "noopener noreferrer",
+					}
+				: {})}
+			{...(!editMode && openServicesIn === "iframe"
+				? {
+						onClick: () => setOpenIframe(href),
+						"aria-expanded": openIframe === href,
+					}
 				: {})}
 			{...attributes}
 			{...listeners}

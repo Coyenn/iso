@@ -1,6 +1,8 @@
 {
 	"defaultGreeting": "¡Bienvenido!",
 	"goBack": "Regresar",
+	"close": "Cerrar",
+	"openInNewTab": "Abrir en una nueva pestaña",
 	"searchPlaceholder": "Buscar en la web...",
 	"theme": {
 		"title": "Esquema de color"
@@ -55,6 +57,14 @@
 		"pageLoadAnimation": {
 			"title": "Animación de carga de página",
 			"description": "Si está activada, se mostrará una animación cuando se cargue la página."
+		},
+		"openServicesIn": {
+			"title": "Abrir servicios en",
+			"description": "Elige cómo se abren los servicios por defecto.",
+			"placeholder": "Selecciona dónde abrir los servicios",
+			"sameTab": "Misma pestaña",
+			"newTab": "Nueva pestaña",
+			"iframe": "iFrame"
 		},
 		"showSearchbar": {
 			"title": "Mostrar barra de búsqueda",

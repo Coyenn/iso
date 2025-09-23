@@ -52,7 +52,10 @@ export function MainSection(props: MainSectionProps) {
 			{config.search?.enabled && (
 				<Searchbar config={config} className="mb-4 md:mb-8" />
 			)}
-			<ServiceIconList pageLoadAnimation={config.pageLoadAnimation} />
+			<ServiceIconList
+				pageLoadAnimation={config.pageLoadAnimation}
+				config={config}
+			/>
 		</section>
 	);
 }
