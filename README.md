@@ -1,3 +1,35 @@
+
+<div align="right">
+  <details>
+    <summary >🌐 Language</summary>
+    <div>
+      <div align="center">
+        <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=en">English</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=zh-CN">简体中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=zh-TW">繁體中文</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=ja">日本語</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=ko">한국어</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=hi">हिन्दी</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=th">ไทย</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=fr">Français</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=de">Deutsch</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=es">Español</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=it">Italiano</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=ru">Русский</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=pt">Português</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=nl">Nederlands</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=pl">Polski</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=ar">العربية</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=fa">فارسی</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=tr">Türkçe</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=vi">Tiếng Việt</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=id">Bahasa Indonesia</a>
+        | <a href="https://openaitx.github.io/view.html?user=Coyenn&project=iso&lang=as">অসমীয়া</
+      </div>
+    </div>
+  </details>
+</div>
+
 <div align="center">
   <a href="https://iso.tim.cv/" target="_blank">
     <img src="./.github/assets/preview-dashboard-bg-image.png" alt="Iso dashboard screenshot" width="800" />
