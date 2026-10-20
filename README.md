@@ -55,6 +55,10 @@ services:
 
 Open http://localhost:3000 and you're up and running!
 
+## One-Click Deploy
+
+[![Deploy on RepoCloud](https://d16t0pc4846x52.cloudfront.net/deploylobe.svg)](https://repocloud.io/details/Iso/)
+
 ## Configuration
 
 Iso is configured through a single `config.json` file located in the `/config` directory.
